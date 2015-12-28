@@ -9,7 +9,8 @@
 // TODO: assert that we pass in containers. Don't mix with std::distance that
 // takes two iterators.
 template<typename ContainerLeft, typename ContainerRight>
-value_type<ContainerLeft> distance(const ContainerLeft& left, const ContainerRight& right)
+sqrt_type_t<value_type<ContainerLeft>>
+distance(const ContainerLeft& left, const ContainerRight& right)
 {
 	assert(left.size() == right.size());
 	using std::begin;

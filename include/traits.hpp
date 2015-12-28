@@ -44,3 +44,8 @@ using check_product = typename enable_if_same<my_product_type<A, B>, C>*;
 template<typename A, typename B, typename C>
 using check_ratio = typename enable_if_same<my_ratio_type<A, B>, C>*;
 */
+
+template<typename T> struct sqrt_type              { using type = double; };
+template<>           struct sqrt_type<float>       { using type = float; };
+template<>           struct sqrt_type<long double> { using type = long double; };
+template<typename T> using sqrt_type_t = typename sqrt_type<T>::type;

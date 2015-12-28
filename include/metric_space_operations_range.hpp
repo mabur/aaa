@@ -3,8 +3,8 @@
 #include <numeric>
 
 template<typename IteratorLeft, typename IteratorRight>
-value_type_i<IteratorLeft> distance(
-	IteratorLeft left_begin, IteratorLeft left_end, IteratorRight right_begin)
+sqrt_type_t<value_type_i<IteratorLeft>>
+distance(IteratorLeft left_begin, IteratorLeft left_end, IteratorRight right_begin)
 {
 	using value_type_left  = const value_type_i<IteratorLeft>;
 	using value_type_right = const value_type_i<IteratorRight>;
@@ -20,6 +20,5 @@ value_type_i<IteratorLeft> distance(
 	{
 		return (left - right) * (left - right);
 	};
-	const auto distance_double = sqrt(std::inner_product(left_begin, left_end, right_begin, zero, op1, op2));
-	return static_cast<value_type>(distance_double);
+	return sqrt(std::inner_product(left_begin, left_end, right_begin, zero, op1, op2));
 }

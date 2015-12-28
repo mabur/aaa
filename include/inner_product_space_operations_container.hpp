@@ -14,7 +14,7 @@ Value inner_product(const Container1& a, Container2& b, const Value& start_value
 }
 
 template<typename Container1, typename Container2>
-typename Container1::value_type dot(const Container1& a, Container2& b)
+value_type<Container1> dot(const Container1& a, Container2& b)
 {
 	assert(size(a) == size(b));
 	using std::begin;
@@ -23,7 +23,7 @@ typename Container1::value_type dot(const Container1& a, Container2& b)
 }
 
 template<typename Container>
-typename Container::value_type squared_norm(const Container& a)
+value_type<Container> squared_norm(const Container& a)
 {
 	using std::begin;
 	using std::end;
@@ -31,7 +31,7 @@ typename Container::value_type squared_norm(const Container& a)
 }
 
 template<typename Container>
-typename Container::value_type norm(const Container& a)
+sqrt_type_t<value_type<Container>> norm(const Container& a)
 {
 	using std::begin;
 	using std::end;

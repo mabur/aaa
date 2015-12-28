@@ -22,8 +22,7 @@ value_type_i<Iterator> squared_norm(Iterator begin, Iterator end)
 }
 
 template<typename Iterator>
-value_type_i<Iterator> norm(Iterator begin, Iterator end)
+sqrt_type_t<value_type_i<Iterator>> norm(Iterator begin, Iterator end)
 {
-	const auto norm_double = sqrt(squared_norm(begin, end));
-	return static_cast<value_type_i<Iterator>>(norm_double);
+	return sqrt(squared_norm(begin, end));
 }
