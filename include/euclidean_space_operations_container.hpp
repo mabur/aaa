@@ -4,15 +4,6 @@
 
 #include "euclidean_space_operations_range.hpp"
 
-template<typename Container1, typename Container2, typename Value>
-Value inner_product(const Container1& a, Container2& b, const Value& start_value)
-{
-	assert(size(a) == size(b));
-	using std::begin;
-	using std::end;
-	return std::inner_product(begin(a), end(a), begin(b), start_value);
-}
-
 template<typename Container1, typename Container2>
 value_type<Container1> dot(const Container1& a, Container2& b)
 {
