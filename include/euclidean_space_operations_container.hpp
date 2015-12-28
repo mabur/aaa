@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-#include "inner_product_space_operations_range.hpp"
+#include "euclidean_space_operations_range.hpp"
 
 template<typename Container1, typename Container2, typename Value>
 Value inner_product(const Container1& a, Container2& b, const Value& start_value)
@@ -36,4 +36,16 @@ sqrt_type_t<value_type<Container>> norm(const Container& a)
 	using std::begin;
 	using std::end;
 	return norm(begin(a), end(a));
+}
+
+// TODO: assert that we pass in containers. Don't mix with std::distance that
+// takes two iterators.
+template<typename ContainerLeft, typename ContainerRight>
+sqrt_type_t<value_type<ContainerLeft>>
+distance(const ContainerLeft& left, const ContainerRight& right)
+{
+	assert(left.size() == right.size());
+	using std::begin;
+	using std::end;
+	return distance(begin(left), end(left), begin(right));
 }

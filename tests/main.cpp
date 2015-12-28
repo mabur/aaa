@@ -7,15 +7,13 @@
 
 void test_algorithms();
 void test_vector_space_operations();
-void test_inner_product_space_operations();
-void test_metric_space_operations();
+void test_euclidean_space_operations();
 
 int main()
 {
 	test_algorithms();
 	test_vector_space_operations();
-	test_inner_product_space_operations();
-	test_metric_space_operations();
+	test_euclidean_space_operations();
 
 	using namespace std;
 	cout << "Press enter to quit." << endl;
@@ -85,7 +83,7 @@ void test_vector_space_operations()
 	divide(begin(c1), end(c1), e, begin(c3));
 }
 
-void test_inner_product_space_operations()
+void test_euclidean_space_operations()
 {
 	std::vector<int>   c1 = { 1, 2, 3, 4, 5 };
 	std::array<int, 5> c2 = { 1, 2, 3, 4, 5 };
@@ -94,6 +92,7 @@ void test_inner_product_space_operations()
 	dot(c1, c2);
 	squared_norm(c1);
 	norm(c1);
+	distance(c1, c2);
 
 	using std::begin;
 	using std::end;
@@ -101,18 +100,5 @@ void test_inner_product_space_operations()
 	dot(begin(c1), end(c1), begin(c2));
 	squared_norm(begin(c1), end(c1));
 	norm(begin(c1), end(c1));
-}
-
-void test_metric_space_operations()
-{
-	std::vector<int>   c1 = { 1, 2, 3, 4, 5 };
-	std::array<int, 5> c2 = { 1, 2, 3, 4, 5 };
-	std::valarray<int> c3 = { 1, 2, 3, 4, 5 };
-
-	distance(c1, c2);
-
-	using std::begin;
-	using std::end;
-
 	distance(begin(c1), end(c1), begin(c2));
 }
