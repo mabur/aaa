@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-#include "vector_space_operations_range.hpp"
+#include "vector_space_range.hpp"
 #include "traits.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////

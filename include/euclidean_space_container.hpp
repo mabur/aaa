@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-#include "euclidean_space_operations_range.hpp"
+#include "euclidean_space_range.hpp"
 
 template<typename Container1, typename Container2>
 value_type<Container1> dot(const Container1& a, Container2& b)
