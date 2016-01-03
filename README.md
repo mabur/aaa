@@ -18,10 +18,10 @@ From a mathematical perspective it implements: some algorithms for general finit
 
 ## Vector space algorithms
 A mathematical vector space has the following operations defined:
-* Elementwise addition of two vectors. `add(vector_in_1, vector_in_2, vector_out)` does this.
-* Elementwise subtraction of two vectors. `subtract(v_in_1, v_in_2, v_out)` does this.
-* Multiplication vector and scalar. `multiply(vector_in, scalar_in, vector_out)` does this.
-* Division of vector and scalar. `divide(vector_in, scalar_in, vector_out)` does this.
+* `add(vector_in_1, vector_in_2, vector_out)` does elementwise addition of two vectors.
+* `subtract(v_in_1, v_in_2, v_out)` does elementwise subtraction of two vectors.
+* `multiply(vector_in, scalar_in, vector_out)` multiplies each element of a vector with a scalar.
+* `divide(vector_in, scalar_in, vector_out)` divides each element of a vector with a scalar.
 
 The library supports expressions on the general form ``binary_operation(in_left, in_right, out)`` where:
 * The operation `binary_operation` is one of `add`, `subtract`, `multiply`, `divide`.
@@ -29,7 +29,7 @@ The library supports expressions on the general form ``binary_operation(in_left,
 * At least one of the inputs `in_left` and `in_right` is a container. The other could be a scalar.
 
 ## Euclidean space algorithms
-An Euclidean space adds operations for computing lengths, angles and distances of vectors:
+An Euclidean space also has operations for computing lengths, angles and distances of vectors:
 * `n = norm(v)` computes the Euclidean norm of a vector. We often call this the length of the vector.
 * `n2 = squared_norm(v)` computes the squared Euclidean norm of a vector.
 * `d = dot(v1, v2)` computes the dot product of two vectors. This is also called the Euclidean inner product. Angles between vectors can be defined using this.
