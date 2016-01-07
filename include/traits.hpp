@@ -49,3 +49,9 @@ template<typename T> struct sqrt_type              { using type = double; };
 template<>           struct sqrt_type<float>       { using type = float; };
 template<>           struct sqrt_type<long double> { using type = long double; };
 template<typename T> using sqrt_type_t = typename sqrt_type<T>::type;
+
+template<typename Container> using sqrt_value_type =
+typename sqrt_type_t<value_type<Container>>;
+
+template<typename Iterator> using sqrt_value_type_i =
+typename sqrt_type_t<value_type_i<Iterator>>;
