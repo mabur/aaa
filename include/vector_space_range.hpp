@@ -1,3 +1,32 @@
+/**
+@defgroup vector_space_range Vector Space Operations on Ranges
+
+This module defines the functions:
+- `add`
+- `subtract`
+- `multiply`
+- `divide`
+
+They do elementwise arithmetic operations on ranges. This module supports
+expressions on the general form `binary_operation(input_left, input_right, output)`
+where:
+- The `binary_operation` is one of `add`, `subtract`, `multiply`, `divide`.
+- The `output` is a range represented by a single iterator to the first element.
+- At least one of `input_left` and `input_right` is a range of two iterators.
+The other is either a scalar or a range with a single iterator to the first element.
+
+We call these **vector space operations** since a mathematical vector space has the
+following elementwise operations defined:
+- addition of two vectors.
+- subtraction of two vectors.
+- multiplication of a vector and a scalar.
+- division of a vector and a scalar.
+
+We represent mathematical vectors as ranges.
+
+@{
+*/
+
 #pragma once
 
 #include <algorithm>

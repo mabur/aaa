@@ -11,6 +11,11 @@ void convert(IteratorIn in_begin, IteratorIn in_end, IteratorOut out_begin)
 	std::transform(in_begin, in_end, out_begin, f);
 }
 
+/*! \brief Brief description.
+*         Brief description continued.
+*
+*  Detailed description starts here.
+*/
 template<typename Iterator>
 value_type_i<Iterator> sum(Iterator begin, Iterator end)
 {

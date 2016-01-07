@@ -1,3 +1,32 @@
+/**
+@defgroup vector_space_container Vector Space Operations on Containers
+
+This module defines the functions:
+- `add`
+- `subtract`
+- `multiply`
+- `divide`
+
+They do elementwise arithmetic operations on containers. This module supports
+expressions on the general form `binary_operation(input_left, input_right, output)`
+where:
+- The `binary_operation` is one of `add`, `subtract`, `multiply`, `divide`.
+- The `output` is a container.
+- At least one of `input_left` and `input_right` is a container.
+  The other could be a scalar.
+
+We call these **vector space operations** since a mathematical vector space has the
+following elementwise operations defined:
+- addition of two vectors.
+- subtraction of two vectors.
+- multiplication of a vector and a scalar.
+- division of a vector and a scalar.
+
+We represent mathematical vectors as containers.
+
+@{
+*/
+
 #pragma once
 
 #include <cassert>
@@ -140,3 +169,5 @@ void divide(const ContainerIn& left, const ElementIn& right, ContainerOut& out)
 	using std::end;
 	multiply(begin(left), end(left), right, begin(out));
 }
+
+/** @} */
