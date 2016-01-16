@@ -6,8 +6,8 @@
 #include "algorithms_range.hpp"
 #include "traits.hpp"
 
-template<typename ContainerIn, typename ContainerOut>
-void convert(const ContainerIn& in, ContainerOut& out)
+template<typename Container1, typename Container2>
+void convert(const Container1& in, Container2& out)
 {
 	using std::begin;
 	using std::end;

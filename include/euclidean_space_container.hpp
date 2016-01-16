@@ -62,9 +62,8 @@ Each vector is represented by a container.
 The two containers should have the same size and value type.
 Returns a floating point type, i.e. it follows the same convention as `std::sqrt`.
 */
-template<typename ContainerLeft, typename ContainerRight>
-sqrt_value_type<ContainerLeft>
-distance(const ContainerLeft& left, const ContainerRight& right)
+template<typename Container1, typename Container2>
+sqrt_value_type<Container1> distance(const Container1& left, const Container2& right)
 {
 	assert(left.size() == right.size());
 	using std::begin;

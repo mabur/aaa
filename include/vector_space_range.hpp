@@ -36,107 +36,107 @@ We represent mathematical vectors as ranges.
 ////////////////////////////////////////////////////////////////////////////////
 // add
 
-template<typename IteratorIn1, typename IteratorIn2, typename IteratorOut,
-	check_sum<value_type_i<IteratorIn1>, value_type_i<IteratorIn2>, value_type_i<IteratorOut>> = 0>
-void add(IteratorIn1 left_begin, IteratorIn1 left_end, IteratorIn2 right_begin, IteratorOut out_begin)
+template<typename InIteratorLeft, typename InIteratorRight, typename OutIterator,
+	check_sum<value_type_i<InIteratorLeft>, value_type_i<InIteratorRight>, value_type_i<OutIterator>> = 0>
+void add(InIteratorLeft first_left, InIteratorLeft last_left, InIteratorRight first_right, OutIterator first_out)
 {
 	auto f = [](const auto& left, const auto& right) { return left + right; };
-	std::transform(left_begin, left_end, right_begin, out_begin, f);
+	std::transform(first_left, last_left, first_right, first_out, f);
 }
 
-template<typename ElementIn, typename IteratorIn, typename IteratorOut,
-	check_sum<ElementIn, value_type_i<IteratorIn>, value_type_i<IteratorOut>> = 0>
-void add(const ElementIn& left, IteratorIn right_begin, IteratorIn right_end, IteratorOut out_begin)
+template<typename Element, typename InIterator, typename OutIterator,
+	check_sum<Element, value_type_i<InIterator>, value_type_i<OutIterator>> = 0>
+void add(const Element& left, InIterator first_right, InIterator last_right, OutIterator first_out)
 {
 	auto f = [&](const auto& right) { return left + right; };
-	std::transform(right_begin, right_end, out_begin, f);
+	std::transform(first_right, last_right, first_out, f);
 }
 
-template<typename IteratorIn, typename ElementIn, typename IteratorOut,
-	check_sum<value_type_i<IteratorIn>, ElementIn, value_type_i<IteratorOut>> = 0>
-void add(IteratorIn left_begin, IteratorIn left_end, const ElementIn& right, IteratorOut out_begin)
+template<typename InIterator, typename Element, typename OutIterator,
+	check_sum<value_type_i<InIterator>, Element, value_type_i<OutIterator>> = 0>
+void add(InIterator first_left, InIterator last_left, const Element& right, OutIterator first_out)
 {
 	auto f = [&](const auto& left) { return left + right; };
-	std::transform(left_begin, left_end, out_begin, f);
+	std::transform(first_left, last_left, first_out, f);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // subtract
 
-template<typename IteratorIn1, typename IteratorIn2, typename IteratorOut,
-	check_difference<value_type_i<IteratorIn1>, value_type_i<IteratorIn2>, value_type_i<IteratorOut>> = 0>
-void subtract(IteratorIn1 left_begin, IteratorIn1 left_end, IteratorIn2 right_begin, IteratorOut out_begin)
+template<typename InIteratorLeft, typename InIteratorRight, typename OutIterator,
+	check_difference<value_type_i<InIteratorLeft>, value_type_i<InIteratorRight>, value_type_i<OutIterator>> = 0>
+void subtract(InIteratorLeft first_left, InIteratorLeft last_left, InIteratorRight first_right, OutIterator first_out)
 {
 	auto f = [](const auto& left, const auto& right) { return left - right; };
-	std::transform(left_begin, left_end, right_begin, out_begin, f);
+	std::transform(first_left, last_left, first_right, first_out, f);
 }
 
-template<typename ElementIn, typename IteratorIn, typename IteratorOut,
-	check_difference<ElementIn, value_type_i<IteratorIn>, value_type_i<IteratorOut>> = 0>
-void subtract(const ElementIn& left, IteratorIn right_begin, IteratorIn right_end, IteratorOut out_begin)
+template<typename Element, typename InIterator, typename OutIterator,
+	check_difference<Element, value_type_i<InIterator>, value_type_i<OutIterator>> = 0>
+void subtract(const Element& left, InIterator first_right, InIterator last_right, OutIterator first_out)
 {
 	auto f = [&](const auto& right) { return left - right; };
-	std::transform(right_begin, right_end, out_begin, f);
+	std::transform(first_right, last_right, first_out, f);
 }
 
-template<typename IteratorIn, typename ElementIn, typename IteratorOut,
-	check_difference<value_type_i<IteratorIn>, ElementIn, value_type_i<IteratorOut>> = 0>
-void subtract(IteratorIn left_begin, IteratorIn left_end, const ElementIn& right, IteratorOut out_begin)
+template<typename InIterator, typename Element, typename OutIterator,
+	check_difference<value_type_i<InIterator>, Element, value_type_i<OutIterator>> = 0>
+void subtract(InIterator first_left, InIterator last_left, const Element& right, OutIterator first_out)
 {
 	auto f = [&](const auto& left) { return left - right; };
-	std::transform(left_begin, left_end, out_begin, f);
+	std::transform(first_left, last_left, first_out, f);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // multiply
 
-template<typename IteratorIn1, typename IteratorIn2, typename IteratorOut,
-	check_product<value_type_i<IteratorIn1>, value_type_i<IteratorIn2>, value_type_i<IteratorOut>> = 0>
-void multiply(IteratorIn1 left_begin, IteratorIn1 left_end, IteratorIn2 right_begin, IteratorOut out_begin)
+template<typename InIteratorLeft, typename InIteratorRight, typename OutIterator,
+	check_product<value_type_i<InIteratorLeft>, value_type_i<InIteratorRight>, value_type_i<OutIterator>> = 0>
+void multiply(InIteratorLeft first_left, InIteratorLeft last_left, InIteratorRight first_right, OutIterator first_out)
 {
 	auto f = [](const auto& left, const auto& right) { return left * right; };
-	std::transform(left_begin, left_end, right_begin, out_begin, f);
+	std::transform(first_left, last_left, first_right, first_out, f);
 }
 
-template<typename ElementIn, typename IteratorIn, typename IteratorOut,
-	check_product<ElementIn, value_type_i<IteratorIn>, value_type_i<IteratorOut>> = 0>
-void multiply(const ElementIn& left, IteratorIn right_begin, IteratorIn right_end, IteratorOut out_begin)
+template<typename Element, typename InIterator, typename OutIterator,
+	check_product<Element, value_type_i<InIterator>, value_type_i<OutIterator>> = 0>
+void multiply(const Element& left, InIterator first_right, InIterator last_right, OutIterator first_out)
 {
 	auto f = [&](const auto& right) { return left * right; };
-	std::transform(right_begin, right_end, out_begin, f);
+	std::transform(first_right, last_right, first_out, f);
 }
 
-template<typename IteratorIn, typename ElementIn, typename IteratorOut,
-	check_product<value_type_i<IteratorIn>, ElementIn, value_type_i<IteratorOut>> = 0>
-void multiply(IteratorIn left_begin, IteratorIn left_end, const ElementIn& right, IteratorOut out_begin)
+template<typename InIterator, typename Element, typename OutIterator,
+	check_product<value_type_i<InIterator>, Element, value_type_i<OutIterator>> = 0>
+void multiply(InIterator first_left, InIterator last_left, const Element& right, OutIterator first_out)
 {
 	auto f = [&](const auto& left) { return left * right; };
-	std::transform(left_begin, left_end, out_begin, f);
+	std::transform(first_left, last_left, first_out, f);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // divide
 
-template<typename IteratorIn1, typename IteratorIn2, typename IteratorOut,
-	check_ratio<value_type_i<IteratorIn1>, value_type_i<IteratorIn2>, value_type_i<IteratorOut>> = 0>
-void divide(IteratorIn1 left_begin, IteratorIn1 left_end, IteratorIn2 right_begin, IteratorOut out_begin)
+template<typename InIteratorLeft, typename InIteratorRight, typename OutIterator,
+	check_ratio<value_type_i<InIteratorLeft>, value_type_i<InIteratorRight>, value_type_i<OutIterator>> = 0>
+void divide(InIteratorLeft first_left, InIteratorLeft last_left, InIteratorRight first_right, OutIterator first_out)
 {
 	auto f = [](const auto& left, const auto& right) { return left / right; };
-	std::transform(left_begin, left_end, right_begin, out_begin, f);
+	std::transform(first_left, last_left, first_right, first_out, f);
 }
 
-template<typename ElementIn, typename IteratorIn, typename IteratorOut,
-	check_ratio<ElementIn, value_type_i<IteratorIn>, value_type_i<IteratorOut>> = 0>
-void divide(const ElementIn& left, IteratorIn right_begin, IteratorIn right_end, IteratorOut out_begin)
+template<typename Element, typename InIterator, typename OutIterator,
+	check_ratio<Element, value_type_i<InIterator>, value_type_i<OutIterator>> = 0>
+void divide(const Element& left, InIterator first_right, InIterator last_right, OutIterator first_out)
 {
 	auto f = [&](const auto& right) { return left / right; };
-	std::transform(right_begin, right_end, out_begin, f);
+	std::transform(first_right, last_right, first_out, f);
 }
 
-template<typename IteratorIn, typename ElementIn, typename IteratorOut,
-	check_ratio<value_type_i<IteratorIn>, ElementIn, value_type_i<IteratorOut>> = 0>
-void divide(IteratorIn left_begin, IteratorIn left_end, const ElementIn& right, IteratorOut out_begin)
+template<typename InIterator, typename Element, typename OutIterator,
+	check_ratio<value_type_i<InIterator>, Element, value_type_i<OutIterator>> = 0>
+void divide(InIterator first_left, InIterator last_left, const Element& right, OutIterator first_out)
 {
 	auto f = [&](const auto& left) { return left / right; };
-	std::transform(left_begin, left_end, out_begin, f);
+	std::transform(first_left, last_left, first_out, f);
 }

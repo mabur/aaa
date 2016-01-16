@@ -4,21 +4,16 @@
 
 #include "traits.hpp"
 
-template<typename IteratorIn, typename IteratorOut>
-void convert(IteratorIn in_begin, IteratorIn in_end, IteratorOut out_begin)
+template<typename InIterator, typename OutIterator>
+void convert(InIterator first_in, InIterator last_in, OutIterator first_out)
 {
-	auto f = [](auto x) { return value_type_i<IteratorOut>(x); };
-	std::transform(in_begin, in_end, out_begin, f);
+	auto f = [](auto x) { return value_type_i<OutIterator>(x); };
+	std::transform(first_in, last_in, first_out, f);
 }
 
-/*! \brief Brief description.
-*         Brief description continued.
-*
-*  Detailed description starts here.
-*/
-template<typename Iterator>
-value_type_i<Iterator> sum(Iterator begin, Iterator end)
+template<typename InIterator>
+value_type_i<InIterator> sum(InIterator first, InIterator last)
 {
-	const auto zero = value_type_i<Iterator>();
-	return std::accumulate(begin, end, zero);
+	const auto zero = value_type_i<InIterator>();
+	return std::accumulate(first, last, zero);
 }
