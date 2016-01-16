@@ -18,40 +18,38 @@ We represent mathematical vectors as ranges of iterators.
 
 #include "traits.hpp"
 
-template<typename IteratorLeft, typename IteratorRight>
-value_type_i<IteratorLeft> dot(IteratorLeft left_begin, IteratorLeft left_end, IteratorRight right_begin)
+template<typename InIterator1, typename InIterator2>
+value_type_i<InIterator1> dot(InIterator1 first_left, InIterator1 last_left, InIterator2 first_right)
 {
-	using value_type_left  = const value_type_i<IteratorLeft>;
-	using value_type_right = const value_type_i<IteratorRight>;
-	static_assert(std::is_same<value_type_left, value_type_right>::value, "Different value types");
+	using value_type1 = const value_type_i<InIterator1>;
+	using value_type2 = const value_type_i<InIterator2>;
+	static_assert(std::is_same<value_type1, value_type2>::value, "Different value types");
 
-	const auto zero = value_type_left();
-	return std::inner_product(left_begin, left_end, right_begin, zero);
+	const auto zero = value_type1();
+	return std::inner_product(first_left, last_left, first_right, zero);
 }
 
-template<typename Iterator>
-value_type_i<Iterator> squared_norm(Iterator begin, Iterator end)
+template<typename InIterator>
+value_type_i<InIterator> squared_norm(InIterator first, InIterator last)
 {
-	return dot(begin, end, begin);
+	return dot(first, last, first);
 }
 
-template<typename Iterator>
-sqrt_value_type_i<Iterator> norm(Iterator begin, Iterator end)
+template<typename InIterator>
+sqrt_value_type_i<InIterator> norm(InIterator first, InIterator last)
 {
-	return sqrt(squared_norm(begin, end));
+	return sqrt(squared_norm(first, last));
 }
 
-template<typename IteratorLeft, typename IteratorRight>
-sqrt_value_type_i<IteratorLeft>
-distance(IteratorLeft left_begin, IteratorLeft left_end, IteratorRight right_begin)
+template<typename InIterator1, typename InIterator2>
+sqrt_value_type_i<InIterator1>
+distance(InIterator1 first_left, InIterator1 last_left, InIterator2 first_right)
 {
-	using value_type_left = const value_type_i<IteratorLeft>;
-	using value_type_right = const value_type_i<IteratorRight>;
-	using value_type = value_type_left;
-	static_assert(std::is_same<value_type_left, value_type_right>::value,
-        "Different value types");
+	using value_type1 = const value_type_i<InIterator1>;
+	using value_type2 = const value_type_i<InIterator2>;
+	static_assert(std::is_same<value_type1, value_type2>::value, "Different value types");
 
-	const auto zero = value_type();
+	const auto zero = value_type1();
 	auto op1 = [](const auto& left, const auto& right)
 	{
 		return left + right;
@@ -60,7 +58,7 @@ distance(IteratorLeft left_begin, IteratorLeft left_end, IteratorRight right_beg
 	{
 		return (left - right) * (left - right);
 	};
-	return sqrt(std::inner_product(left_begin, left_end, right_begin, zero, op1, op2));
+	return sqrt(std::inner_product(first_left, last_left, first_right, zero, op1, op2));
 }
 
 /** @} */
