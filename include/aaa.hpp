@@ -75,6 +75,8 @@ my_image normalized_image(const my_image& image)
 ```
 */
 
+// TODO: should the elements be passed by value or const reference?
+
 #pragma once
 
 #include "algorithms_range.hpp"
