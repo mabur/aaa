@@ -37,9 +37,9 @@ We represent mathematical vectors as containers.
 ////////////////////////////////////////////////////////////////////////////////
 // add
 
-template<typename ContainerIn1, typename ContainerIn2, typename ContainerOut,
-	typename check_sum<value_type<ContainerIn1>, value_type<ContainerIn2>, value_type<ContainerOut>> = 0>
-void add(const ContainerIn1& left, const ContainerIn2& right, ContainerOut& out)
+template<typename Container1, typename Container2, typename Container3,
+	typename check_sum<value_type<Container1>, value_type<Container2>, value_type<Container3>> = 0>
+void add(const Container1& left, const Container2& right, Container3& out)
 {
 	assert(left.size() == out.size());
 	assert(right.size() == out.size());
@@ -48,9 +48,9 @@ void add(const ContainerIn1& left, const ContainerIn2& right, ContainerOut& out)
 	add(begin(left), end(left), begin(right), begin(out));
 }
 
-template<typename ElementIn, typename ContainerIn, typename ContainerOut,
-	typename check_sum<ElementIn, value_type<ContainerIn>, value_type<ContainerOut>> = 0>
-void add(const ElementIn& left, const ContainerIn& right, ContainerOut& out)
+template<typename Element, typename Container1, typename Container2,
+	typename check_sum<Element, value_type<Container1>, value_type<Container2>> = 0>
+void add(const Element& left, const Container1& right, Container2& out)
 {
 	assert(right.size() == out.size());
 	using std::begin;
@@ -58,9 +58,9 @@ void add(const ElementIn& left, const ContainerIn& right, ContainerOut& out)
 	add(left, begin(right), end(right), begin(out));
 }
 
-template<typename ContainerIn, typename ElementIn, typename ContainerOut,
-	typename check_sum<value_type<ContainerIn>, ElementIn, value_type<ContainerOut>> = 0>
-void add(const ContainerIn& left, const ElementIn& right, ContainerOut& out)
+template<typename Container1, typename Element, typename Container2,
+	typename check_sum<value_type<Container1>, Element, value_type<Container2>> = 0>
+void add(const Container1& left, const Element& right, Container2& out)
 {
 	assert(left.size() == out.size());
 	using std::begin;
@@ -71,9 +71,9 @@ void add(const ContainerIn& left, const ElementIn& right, ContainerOut& out)
 ////////////////////////////////////////////////////////////////////////////////
 // subtract
 
-template<typename ContainerIn1, typename ContainerIn2, typename ContainerOut,
-	typename check_difference<value_type<ContainerIn1>, value_type<ContainerIn2>, value_type<ContainerOut>> = 0>
-void subtract(const ContainerIn1& left, const ContainerIn2& right, ContainerOut& out)
+template<typename Container1, typename Container2, typename Container3,
+	typename check_difference<value_type<Container1>, value_type<Container2>, value_type<Container3>> = 0>
+void subtract(const Container1& left, const Container2& right, Container3& out)
 {
 	assert(left.size() == out.size());
 	assert(right.size() == out.size());
@@ -82,9 +82,9 @@ void subtract(const ContainerIn1& left, const ContainerIn2& right, ContainerOut&
 	subtract(begin(left), end(left), begin(right), begin(out));
 }
 
-template<typename ElementIn, typename ContainerIn, typename ContainerOut,
-	typename check_difference<ElementIn, value_type<ContainerIn>, value_type<ContainerOut>> = 0>
-void subtract(const ElementIn& left, const ContainerIn& right, ContainerOut& out)
+template<typename Element, typename Container1, typename Container2,
+	typename check_difference<Element, value_type<Container1>, value_type<Container2>> = 0>
+void subtract(const Element& left, const Container1& right, Container2& out)
 {
 	assert(right.size() == out.size());
 	using std::begin;
@@ -92,9 +92,9 @@ void subtract(const ElementIn& left, const ContainerIn& right, ContainerOut& out
 	subtract(left, begin(right), end(right), begin(out));
 }
 
-template<typename ContainerIn, typename ElementIn, typename ContainerOut,
-	typename check_difference<value_type<ContainerIn>, ElementIn, value_type<ContainerOut>> = 0>
-void subtract(const ContainerIn& left, const ElementIn& right, ContainerOut& out)
+template<typename Container1, typename Element, typename Container2,
+	typename check_difference<value_type<Container1>, Element, value_type<Container2>> = 0>
+void subtract(const Container1& left, const Element& right, Container2& out)
 {
 	assert(left.size() == out.size());
 	using std::begin;
@@ -105,9 +105,9 @@ void subtract(const ContainerIn& left, const ElementIn& right, ContainerOut& out
 ////////////////////////////////////////////////////////////////////////////////
 // multiply
 
-template<typename ContainerIn1, typename ContainerIn2, typename ContainerOut,
-	typename check_product<value_type<ContainerIn1>, value_type<ContainerIn2>, value_type<ContainerOut>> = 0>
-void multiply(const ContainerIn1& left, const ContainerIn2& right, ContainerOut& out)
+template<typename Container1, typename Container2, typename Container3,
+	typename check_product<value_type<Container1>, value_type<Container2>, value_type<Container3>> = 0>
+void multiply(const Container1& left, const Container2& right, Container3& out)
 {
 	assert(left.size() == out.size());
 	assert(right.size() == out.size());
@@ -116,9 +116,9 @@ void multiply(const ContainerIn1& left, const ContainerIn2& right, ContainerOut&
 	multiply(begin(left), end(left), begin(right), begin(out));
 }
 
-template<typename ElementIn, typename ContainerIn, typename ContainerOut,
-	typename check_product<ElementIn, value_type<ContainerIn>, value_type<ContainerOut>> = 0>
-void multiply(const ElementIn& left, const ContainerIn& right, ContainerOut& out)
+template<typename Element, typename Container1, typename Container2,
+	typename check_product<Element, value_type<Container1>, value_type<Container2>> = 0>
+void multiply(const Element& left, const Container1& right, Container2& out)
 {
 	assert(right.size() == out.size());
 	using std::begin;
@@ -126,9 +126,9 @@ void multiply(const ElementIn& left, const ContainerIn& right, ContainerOut& out
 	multiply(left, begin(right), end(right), begin(out));
 }
 
-template<typename ContainerIn, typename ElementIn, typename ContainerOut,
-	typename check_product<value_type<ContainerIn>, ElementIn, value_type<ContainerOut>> = 0>
-void multiply(const ContainerIn& left, const ElementIn& right, ContainerOut& out)
+template<typename Container1, typename Element, typename Container2,
+	typename check_product<value_type<Container1>, Element, value_type<Container2>> = 0>
+void multiply(const Container1& left, const Element& right, Container2& out)
 {
 	assert(left.size() == out.size());
 	using std::begin;
@@ -139,9 +139,9 @@ void multiply(const ContainerIn& left, const ElementIn& right, ContainerOut& out
 ////////////////////////////////////////////////////////////////////////////////
 // divide
 
-template<typename ContainerIn1, typename ContainerIn2, typename ContainerOut,
-	typename check_ratio<value_type<ContainerIn1>, value_type<ContainerIn2>, value_type<ContainerOut>> = 0>
-void divide(const ContainerIn1& left, const ContainerIn2& right, ContainerOut& out)
+template<typename Container1, typename Container2, typename Container3,
+	typename check_ratio<value_type<Container1>, value_type<Container2>, value_type<Container3>> = 0>
+void divide(const Container1& left, const Container2& right, Container3& out)
 {
 	assert(left.size() == out.size());
 	assert(right.size() == out.size());
@@ -150,9 +150,9 @@ void divide(const ContainerIn1& left, const ContainerIn2& right, ContainerOut& o
 	multiply(begin(left), end(left), begin(right), begin(out));
 }
 
-template<typename ElementIn, typename ContainerIn, typename ContainerOut,
-	typename check_ratio<ElementIn, value_type<ContainerIn>, value_type<ContainerOut>> = 0>
-void divide(const ElementIn& left, const ContainerIn& right, ContainerOut& out)
+template<typename Element, typename Container1, typename Container2,
+	typename check_ratio<Element, value_type<Container1>, value_type<Container2>> = 0>
+void divide(const Element& left, const Container1& right, Container2& out)
 {
 	assert(right.size() == out.size());
 	using std::begin;
@@ -160,9 +160,9 @@ void divide(const ElementIn& left, const ContainerIn& right, ContainerOut& out)
 	multiply(left, begin(right), end(right), begin(out));
 }
 
-template<typename ContainerIn, typename ElementIn, typename ContainerOut,
-	typename check_ratio<value_type<ContainerIn>, ElementIn, value_type<ContainerOut>> = 0>
-void divide(const ContainerIn& left, const ElementIn& right, ContainerOut& out)
+template<typename Container1, typename Element, typename Container2,
+	typename check_ratio<value_type<Container1>, Element, value_type<Container2>> = 0>
+void divide(const Container1& left, const Element& right, Container2& out)
 {
 	assert(left.size() == out.size());
 	using std::begin;
