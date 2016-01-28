@@ -40,7 +40,10 @@ template<typename InIteratorLeft, typename InIteratorRight, typename OutIterator
 	check_sum<value_type_i<InIteratorLeft>, value_type_i<InIteratorRight>, value_type_i<OutIterator>> = 0>
 void add(InIteratorLeft first_left, InIteratorLeft last_left, InIteratorRight first_right, OutIterator first_out)
 {
-	auto f = [](const auto& left, const auto& right) { return left + right; };
+	auto f = [](const value_type_i<InIteratorLeft>& left, const value_type_i<InIteratorRight>& right)
+    {
+        return left + right;
+    };
 	std::transform(first_left, last_left, first_right, first_out, f);
 }
 
@@ -48,7 +51,7 @@ template<typename Element, typename InIterator, typename OutIterator,
 	check_sum<Element, value_type_i<InIterator>, value_type_i<OutIterator>> = 0>
 void add(const Element& left, InIterator first_right, InIterator last_right, OutIterator first_out)
 {
-	auto f = [&](const auto& right) { return left + right; };
+	auto f = [&](const value_type_i<InIterator>& right) { return left + right; };
 	std::transform(first_right, last_right, first_out, f);
 }
 
@@ -56,7 +59,7 @@ template<typename InIterator, typename Element, typename OutIterator,
 	check_sum<value_type_i<InIterator>, Element, value_type_i<OutIterator>> = 0>
 void add(InIterator first_left, InIterator last_left, const Element& right, OutIterator first_out)
 {
-	auto f = [&](const auto& left) { return left + right; };
+	auto f = [&](const value_type_i<InIterator>& left) { return left + right; };
 	std::transform(first_left, last_left, first_out, f);
 }
 
@@ -67,7 +70,10 @@ template<typename InIteratorLeft, typename InIteratorRight, typename OutIterator
 	check_difference<value_type_i<InIteratorLeft>, value_type_i<InIteratorRight>, value_type_i<OutIterator>> = 0>
 void subtract(InIteratorLeft first_left, InIteratorLeft last_left, InIteratorRight first_right, OutIterator first_out)
 {
-	auto f = [](const auto& left, const auto& right) { return left - right; };
+    auto f = [](const value_type_i<InIteratorLeft>& left, const value_type_i<InIteratorRight>& right)
+    {
+        return left - right;
+    };
 	std::transform(first_left, last_left, first_right, first_out, f);
 }
 
@@ -75,7 +81,7 @@ template<typename Element, typename InIterator, typename OutIterator,
 	check_difference<Element, value_type_i<InIterator>, value_type_i<OutIterator>> = 0>
 void subtract(const Element& left, InIterator first_right, InIterator last_right, OutIterator first_out)
 {
-	auto f = [&](const auto& right) { return left - right; };
+	auto f = [&](const value_type_i<InIterator>& right) { return left - right; };
 	std::transform(first_right, last_right, first_out, f);
 }
 
@@ -83,7 +89,7 @@ template<typename InIterator, typename Element, typename OutIterator,
 	check_difference<value_type_i<InIterator>, Element, value_type_i<OutIterator>> = 0>
 void subtract(InIterator first_left, InIterator last_left, const Element& right, OutIterator first_out)
 {
-	auto f = [&](const auto& left) { return left - right; };
+	auto f = [&](const value_type_i<InIterator>& left) { return left - right; };
 	std::transform(first_left, last_left, first_out, f);
 }
 
@@ -94,7 +100,10 @@ template<typename InIteratorLeft, typename InIteratorRight, typename OutIterator
 	check_product<value_type_i<InIteratorLeft>, value_type_i<InIteratorRight>, value_type_i<OutIterator>> = 0>
 void multiply(InIteratorLeft first_left, InIteratorLeft last_left, InIteratorRight first_right, OutIterator first_out)
 {
-	auto f = [](const auto& left, const auto& right) { return left * right; };
+    auto f = [](const value_type_i<InIteratorLeft>& left, const value_type_i<InIteratorRight>& right)
+    {
+        return left * right;
+    };
 	std::transform(first_left, last_left, first_right, first_out, f);
 }
 
@@ -102,7 +111,7 @@ template<typename Element, typename InIterator, typename OutIterator,
 	check_product<Element, value_type_i<InIterator>, value_type_i<OutIterator>> = 0>
 void multiply(const Element& left, InIterator first_right, InIterator last_right, OutIterator first_out)
 {
-	auto f = [&](const auto& right) { return left * right; };
+	auto f = [&](const value_type_i<InIterator>& right) { return left * right; };
 	std::transform(first_right, last_right, first_out, f);
 }
 
@@ -110,7 +119,7 @@ template<typename InIterator, typename Element, typename OutIterator,
 	check_product<value_type_i<InIterator>, Element, value_type_i<OutIterator>> = 0>
 void multiply(InIterator first_left, InIterator last_left, const Element& right, OutIterator first_out)
 {
-	auto f = [&](const auto& left) { return left * right; };
+	auto f = [&](const value_type_i<InIterator>& left) { return left * right; };
 	std::transform(first_left, last_left, first_out, f);
 }
 
@@ -121,7 +130,10 @@ template<typename InIteratorLeft, typename InIteratorRight, typename OutIterator
 	check_ratio<value_type_i<InIteratorLeft>, value_type_i<InIteratorRight>, value_type_i<OutIterator>> = 0>
 void divide(InIteratorLeft first_left, InIteratorLeft last_left, InIteratorRight first_right, OutIterator first_out)
 {
-	auto f = [](const auto& left, const auto& right) { return left / right; };
+    auto f = [](const value_type_i<InIteratorLeft>& left, const value_type_i<InIteratorRight>& right)
+    {
+        return left / right;
+    };
 	std::transform(first_left, last_left, first_right, first_out, f);
 }
 
@@ -129,7 +141,7 @@ template<typename Element, typename InIterator, typename OutIterator,
 	check_ratio<Element, value_type_i<InIterator>, value_type_i<OutIterator>> = 0>
 void divide(const Element& left, InIterator first_right, InIterator last_right, OutIterator first_out)
 {
-	auto f = [&](const auto& right) { return left / right; };
+	auto f = [&](const value_type_i<InIterator>& right) { return left / right; };
 	std::transform(first_right, last_right, first_out, f);
 }
 
@@ -137,6 +149,6 @@ template<typename InIterator, typename Element, typename OutIterator,
 	check_ratio<value_type_i<InIterator>, Element, value_type_i<OutIterator>> = 0>
 void divide(InIterator first_left, InIterator last_left, const Element& right, OutIterator first_out)
 {
-	auto f = [&](const auto& left) { return left / right; };
+	auto f = [&](const value_type_i<InIterator>& left) { return left / right; };
 	std::transform(first_left, last_left, first_out, f);
 }
