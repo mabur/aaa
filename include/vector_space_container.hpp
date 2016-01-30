@@ -34,6 +34,8 @@ We represent mathematical vectors as containers.
 #include "vector_space_range.hpp"
 #include "traits.hpp"
 
+namespace aaa {
+
 ////////////////////////////////////////////////////////////////////////////////
 // add
 
@@ -169,5 +171,7 @@ void divide(const Container1& left, const Element& right, Container2& out)
 	using std::end;
 	multiply(begin(left), end(left), right, begin(out));
 }
+
+} // namespace aaa
 
 /** @} */

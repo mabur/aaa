@@ -4,6 +4,8 @@
 
 #include "traits.hpp"
 
+namespace aaa {
+
 template<typename Container1, typename Container2>
 void copy(const Container1& in, Container2& out)
 {
@@ -69,3 +71,5 @@ minmax_element(Container& container)
     using std::end;
     return std::minmax_element(begin(container), end(container));
 }
+
+} // namespace aaa

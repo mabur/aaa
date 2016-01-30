@@ -26,6 +26,8 @@ int main()
 
 void test_std_algorithms()
 {
+    using namespace aaa;
+
     const std::vector<int> c1 = { 1, 2, 3, 4, 5 };
     std::array<float, 5> c2 = { 1, 2, 3, 4, 5 };
     std::valarray<double> c3 = { 1, 2, 3, 4, 5 };
@@ -56,6 +58,8 @@ void test_std_algorithms()
 
 void test_algorithms()
 {
+    using namespace aaa;
+
 	std::vector<int>   c1 = { 1, 2, 3, 4, 5 };
 	std::array<float, 5> c2 = { 1, 2, 3, 4, 5 };
 	std::valarray<double> c3 = { 1, 2, 3, 4, 5 };
@@ -74,6 +78,8 @@ void test_algorithms()
 
 void test_vector_space_operations()
 {
+    using namespace aaa;
+
 	std::vector<int>   c1 = { 1, 2, 3, 4, 5 };
 	std::array<int, 5> c2 = { 1, 2, 3, 4, 5 };
 	std::valarray<int> c3 = { 1, 2, 3, 4, 5 };
@@ -117,6 +123,8 @@ void test_vector_space_operations()
 
 void test_euclidean_space_operations()
 {
+    using namespace aaa;
+
 	std::vector<int>   c1 = { 1, 2, 3, 4, 5 };
 	std::array<int, 5> c2 = { 1, 2, 3, 4, 5 };
 	std::valarray<int> c3 = { 1, 2, 3, 4, 5 };

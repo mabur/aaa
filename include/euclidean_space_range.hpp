@@ -18,6 +18,8 @@ We represent mathematical vectors as ranges of iterators.
 
 #include "traits.hpp"
 
+namespace aaa {
+
 template<typename InIterator1, typename InIterator2>
 value_type_i<InIterator1> dot(InIterator1 first_left, InIterator1 last_left, InIterator2 first_right)
 {
@@ -61,5 +63,7 @@ distance(InIterator1 first_left, InIterator1 last_left, InIterator2 first_right)
 	};
 	return sqrt(std::inner_product(first_left, last_left, first_right, zero, op1, op2));
 }
+
+} // namespace aaa
 
 /** @} */

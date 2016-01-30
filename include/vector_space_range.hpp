@@ -33,6 +33,8 @@ We represent mathematical vectors as ranges.
 
 #include "traits.hpp"
 
+namespace aaa {
+
 ////////////////////////////////////////////////////////////////////////////////
 // add
 
@@ -152,3 +154,5 @@ void divide(InIterator first_left, InIterator last_left, const Element& right, O
 	auto f = [&](const value_type_i<InIterator>& left) { return left / right; };
 	std::transform(first_left, last_left, first_out, f);
 }
+
+} // namespace aaa

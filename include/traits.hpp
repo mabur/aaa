@@ -2,6 +2,8 @@
 
 #include <type_traits>
 
+namespace aaa {
+
 template<typename Container>
 using value_type = typename Container::value_type;
 
@@ -61,3 +63,5 @@ using sqrt_value_type = sqrt_type_t<value_type<Container>>;
 
 template<typename Iterator>
 using sqrt_value_type_i = sqrt_type_t<value_type_i<Iterator>>;
+
+} // namespace aaa

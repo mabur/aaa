@@ -18,6 +18,8 @@ We represent mathematical vectors as arbitrary containers.
 
 #include "euclidean_space_range.hpp"
 
+namespace aaa {
+
 /** The dot product of two vectors.
 Each vector is represented by a container.
 The two containers should have the same size and value type.
@@ -70,5 +72,7 @@ sqrt_value_type<Container1> distance(const Container1& left, const Container2& r
 	using std::end;
 	return distance(begin(left), end(left), begin(right));
 }
+
+} // namespace aaa
 
 /** @} */
