@@ -18,6 +18,8 @@ We represent mathematical vectors as ranges of iterators.
 
 #include "traits.hpp"
 
+namespace aaa {
+
 template<typename InIterator1, typename InIterator2>
 value_type_i<InIterator1> dot(InIterator1 first_left, InIterator1 last_left, InIterator2 first_right)
 {
@@ -45,20 +47,23 @@ template<typename InIterator1, typename InIterator2>
 sqrt_value_type_i<InIterator1>
 distance(InIterator1 first_left, InIterator1 last_left, InIterator2 first_right)
 {
-	using value_type1 = const value_type_i<InIterator1>;
-	using value_type2 = const value_type_i<InIterator2>;
-	static_assert(std::is_same<value_type1, value_type2>::value, "Different value types");
+	using value_type_left  = const value_type_i<InIterator1>;
+	using value_type_right = const value_type_i<InIterator2>;
+    using value_type       = value_type_left;
+	static_assert(std::is_same<value_type_left, value_type_right>::value, "Different value types");
 
-	const auto zero = value_type1();
-	auto op1 = [](const auto& left, const auto& right)
+	const auto zero = value_type();
+	auto op1 = [](const value_type& left, const value_type& right)
 	{
 		return left + right;
 	};
-	auto op2 = [](const auto& left, const auto& right)
+	auto op2 = [](const value_type& left, const value_type& right)
 	{
 		return (left - right) * (left - right);
 	};
 	return sqrt(std::inner_product(first_left, last_left, first_right, zero, op1, op2));
 }
+
+} // namespace aaa
 
 /** @} */

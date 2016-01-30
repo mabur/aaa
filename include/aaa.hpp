@@ -43,6 +43,13 @@ The two approaches have different advantages and disadvantages:
 
 The algorithms can be used on arbitrary containers like this:
 ```
+// Blend two images.
+void blend(const Image& in1, const Image& in2, Image& out)
+{
+    add(in1, in2, out);
+    divide(out, 2, out);
+}
+
 // Returns the projection of a on b.
 std::vector<float> project(const std::vector<float>& a, const std::vector<float>& b)
 {
@@ -51,31 +58,14 @@ std::vector<float> project(const std::vector<float>& a, const std::vector<float>
     multiply(scaling, b, projection);
     return projection;
 }
-
-// Normalize a gray scale image to be between 0 and 1.
-my_image normalized_image(const my_image& image)
-{
-    if (image.empty())
-        return image;
-
-    const auto bounds  = std::minmax_element(image.begin(), image.end());
-    const auto minimum = *bounds.first;
-    const auto maximum = *bounds.second;
-    const auto diff    = maximum - minium;
-
-    if (diff == 0)
-        return image;
-
-    auto normalized_image = image;
-    subtract(normalized_image, minimum, normalized_image);
-    divide(normalized_image, diff, normalized_image);
-
-    return normalized_image;
-}
 ```
 */
 
+// TODO: should the elements be passed by value or const reference?
+
 #pragma once
+
+#include "std_algorithms_container.hpp"
 
 #include "algorithms_range.hpp"
 #include "algorithms_container.hpp"
