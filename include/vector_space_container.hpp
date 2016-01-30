@@ -38,7 +38,7 @@ We represent mathematical vectors as containers.
 // add
 
 template<typename Container1, typename Container2, typename Container3,
-	typename check_sum<value_type<Container1>, value_type<Container2>, value_type<Container3>> = 0>
+	check_sum<value_type<Container1>, value_type<Container2>, value_type<Container3>> = 0>
 void add(const Container1& left, const Container2& right, Container3& out)
 {
 	assert(left.size() == out.size());
@@ -49,7 +49,7 @@ void add(const Container1& left, const Container2& right, Container3& out)
 }
 
 template<typename Element, typename Container1, typename Container2,
-	typename check_sum<Element, value_type<Container1>, value_type<Container2>> = 0>
+	check_sum<Element, value_type<Container1>, value_type<Container2>> = 0>
 void add(const Element& left, const Container1& right, Container2& out)
 {
 	assert(right.size() == out.size());
@@ -59,7 +59,7 @@ void add(const Element& left, const Container1& right, Container2& out)
 }
 
 template<typename Container1, typename Element, typename Container2,
-	typename check_sum<value_type<Container1>, Element, value_type<Container2>> = 0>
+	check_sum<value_type<Container1>, Element, value_type<Container2>> = 0>
 void add(const Container1& left, const Element& right, Container2& out)
 {
 	assert(left.size() == out.size());
@@ -72,7 +72,7 @@ void add(const Container1& left, const Element& right, Container2& out)
 // subtract
 
 template<typename Container1, typename Container2, typename Container3,
-	typename check_difference<value_type<Container1>, value_type<Container2>, value_type<Container3>> = 0>
+	check_difference<value_type<Container1>, value_type<Container2>, value_type<Container3>> = 0>
 void subtract(const Container1& left, const Container2& right, Container3& out)
 {
 	assert(left.size() == out.size());
@@ -83,7 +83,7 @@ void subtract(const Container1& left, const Container2& right, Container3& out)
 }
 
 template<typename Element, typename Container1, typename Container2,
-	typename check_difference<Element, value_type<Container1>, value_type<Container2>> = 0>
+	check_difference<Element, value_type<Container1>, value_type<Container2>> = 0>
 void subtract(const Element& left, const Container1& right, Container2& out)
 {
 	assert(right.size() == out.size());
@@ -93,7 +93,7 @@ void subtract(const Element& left, const Container1& right, Container2& out)
 }
 
 template<typename Container1, typename Element, typename Container2,
-	typename check_difference<value_type<Container1>, Element, value_type<Container2>> = 0>
+	check_difference<value_type<Container1>, Element, value_type<Container2>> = 0>
 void subtract(const Container1& left, const Element& right, Container2& out)
 {
 	assert(left.size() == out.size());
@@ -106,7 +106,7 @@ void subtract(const Container1& left, const Element& right, Container2& out)
 // multiply
 
 template<typename Container1, typename Container2, typename Container3,
-	typename check_product<value_type<Container1>, value_type<Container2>, value_type<Container3>> = 0>
+	check_product<value_type<Container1>, value_type<Container2>, value_type<Container3>> = 0>
 void multiply(const Container1& left, const Container2& right, Container3& out)
 {
 	assert(left.size() == out.size());
@@ -117,7 +117,7 @@ void multiply(const Container1& left, const Container2& right, Container3& out)
 }
 
 template<typename Element, typename Container1, typename Container2,
-	typename check_product<Element, value_type<Container1>, value_type<Container2>> = 0>
+	check_product<Element, value_type<Container1>, value_type<Container2>> = 0>
 void multiply(const Element& left, const Container1& right, Container2& out)
 {
 	assert(right.size() == out.size());
@@ -127,7 +127,7 @@ void multiply(const Element& left, const Container1& right, Container2& out)
 }
 
 template<typename Container1, typename Element, typename Container2,
-	typename check_product<value_type<Container1>, Element, value_type<Container2>> = 0>
+	check_product<value_type<Container1>, Element, value_type<Container2>> = 0>
 void multiply(const Container1& left, const Element& right, Container2& out)
 {
 	assert(left.size() == out.size());
@@ -140,7 +140,7 @@ void multiply(const Container1& left, const Element& right, Container2& out)
 // divide
 
 template<typename Container1, typename Container2, typename Container3,
-	typename check_ratio<value_type<Container1>, value_type<Container2>, value_type<Container3>> = 0>
+	check_ratio<value_type<Container1>, value_type<Container2>, value_type<Container3>> = 0>
 void divide(const Container1& left, const Container2& right, Container3& out)
 {
 	assert(left.size() == out.size());
@@ -151,7 +151,7 @@ void divide(const Container1& left, const Container2& right, Container3& out)
 }
 
 template<typename Element, typename Container1, typename Container2,
-	typename check_ratio<Element, value_type<Container1>, value_type<Container2>> = 0>
+	check_ratio<Element, value_type<Container1>, value_type<Container2>> = 0>
 void divide(const Element& left, const Container1& right, Container2& out)
 {
 	assert(right.size() == out.size());
@@ -161,7 +161,7 @@ void divide(const Element& left, const Container1& right, Container2& out)
 }
 
 template<typename Container1, typename Element, typename Container2,
-	typename check_ratio<value_type<Container1>, Element, value_type<Container2>> = 0>
+	check_ratio<value_type<Container1>, Element, value_type<Container2>> = 0>
 void divide(const Container1& left, const Element& right, Container2& out)
 {
 	assert(left.size() == out.size());
