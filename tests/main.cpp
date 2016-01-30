@@ -5,12 +5,14 @@
 
 #include "aaa.hpp"
 
+void test_std_algorithms();
 void test_algorithms();
 void test_vector_space_operations();
 void test_euclidean_space_operations();
 
 int main()
 {
+    test_std_algorithms();
 	test_algorithms();
 	test_vector_space_operations();
 	test_euclidean_space_operations();
@@ -20,6 +22,36 @@ int main()
 	cin.get();
 
 	return 0;
+}
+
+void test_std_algorithms()
+{
+    const std::vector<int> c1 = { 1, 2, 3, 4, 5 };
+    std::array<float, 5> c2 = { 1, 2, 3, 4, 5 };
+    std::valarray<double> c3 = { 1, 2, 3, 4, 5 };
+    double x = 3.14;
+
+    copy(c1, c2);
+    fill(c3, x);
+
+    auto min1 = min_element(c1);
+    auto min2 = min_element(c2);
+
+    auto max1 = max_element(c1);
+    auto max2 = max_element(c2);
+
+    auto minmax1 = minmax_element(c1);
+    auto minmax2 = minmax_element(c2);
+
+    //*min1 = 3;
+    *min2 = 3;
+    //*max1 = 3;
+    *max2 = 3;
+
+    //*minmax1.first = 3;
+    *minmax2.first = 3;
+    //*minmax1.second = 3;
+    *minmax2.second = 3;
 }
 
 void test_algorithms()

@@ -8,6 +8,12 @@ using value_type = typename Container::value_type;
 template<typename Iterator>
 using value_type_i = typename std::iterator_traits<Iterator>::value_type;
 
+template<typename Container>
+using iterator = typename Container::iterator;
+
+template<typename Container>
+using const_iterator = typename Container::const_iterator;
+
 
 template<typename A, typename B, typename C = B>
 using enable_if_same = typename std::enable_if<

@@ -79,6 +79,8 @@ my_image normalized_image(const my_image& image)
 
 #pragma once
 
+#include "std_algorithms_container.hpp"
+
 #include "algorithms_range.hpp"
 #include "algorithms_container.hpp"
 
