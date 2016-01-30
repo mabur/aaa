@@ -46,6 +46,7 @@ The algorithms can be used on arbitrary containers like this:
 // Blend two images.
 void blend(const Image& in1, const Image& in2, Image& out)
 {
+    using namespace aaa;
     add(in1, in2, out);
     divide(out, 2, out);
 }
@@ -53,6 +54,7 @@ void blend(const Image& in1, const Image& in2, Image& out)
 // Returns the projection of a on b.
 std::vector<float> project(const std::vector<float>& a, const std::vector<float>& b)
 {
+    using namespace aaa;
     const auto scaling = dot(a, b) / dot(b, b);
     auto projection = b;
     multiply(scaling, b, projection);

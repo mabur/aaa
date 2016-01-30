@@ -1,7 +1,7 @@
 var group__euclidean__space__container =
 [
-    [ "distance", "group__euclidean__space__container.html#gac99e78e971cf509c3e97228a06b46136", null ],
-    [ "dot", "group__euclidean__space__container.html#gaf2a4098aa2d5c3671e9e4ded059024ec", null ],
-    [ "norm", "group__euclidean__space__container.html#ga792a5b1e698773f7229eeeff4ce7cdcb", null ],
-    [ "squared_norm", "group__euclidean__space__container.html#gaf515bf3c389a289e8daa42f6c4635bc8", null ]
+    [ "distance", "group__euclidean__space__container.html#gadbf624851d12e60a22b137a4d831247f", null ],
+    [ "dot", "group__euclidean__space__container.html#ga71a5eac60a99bb7a62228edc1a201e15", null ],
+    [ "norm", "group__euclidean__space__container.html#ga7201a014eb3a5b909071ee1981f964b5", null ],
+    [ "squared_norm", "group__euclidean__space__container.html#gac8124a03c9979612a0acdfd5423ffeb0", null ]
 ];
