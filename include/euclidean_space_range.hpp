@@ -1,17 +1,3 @@
-/**
-@defgroup euclidean_space_ranges Euclidean Space perations on Ranges
-
-An Euclidean vector space defines the following:
-- the length or Euclidean norm of a vector.
-- the dot product of two vectors. This is also known as the scalar product or
-Euclidean inner product.
-- the distance between two vectors.
-
-We represent mathematical vectors as ranges of iterators.
-
-@{
-*/
-
 #pragma once
 
 #include <numeric>
@@ -19,6 +5,20 @@ We represent mathematical vectors as ranges of iterators.
 #include "traits.hpp"
 
 namespace aaa {
+
+/**
+@defgroup euclidean_space_ranges Euclidean Space perations on Ranges
+
+An Euclidean vector space defines the following:
+- the length or Euclidean norm of a vector.
+- the dot product of two vectors. This is also known as the scalar product or
+  Euclidean inner product.
+- the distance between two vectors.
+
+We represent mathematical vectors as ranges of iterators.
+
+@{
+*/
 
 template<typename InIterator1, typename InIterator2>
 value_type_i<InIterator1> dot(InIterator1 first_left, InIterator1 last_left, InIterator2 first_right)
@@ -64,6 +64,6 @@ distance(InIterator1 first_left, InIterator1 last_left, InIterator2 first_right)
 	return sqrt(std::inner_product(first_left, last_left, first_right, zero, op1, op2));
 }
 
-} // namespace aaa
-
 /** @} */
+
+} // namespace aaa

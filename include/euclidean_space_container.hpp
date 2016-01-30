@@ -1,3 +1,11 @@
+#pragma once
+
+#include <cassert>
+
+#include "euclidean_space_range.hpp"
+
+namespace aaa {
+
 /**
 @defgroup euclidean_space_container Euclidean Space Operations on Containers
 
@@ -11,14 +19,6 @@ We represent mathematical vectors as arbitrary containers.
 
 @{
 */
-
-#pragma once
-
-#include <cassert>
-
-#include "euclidean_space_range.hpp"
-
-namespace aaa {
 
 /** The dot product of two vectors.
 Each vector is represented by a container.
@@ -73,6 +73,6 @@ sqrt_value_type<Container1> distance(const Container1& left, const Container2& r
 	return distance(begin(left), end(left), begin(right));
 }
 
-} // namespace aaa
-
 /** @} */
+
+} // namespace aaa

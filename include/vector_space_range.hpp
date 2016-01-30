@@ -1,3 +1,11 @@
+#pragma once
+
+#include <algorithm>
+
+#include "traits.hpp"
+
+namespace aaa {
+
 /**
 @defgroup vector_space_range Vector Space Operations on Ranges
 
@@ -13,7 +21,7 @@ where:
 - The `binary_operation` is one of `add`, `subtract`, `multiply`, `divide`.
 - The `output` is a range represented by a single iterator to the first element.
 - At least one of `input_left` and `input_right` is a range of two iterators.
-The other is either a scalar or a range with a single iterator to the first element.
+  The other is either a scalar or a range with a single iterator to the first element.
 
 We call these **vector space operations** since a mathematical vector space has the
 following elementwise operations defined:
@@ -26,14 +34,6 @@ We represent mathematical vectors as ranges.
 
 @{
 */
-
-#pragma once
-
-#include <algorithm>
-
-#include "traits.hpp"
-
-namespace aaa {
 
 ////////////////////////////////////////////////////////////////////////////////
 // add
@@ -154,5 +154,7 @@ void divide(InIterator first_left, InIterator last_left, const Element& right, O
 	auto f = [&](const value_type_i<InIterator>& left) { return left / right; };
 	std::transform(first_left, last_left, first_out, f);
 }
+
+/** @} */
 
 } // namespace aaa
