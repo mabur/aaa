@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <cassert>
 
 #include "traits.hpp"
 
@@ -9,6 +10,7 @@ namespace aaa {
 template<typename Container1, typename Container2>
 void copy(const Container1& in, Container2& out)
 {
+    assert(in.size() == out.size());
 	using std::begin;
 	using std::end;
 	std::copy(begin(in), end(in), begin(out));

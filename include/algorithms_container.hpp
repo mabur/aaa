@@ -11,6 +11,7 @@ namespace aaa {
 template<typename Container1, typename Container2>
 void convert(const Container1& in, Container2& out)
 {
+    assert(in.size() == out.size());
 	using std::begin;
 	using std::end;
 	return convert(begin(in), end(in), begin(out));

@@ -27,7 +27,7 @@ The two containers should have the same size and value type.
 template<typename Container1, typename Container2>
 value_type<Container1> dot(const Container1& a, Container2& b)
 {
-	assert(size(a) == size(b));
+	assert(a.size() == b.size());
 	using std::begin;
 	using std::end;
 	return dot(begin(a), end(a), begin(b));
