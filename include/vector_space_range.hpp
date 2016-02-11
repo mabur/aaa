@@ -35,6 +35,13 @@ We represent mathematical vectors as ranges.
 @{
 */
 
+template<typename InIterator, typename OutIterator>
+void negate(InIterator first_in, InIterator last_in, OutIterator first_out)
+{
+    auto f = [](const value_type_i<InIterator>& in) { return -in; };
+    std::transform(first_in, last_in, first_out, f);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // add
 

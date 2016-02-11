@@ -36,6 +36,15 @@ We represent mathematical vectors as containers.
 @{
 */
 
+template<typename Container1, typename Container2>
+void negate(const Container1& in, Container2& out)
+{
+    assert(in.size() == out.size());
+    using std::begin;
+    using std::end;
+    negate(begin(in), end(in), begin(out));
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // add
 
