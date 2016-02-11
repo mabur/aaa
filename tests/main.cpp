@@ -85,6 +85,8 @@ void test_vector_space_operations()
 	std::valarray<int> c3 = { 1, 2, 3, 4, 5 };
 	int e = 10;
 
+    negate(c1, c2);
+
 	add(c1, c2, c3);
 	add(e, c2, c3);
 	add(c2, e, c3);
@@ -103,6 +105,8 @@ void test_vector_space_operations()
 
 	using std::begin;
 	using std::end;
+
+    negate(begin(c1), end(c1), begin(c2));
 
 	add(begin(c1), end(c1), begin(c2), begin(c3));
 	add(e, begin(c1), end(c1), begin(c3));
@@ -132,6 +136,7 @@ void test_euclidean_space_operations()
 	dot(c1, c2);
 	squared_norm(c1);
 	norm(c1);
+    squared_distance(c1, c2);
 	distance(c1, c2);
 
 	using std::begin;
@@ -140,5 +145,6 @@ void test_euclidean_space_operations()
 	dot(begin(c1), end(c1), begin(c2));
 	squared_norm(begin(c1), end(c1));
 	norm(begin(c1), end(c1));
+    squared_distance(begin(c1), end(c1), begin(c2));
 	distance(begin(c1), end(c1), begin(c2));
 }

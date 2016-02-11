@@ -19,7 +19,7 @@ using const_iterator = typename Container::const_iterator;
 
 template<typename A, typename B, typename C = B>
 using enable_if_same = typename std::enable_if<
-	std::is_same<A, B>::value && std::is_same<B, C>::value, int>::type;
+    std::is_same<A, B>::value && std::is_same<B, C>::value, int>::type;
 
 
 template<typename A, typename B, typename C>

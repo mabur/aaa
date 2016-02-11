@@ -6,6 +6,7 @@ This library consists of the modules:
 - **Vector space operations**. This module defines the algorithms:
     - add
     - subtract
+    - negate
     - multiply
     - divide
 - **Euclidean space operations**. This module defines the algorithms:
@@ -13,18 +14,30 @@ This library consists of the modules:
     - squared_norm
     - dot
     - distance
+    - squared_distance
 
 Go to the **Modules** pages to learn more about each module.
 
 # Design and Rationale
 
 This library deals with arithmetic operations on mathematical vectors.
-C++ libraries that deals with this can usually be divided into two categories:
+It is designed for vectors in arbitrary dimensions. It is NOT optimized for small
+vectors, which you typically use to represent geometry in 2D and 3D. For that
+use case it might be more optimal to use other libraries like:
+[GLM](http://glm.g-truc.net/) and [Eigen](http://eigen.tuxfamily.org/). 
+
+C++ libraries that deals with mathematical vectors in arbitrary dimensions
+can usually be divided into two categories:
 -# Those that implement a vector class and overload its arithmetic operators.
-   Examples of this are: `std::valarray`, `Eigen`, `Blitz++`, `OpenCV`, `GLM`.
+   Examples of this are:
+   [std::valarray](http://www.cplusplus.com/reference/valarray/),
+   [Eigen](http://eigen.tuxfamily.org/),
+   [Blitz++](https://sourceforge.net/projects/blitz/),
+   [OpenCV](http://opencv.org/).
 -# Those that implement general algorithms that work on any container or
    range of iterators. An example of this is the standard library and the headers
-   `<algorithm>` and `<numeric>`.
+   [algorithm](http://www.cplusplus.com/reference/algorithm/)
+   and [numeric](http://www.cplusplus.com/reference/numeric/).
 
 This library follows the second approach. It implements some common arithmetic
 algorithms that are missing in the standard library.
