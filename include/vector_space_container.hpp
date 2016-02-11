@@ -13,6 +13,7 @@ namespace aaa {
 This module defines the functions:
 - `add`
 - `subtract`
+- `negate`
 - `multiply`
 - `divide`
 
@@ -28,6 +29,7 @@ We call these **vector space operations** since a mathematical vector space has 
 following elementwise operations defined:
 - addition of two vectors.
 - subtraction of two vectors.
+- negation of a vector.
 - multiplication of a vector and a scalar.
 - division of a vector and a scalar.
 
