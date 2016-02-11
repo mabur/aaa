@@ -56,8 +56,18 @@ sqrt_value_type<Container> norm(const Container& a)
     return norm(begin(a), end(a));
 }
 
-// TODO: assert that we pass in containers. Don't mix with std::distance that
-// takes two iterators.
+/** The squared Euclidean distance of two vectors.
+Each vector is represented by a container.
+The two containers should have the same size and value type.
+*/
+template<typename Container1, typename Container2>
+value_type<Container1> squared_distance(const Container1& left, const Container2& right)
+{
+    assert(left.size() == right.size());
+    using std::begin;
+    using std::end;
+    return squared_distance(begin(left), end(left), begin(right));
+}
 
 /** The Euclidean distance of two vectors.
 Each vector is represented by a container.

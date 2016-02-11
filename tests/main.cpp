@@ -136,6 +136,7 @@ void test_euclidean_space_operations()
 	dot(c1, c2);
 	squared_norm(c1);
 	norm(c1);
+    squared_distance(c1, c2);
 	distance(c1, c2);
 
 	using std::begin;
@@ -144,5 +145,6 @@ void test_euclidean_space_operations()
 	dot(begin(c1), end(c1), begin(c2));
 	squared_norm(begin(c1), end(c1));
 	norm(begin(c1), end(c1));
+    squared_distance(begin(c1), end(c1), begin(c2));
 	distance(begin(c1), end(c1), begin(c2));
 }
