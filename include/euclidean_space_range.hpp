@@ -20,35 +20,36 @@ We represent mathematical vectors as ranges of iterators.
 @{
 */
 
-template<typename InIterator1, typename InIterator2>
-value_type_i<InIterator1> dot(InIterator1 first_left, InIterator1 last_left, InIterator2 first_right)
+template<typename InputIterator1, typename InputIterator2>
+value_type_i<InputIterator1>
+dot(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
 {
-    using value_type1 = const value_type_i<InIterator1>;
-    using value_type2 = const value_type_i<InIterator2>;
+    using value_type1 = const value_type_i<InputIterator1>;
+    using value_type2 = const value_type_i<InputIterator2>;
     static_assert(std::is_same<value_type1, value_type2>::value, "Different value types");
 
     const auto zero = value_type1();
     return std::inner_product(first_left, last_left, first_right, zero);
 }
 
-template<typename InIterator>
-value_type_i<InIterator> squared_norm(InIterator first, InIterator last)
+template<typename InputIterator>
+value_type_i<InputIterator> squared_norm(InputIterator first, InputIterator last)
 {
     return dot(first, last, first);
 }
 
-template<typename InIterator>
-sqrt_value_type_i<InIterator> norm(InIterator first, InIterator last)
+template<typename InputIterator>
+sqrt_value_type_i<InputIterator> norm(InputIterator first, InputIterator last)
 {
     return sqrt(squared_norm(first, last));
 }
 
-template<typename InIterator1, typename InIterator2>
-value_type_i<InIterator1>
-squared_distance(InIterator1 first_left, InIterator1 last_left, InIterator2 first_right)
+template<typename InputIterator1, typename InputIterator2>
+value_type_i<InputIterator1>
+squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
 {
-    using value_type_left = const value_type_i<InIterator1>;
-    using value_type_right = const value_type_i<InIterator2>;
+    using value_type_left = const value_type_i<InputIterator1>;
+    using value_type_right = const value_type_i<InputIterator2>;
     using value_type = value_type_left;
     static_assert(std::is_same<value_type_left, value_type_right>::value, "Different value types");
 
@@ -64,9 +65,9 @@ squared_distance(InIterator1 first_left, InIterator1 last_left, InIterator2 firs
     return std::inner_product(first_left, last_left, first_right, zero, op1, op2);
 }
 
-template<typename InIterator1, typename InIterator2>
-sqrt_value_type_i<InIterator1>
-distance(InIterator1 first_left, InIterator1 last_left, InIterator2 first_right)
+template<typename InputIterator1, typename InputIterator2>
+sqrt_value_type_i<InputIterator1>
+distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
 {
     return sqrt(squared_distance(first_left, last_left, first_right));
 }
