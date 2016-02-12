@@ -62,28 +62,58 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="title">Auxiliary Arithmetic Algorithms Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1>Overview</h1>
-<p>This library consists of the modules:</p><ul>
+<div class="textblock"><h1>Contents</h1>
+<ul>
+<li>Overview</li>
+<li>Requirements</li>
+<li>Building</li>
+<li>Design and Rationale</li>
+<li>Examples</li>
+</ul>
+<h1>Overview</h1>
+<p>This library consists of a set of templated functions for doing basic arithmetic operations on ranges and containers. It assumes that the elements of the ranges/containers support the arithmetic operators: +, -, *, /.</p>
+<p>From a mathematical point of view it works on vector spaces in arbitrary dimensions. It does not define any specific data structure for the vectors. Instead it provides functions that implement vector space operations for arbitrary ranges/containers.</p>
+<p>The library consists of the modules:</p><ul>
 <li><b>Vector space operations</b>. This module defines the algorithms:<ul>
-<li>add</li>
-<li>subtract</li>
-<li>negate</li>
-<li>multiply</li>
-<li>divide</li>
+<li><b>add</b>. Does elementwise addition of either two ranges/containers, or a scalar and a range/container.</li>
+<li><b>subtract</b>. Does elementwise subtraction of either two ranges/containers, or a scalar and a range/container.</li>
+<li><b>negate</b>. Does elementwise negation of a range/container.</li>
+<li><b>multiply</b>. Does elementwise multiplication of either two ranges/containers, or a scalar and a range/container.</li>
+<li><b>divide</b>. Does elementwise division of either two ranges/containers, or a scalar and a range/container.</li>
 </ul>
 </li>
 <li><b>Euclidean space operations</b>. This module defines the algorithms:<ul>
-<li>norm</li>
-<li>squared_norm</li>
-<li>dot</li>
-<li>distance</li>
-<li>squared_distance</li>
+<li><b>norm</b>. Computes the Euclidean norm of a range/container.</li>
+<li><b>squared_norm</b>. Computes the squared Euclidean norm of a range/container.</li>
+<li><b>dot</b>. Computes the Euclidean inner product of two ranges/containers.</li>
+<li><b>distance</b>. Computes the Euclidean distance of two ranges/containers.</li>
+<li><b>squared_distance</b>. Computes the squared Euclidean distance of two ranges/containers.</li>
+</ul>
+</li>
+<li><b>Misc algorithms</b>. This module defines the aglorithms:<ul>
+<li><b>sum</b>. Computes the sum of the elements of a range/container.</li>
+<li><b>convert</b>. Does elementwise <code>static_cast</code> on the elements from one range/container to another range/container.</li>
+</ul>
+</li>
+<li><b>STD algorithms</b>. This module defines container versions of some range algorithms from the standard library header <code>&lt;algorithm&gt;</code>. It only does it for the algorithms that are used a lot for arithmetic types:<ul>
+<li><b>copy</b>.</li>
+<li><b>fill</b>.</li>
+<li><b>min_element</b>.</li>
+<li><b>max_element</b>.</li>
+<li><b>minmax_element</b>.</li>
 </ul>
 </li>
 </ul>
 <p>Go to the <b>Modules</b> pages to learn more about each module.</p>
+<h1>Requirements</h1>
+<p>All the functions of this library assume that the input and output is:</p><ul>
+<li>Either ranges of iterators, or standard like containers, i.e. they have begin and end functions that give iterators.</li>
+<li>The elements of the ranges/containers should support arithmetic operations: +, -, *, /.</li>
+</ul>
+<h1>Building</h1>
+<p>The library is header only, which makes it easy to use and build. Download it and add it to the include directory of your project and <code>#include &lt;<a class="el" href="aaa_8hpp_source.html">aaa.hpp</a>&gt;</code>.</p>
 <h1>Design and Rationale</h1>
-<p>This library deals with arithmetic operations on mathematical vectors. It is designed for vectors in arbitrary dimensions. It is NOT optimized for small vectors, which you typically use to represent geometry in 2D and 3D. For that use case it might be more optimal to use other libraries like: <a href="http://glm.g-truc.net/">GLM</a> and <a href="http://eigen.tuxfamily.org/">Eigen</a>.</p>
+<p>This library deals with arithmetic operations on mathematical vectors, represented as ranges or containers. It is designed for vectors in arbitrary dimensions. It is NOT optimized for small vectors, which you typically use to represent geometry in 2D and 3D. For that use case it might be more optimal to use other libraries like: <a href="http://glm.g-truc.net/">GLM</a> and <a href="http://eigen.tuxfamily.org/">Eigen</a>.</p>
 <p>C++ libraries that deals with mathematical vectors in arbitrary dimensions can usually be divided into two categories:</p><ol type="1">
 <li>Those that implement a vector class and overload its arithmetic operators. Examples of this are: <a href="http://www.cplusplus.com/reference/valarray/">std::valarray</a>, <a href="http://eigen.tuxfamily.org/">Eigen</a>, <a href="https://sourceforge.net/projects/blitz/">Blitz++</a>, <a href="http://opencv.org/">OpenCV</a>.</li>
 <li>Those that implement general algorithms that work on any container or range of iterators. An example of this is the standard library and the headers <a href="http://www.cplusplus.com/reference/algorithm/">algorithm</a> and <a href="http://www.cplusplus.com/reference/numeric/">numeric</a>.</li>
@@ -94,7 +124,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <li>The advantage of the second approach is that it allows <em>generic programming</em>. Code that uses such libraries is more general since it is less coupled to a specific data structure. This is good for readability and reuse of the code.</li>
 </ol>
 <h1>Examples</h1>
-<p>The algorithms can be used on arbitrary containers like this: </p><div class="fragment"><div class="line"><span class="comment">// Blend two images.</span></div><div class="line"><span class="keywordtype">void</span> blend(<span class="keyword">const</span> Image&amp; in1, <span class="keyword">const</span> Image&amp; in2, Image&amp; out)</div><div class="line">{</div><div class="line">    <span class="keyword">using namespace </span><a class="code" href="namespaceaaa.html">aaa</a>;</div><div class="line">    add(in1, in2, out);</div><div class="line">    divide(out, 2, out);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// Returns the projection of a on b.</span></div><div class="line">std::vector&lt;float&gt; project(<span class="keyword">const</span> std::vector&lt;float&gt;&amp; a, <span class="keyword">const</span> std::vector&lt;float&gt;&amp; b)</div><div class="line">{</div><div class="line">    <span class="keyword">using namespace </span><a class="code" href="namespaceaaa.html">aaa</a>;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> scaling = <a class="code" href="group__euclidean__space__container.html#ga71a5eac60a99bb7a62228edc1a201e15">dot</a>(a, b) / <a class="code" href="group__euclidean__space__container.html#ga71a5eac60a99bb7a62228edc1a201e15">dot</a>(b, b);</div><div class="line">    <span class="keyword">auto</span> projection = b;</div><div class="line">    multiply(scaling, b, projection);</div><div class="line">    <span class="keywordflow">return</span> projection;</div><div class="line">}</div></div><!-- fragment --> </div></div><!-- contents -->
+<p>The algorithms can be used on arbitrary containers like this: </p><div class="fragment"><div class="line"><span class="comment">// Blend two images.</span></div><div class="line"><span class="keywordtype">void</span> blend(<span class="keyword">const</span> Image&amp; in1, <span class="keyword">const</span> Image&amp; in2, Image&amp; out)</div><div class="line">{</div><div class="line">    <span class="keyword">using namespace </span><a class="code" href="namespaceaaa.html">aaa</a>;</div><div class="line">    add(in1, in2, out); <span class="comment">// Add the images together elementwise.</span></div><div class="line">    divide(out, 2, out);<span class="comment">// Divide the result elementwise with 2 to get the mean image.</span></div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// Returns the projection of a on b.</span></div><div class="line">std::vector&lt;float&gt; project(<span class="keyword">const</span> std::vector&lt;float&gt;&amp; a, <span class="keyword">const</span> std::vector&lt;float&gt;&amp; b)</div><div class="line">{</div><div class="line">    <span class="keyword">using namespace </span><a class="code" href="namespaceaaa.html">aaa</a>;</div><div class="line">    <span class="comment">// First we compute the scaling factor of the projection by taking the dot</span></div><div class="line">    <span class="comment">// product of the vectors. We normalize with the squared_norm of the vector</span></div><div class="line">    <span class="comment">// that we are projecting on.</span></div><div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> scaling = <a class="code" href="group__euclidean__space__container.html#ga71a5eac60a99bb7a62228edc1a201e15">dot</a>(a, b) / <a class="code" href="group__euclidean__space__container.html#gac8124a03c9979612a0acdfd5423ffeb0">squared_norm</a>(b);</div><div class="line">    <span class="comment">// The projection of a on b is like b:</span></div><div class="line">    <span class="keyword">auto</span> projection = b;</div><div class="line">    <span class="comment">// but multipled elementwise with the scaling factor.</span></div><div class="line">    multiply(scaling, b, projection);</div><div class="line">    <span class="keywordflow">return</span> projection;</div><div class="line">}</div></div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

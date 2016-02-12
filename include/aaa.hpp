@@ -1,26 +1,73 @@
 /** \mainpage
 
+# Contents
+- Overview
+- Requirements
+- Building
+- Design and Rationale
+- Examples
+
 # Overview
 
-This library consists of the modules:
+This library consists of a set of templated functions for doing basic arithmetic
+operations on ranges and containers. It assumes that the elements of the
+ranges/containers support the arithmetic operators: +, -, *, /.
+
+From a mathematical point of view it works on vector spaces in arbitrary dimensions.
+It does not define any specific data structure for the vectors.
+Instead it provides functions that implement vector space operations
+for arbitrary ranges/containers.
+
+The library consists of the modules:
 - **Vector space operations**. This module defines the algorithms:
-    - add
-    - subtract
-    - negate
-    - multiply
-    - divide
+    - **add**. Does elementwise addition of either two ranges/containers,
+      or a scalar and a range/container.
+    - **subtract**. Does elementwise subtraction of either two ranges/containers,
+      or a scalar and a range/container.
+    - **negate**. Does elementwise negation of a range/container.
+    - **multiply**. Does elementwise multiplication of either two ranges/containers,
+      or a scalar and a range/container.
+    - **divide**. Does elementwise division of either two ranges/containers,
+      or a scalar and a range/container.
 - **Euclidean space operations**. This module defines the algorithms:
-    - norm
-    - squared_norm
-    - dot
-    - distance
-    - squared_distance
+    - **norm**. Computes the Euclidean norm of a range/container.
+    - **squared_norm**. Computes the squared Euclidean norm of a range/container.
+    - **dot**. Computes the Euclidean inner product of two ranges/containers.
+    - **distance**. Computes the Euclidean distance of two ranges/containers.
+    - **squared_distance**. Computes the squared Euclidean distance of two
+      ranges/containers.
+- **Misc algorithms**. This module defines the aglorithms:
+    - **sum**. Computes the sum of the elements of a range/container.
+    - **convert**. Does elementwise `static_cast` on the elements from one
+      range/container to another range/container.
+- **STD algorithms**. This module defines container versions of some range
+  algorithms from the standard library header `<algorithm>`. It only does it for
+  the algorithms that are used a lot for arithmetic types:
+    - **copy**.
+    - **fill**.
+    - **min_element**.
+    - **max_element**.
+    - **minmax_element**.
 
 Go to the **Modules** pages to learn more about each module.
 
+# Requirements
+
+All the functions of this library assume that the input and output is:
+- Either ranges of iterators, or standard like containers, i.e. they have begin
+  and end functions that give iterators.
+- The elements of the ranges/containers should support arithmetic operations:
+  +, -, *, /.
+
+# Building
+
+The library is header only, which makes it easy to use and build. Download it
+and add it to the include directory of your project and `#include <aaa.hpp>`.
+
 # Design and Rationale
 
-This library deals with arithmetic operations on mathematical vectors.
+This library deals with arithmetic operations on mathematical vectors,
+represented as ranges or containers.
 It is designed for vectors in arbitrary dimensions. It is NOT optimized for small
 vectors, which you typically use to represent geometry in 2D and 3D. For that
 use case it might be more optimal to use other libraries like:
@@ -60,16 +107,21 @@ The algorithms can be used on arbitrary containers like this:
 void blend(const Image& in1, const Image& in2, Image& out)
 {
     using namespace aaa;
-    add(in1, in2, out);
-    divide(out, 2, out);
+    add(in1, in2, out); // Add the images together elementwise.
+    divide(out, 2, out);// Divide the result elementwise with 2 to get the mean image.
 }
 
 // Returns the projection of a on b.
 std::vector<float> project(const std::vector<float>& a, const std::vector<float>& b)
 {
     using namespace aaa;
-    const auto scaling = dot(a, b) / dot(b, b);
+    // First we compute the scaling factor of the projection by taking the dot
+    // product of the vectors. We normalize with the squared_norm of the vector
+    // that we are projecting on.
+    const auto scaling = dot(a, b) / squared_norm(b);
+    // The projection of a on b is like b:
     auto projection = b;
+    // but multipled elementwise with the scaling factor.
     multiply(scaling, b, projection);
     return projection;
 }

@@ -6,17 +6,17 @@
 
 namespace aaa {
 
-template<typename InIterator, typename OutIterator>
-void convert(InIterator first_in, InIterator last_in, OutIterator first_out)
+template<typename InputIterator, typename OutputIterator>
+void convert(InputIterator first_in, InputIterator last_in, OutputIterator first_out)
 {
-    auto f = [](value_type_i<InIterator> x) { return value_type_i<OutIterator>(x); };
+    auto f = [](value_type_i<InputIterator> x) { return value_type_i<OutputIterator>(x); };
     std::transform(first_in, last_in, first_out, f);
 }
 
-template<typename InIterator>
-value_type_i<InIterator> sum(InIterator first, InIterator last)
+template<typename InputIterator>
+value_type_i<InputIterator> sum(InputIterator first, InputIterator last)
 {
-    const auto zero = value_type_i<InIterator>();
+    const auto zero = value_type_i<InputIterator>();
     return std::accumulate(first, last, zero);
 }
 
