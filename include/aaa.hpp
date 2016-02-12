@@ -119,9 +119,9 @@ std::vector<float> project(const std::vector<float>& a, const std::vector<float>
     // product of the vectors. We normalize with the squared_norm of the vector
     // that we are projecting on.
     const auto scaling = dot(a, b) / squared_norm(b);
-    // The projection of a on b is like b:
+    // The projection of a on b is like b,
+    // but multiplied elementwise with the scaling factor.
     auto projection = b;
-    // but multipled elementwise with the scaling factor.
     multiply(scaling, b, projection);
     return projection;
 }
