@@ -48,7 +48,7 @@ void negate(InputIterator first_in, InputIterator last_in, OutputIterator first_
 // add
 
 template<typename InputIterator1, typename InputIterator2, typename OutputIterator,
-    check_sum<value_type_i<InputIterator1>, value_type_i<InputIterator2>, value_type_i<OutputIterator>> = 0>
+    check_sum<value_type_i<InputIterator1>, value_type_i<InputIterator2>, value_type_i<OutputIterator>> = nullptr>
 void add(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, OutputIterator first_out)
 {
     auto f = [](const value_type_i<InputIterator1>& left, const value_type_i<InputIterator2>& right)
@@ -59,7 +59,7 @@ void add(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 fir
 }
 
 template<typename Element, typename InputIterator, typename OutputIterator,
-    check_sum<Element, value_type_i<InputIterator>, value_type_i<OutputIterator>> = 0>
+    check_sum<Element, value_type_i<InputIterator>, value_type_i<OutputIterator>> = nullptr>
 void add(const Element& left, InputIterator first_right, InputIterator last_right, OutputIterator first_out)
 {
     auto f = [&](const value_type_i<InputIterator>& right) { return left + right; };
@@ -67,7 +67,7 @@ void add(const Element& left, InputIterator first_right, InputIterator last_righ
 }
 
 template<typename InputIterator, typename Element, typename OutputIterator,
-    check_sum<value_type_i<InputIterator>, Element, value_type_i<OutputIterator>> = 0>
+    check_sum<value_type_i<InputIterator>, Element, value_type_i<OutputIterator>> = nullptr>
 void add(InputIterator first_left, InputIterator last_left, const Element& right, OutputIterator first_out)
 {
     auto f = [&](const value_type_i<InputIterator>& left) { return left + right; };
@@ -78,7 +78,7 @@ void add(InputIterator first_left, InputIterator last_left, const Element& right
 // subtract
 
 template<typename InputIterator1, typename InputIterator2, typename OutputIterator,
-    check_difference<value_type_i<InputIterator1>, value_type_i<InputIterator2>, value_type_i<OutputIterator>> = 0>
+    check_difference<value_type_i<InputIterator1>, value_type_i<InputIterator2>, value_type_i<OutputIterator>> = nullptr>
 void subtract(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, OutputIterator first_out)
 {
     auto f = [](const value_type_i<InputIterator1>& left, const value_type_i<InputIterator2>& right)
@@ -89,7 +89,7 @@ void subtract(InputIterator1 first_left, InputIterator1 last_left, InputIterator
 }
 
 template<typename Element, typename InputIterator, typename OutputIterator,
-    check_difference<Element, value_type_i<InputIterator>, value_type_i<OutputIterator>> = 0>
+    check_difference<Element, value_type_i<InputIterator>, value_type_i<OutputIterator>> = nullptr>
 void subtract(const Element& left, InputIterator first_right, InputIterator last_right, OutputIterator first_out)
 {
     auto f = [&](const value_type_i<InputIterator>& right) { return left - right; };
@@ -97,7 +97,7 @@ void subtract(const Element& left, InputIterator first_right, InputIterator last
 }
 
 template<typename InputIterator, typename Element, typename OutputIterator,
-    check_difference<value_type_i<InputIterator>, Element, value_type_i<OutputIterator>> = 0>
+    check_difference<value_type_i<InputIterator>, Element, value_type_i<OutputIterator>> = nullptr>
 void subtract(InputIterator first_left, InputIterator last_left, const Element& right, OutputIterator first_out)
 {
     auto f = [&](const value_type_i<InputIterator>& left) { return left - right; };
@@ -108,7 +108,7 @@ void subtract(InputIterator first_left, InputIterator last_left, const Element& 
 // multiply
 
 template<typename InputIterator1, typename InputIterator2, typename OutputIterator,
-    check_product<value_type_i<InputIterator1>, value_type_i<InputIterator2>, value_type_i<OutputIterator>> = 0>
+    check_product<value_type_i<InputIterator1>, value_type_i<InputIterator2>, value_type_i<OutputIterator>> = nullptr>
 void multiply(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, OutputIterator first_out)
 {
     auto f = [](const value_type_i<InputIterator1>& left, const value_type_i<InputIterator2>& right)
@@ -119,7 +119,7 @@ void multiply(InputIterator1 first_left, InputIterator1 last_left, InputIterator
 }
 
 template<typename Element, typename InputIterator, typename OutputIterator,
-    check_product<Element, value_type_i<InputIterator>, value_type_i<OutputIterator>> = 0>
+    check_product<Element, value_type_i<InputIterator>, value_type_i<OutputIterator>> = nullptr>
 void multiply(const Element& left, InputIterator first_right, InputIterator last_right, OutputIterator first_out)
 {
     auto f = [&](const value_type_i<InputIterator>& right) { return left * right; };
@@ -127,7 +127,7 @@ void multiply(const Element& left, InputIterator first_right, InputIterator last
 }
 
 template<typename InputIterator, typename Element, typename OutputIterator,
-    check_product<value_type_i<InputIterator>, Element, value_type_i<OutputIterator>> = 0>
+    check_product<value_type_i<InputIterator>, Element, value_type_i<OutputIterator>> = nullptr>
 void multiply(InputIterator first_left, InputIterator last_left, const Element& right, OutputIterator first_out)
 {
     auto f = [&](const value_type_i<InputIterator>& left) { return left * right; };
@@ -138,7 +138,7 @@ void multiply(InputIterator first_left, InputIterator last_left, const Element& 
 // divide
 
 template<typename InputIterator1, typename InputIterator2, typename OutputIterator,
-    check_ratio<value_type_i<InputIterator1>, value_type_i<InputIterator2>, value_type_i<OutputIterator>> = 0>
+    check_ratio<value_type_i<InputIterator1>, value_type_i<InputIterator2>, value_type_i<OutputIterator>> = nullptr>
 void divide(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, OutputIterator first_out)
 {
     auto f = [](const value_type_i<InputIterator1>& left, const value_type_i<InputIterator2>& right)
@@ -149,7 +149,7 @@ void divide(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 
 }
 
 template<typename Element, typename InputIterator, typename OutputIterator,
-    check_ratio<Element, value_type_i<InputIterator>, value_type_i<OutputIterator>> = 0>
+    check_ratio<Element, value_type_i<InputIterator>, value_type_i<OutputIterator>> = nullptr>
 void divide(const Element& left, InputIterator first_right, InputIterator last_right, OutputIterator first_out)
 {
     auto f = [&](const value_type_i<InputIterator>& right) { return left / right; };
@@ -157,7 +157,7 @@ void divide(const Element& left, InputIterator first_right, InputIterator last_r
 }
 
 template<typename InputIterator, typename Element, typename OutputIterator,
-    check_ratio<value_type_i<InputIterator>, Element, value_type_i<OutputIterator>> = 0>
+    check_ratio<value_type_i<InputIterator>, Element, value_type_i<OutputIterator>> = nullptr>
 void divide(InputIterator first_left, InputIterator last_left, const Element& right, OutputIterator first_out)
 {
     auto f = [&](const value_type_i<InputIterator>& left) { return left / right; };

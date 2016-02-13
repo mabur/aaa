@@ -103,6 +103,30 @@ void test_vector_space_operations()
 	divide(e, c2, c3);
 	divide(c1, e, c3);
 
+#if !_MSC_VER || __clang__
+
+    std::vector<float>   c1f = { 1.f, 2.f, 3.f, 4.f, 5.f };
+    std::array<float, 5> c2f = { 1.f, 2.f, 3.f, 4.f, 5.f };
+    std::valarray<float> c3f = { 1.f, 2.f, 3.f, 4.f, 5.f };
+    int ef = 10.f;
+
+    add(c1, c2f, c3f);
+    add(e, c2f, c3f);
+    add(c2, ef, c3f);
+
+    subtract(c1, c2f, c3f);
+    subtract(e, c2f, c3f);
+    subtract(c2, ef, c3f);
+
+    multiply(c1, c2f, c3f);
+    multiply(e, c2f, c3f);
+    multiply(c1, ef, c3f);
+
+    divide(c1, c2f, c3f);
+    divide(e, c2f, c3f);
+    divide(c1, ef, c3f);
+#endif
+
 	using std::begin;
 	using std::end;
 
