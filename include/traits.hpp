@@ -34,16 +34,16 @@ using sqrt_value_type_i = sqrt_type_t<value_type_i<Iterator>>;
 #if !_MSC_VER || __clang__
 
 template<typename A, typename B, typename C>
-using check_sum = typename decltype(C{ A{} + B{} })*;
+using check_sum = decltype(C{ A{} + B{} })*;
 
 template<typename A, typename B, typename C>
-using check_difference = typename decltype(C{ A{} - B{} })*;
+using check_difference = decltype(C{ A{} - B{} })*;
 
 template<typename A, typename B, typename C>
-using check_product = typename decltype(C{ A{} * B{} })*;
+using check_product = decltype(C{ A{} * B{} })*;
 
 template<typename A, typename B, typename C>
-using check_ratio = typename decltype(C{ A{} / B{} })*;
+using check_ratio = decltype(C{ A{} / B{} })*;
 
 #else // Fallback for MSVC without Clang.
 
