@@ -179,13 +179,27 @@ void test_logical_operations()
 {
     using namespace aaa;
 
-    std::vector<bool>   c1 = { true, false, false, true, false };
-    std::array<bool, 5> c2 = { true, false, false, true, false };
-    std::valarray<bool> c3 = { true, false, false, true, false };
+    std::vector<bool>   c1 = { true, true, false };
+    std::array<bool, 3> c2 = { true, false, true };
+    std::valarray<bool> c3 = { true, false, false };
 
     logical_and(c1, c2, c3);
+
+    assert(c3[0] == true);
+    assert(c3[1] == false);
+    assert(c3[2] == false);
+
     logical_or(c1, c2, c3);
+
+    assert(c3[0] == true);
+    assert(c3[1] == true);
+    assert(c3[2] == true);
+
     logical_not(c1, c2);
+
+    assert(c2[0] == false);
+    assert(c2[1] == false);
+    assert(c2[2] == true);
 
     using std::begin;
     using std::end;
