@@ -48,6 +48,11 @@ The library consists of the modules:
     - **min_element**.
     - **max_element**.
     - **minmax_element**.
+- **Logical operations**. This module works on Ranges/Containers with elements
+  of type `bool`. The module defines the algorithms:
+    - **logical_and**. Does elementwise boolean `and` on two ranges/containers.
+    - **logical_or**. Does elementwise boolean `or` on two ranges/containers.
+    - **logical_not**. Does elementwise boolean `not` on a range/container.
 
 Go to the **Modules** pages to learn more about each module.
 
@@ -57,7 +62,8 @@ All the functions of this library assume that the input and output is:
 - Either ranges of iterators, or standard like containers, i.e. they have begin
   and end functions that give iterators.
 - The elements of the ranges/containers should support arithmetic operations:
-  +, -, *, /.
+  +, -, *, /. The functions in the module *Logical Operations* is the only
+  exception to this. It assumes that the elements have type `bool`.
 
 # Building
 

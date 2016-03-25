@@ -103,12 +103,18 @@ $(document).ready(function(){initNavTree('index.html','');});
 <li><b>minmax_element</b>.</li>
 </ul>
 </li>
+<li><b>Logical operations</b>. This module works on Ranges/Containers with elements of type <code>bool</code>. The module defines the algorithms:<ul>
+<li><b>logical_and</b>. Does elementwise boolean <code>and</code> on two ranges/containers.</li>
+<li><b>logical_or</b>. Does elementwise boolean <code>or</code> on two ranges/containers.</li>
+<li><b>logical_not</b>. Does elementwise boolean <code>not</code> on a range/container.</li>
+</ul>
+</li>
 </ul>
 <p>Go to the <b>Modules</b> pages to learn more about each module.</p>
 <h1>Requirements</h1>
 <p>All the functions of this library assume that the input and output is:</p><ul>
 <li>Either ranges of iterators, or standard like containers, i.e. they have begin and end functions that give iterators.</li>
-<li>The elements of the ranges/containers should support arithmetic operations: +, -, *, /.</li>
+<li>The elements of the ranges/containers should support arithmetic operations: +, -, *, /. The functions in the module <em>Logical Operations</em> is the only exception to this. It assumes that the elements have type <code>bool</code>.</li>
 </ul>
 <h1>Building</h1>
 <p>The library is header only, which makes it easy to use and build. Download it and add it to the include directory of your project and <code>#include &lt;<a class="el" href="aaa_8hpp_source.html">aaa.hpp</a>&gt;</code>.</p>

@@ -5,6 +5,12 @@
 
 namespace aaa {
 
+/**
+@defgroup logical_range Logical Operations on Ranges
+
+@{
+*/
+
 template<typename InputIterator1, typename InputIterator2, typename OutputIterator>
 void logical_and(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, OutputIterator first_out)
 {
@@ -22,5 +28,7 @@ void logical_not(InputIterator first_in, InputIterator last_in, OutputIterator f
 {
     std::transform(first_in, last_in, first_out, std::logical_not<bool>());
 }
+
+/** @} */
 
 } // namespace aaa

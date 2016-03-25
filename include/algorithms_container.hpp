@@ -8,6 +8,12 @@
 
 namespace aaa {
 
+/**
+@defgroup algorithms_container Misc Operations on Containers
+
+@{
+*/
+
 template<typename Container1, typename Container2>
 void convert(const Container1& in, Container2& out)
 {
@@ -24,5 +30,7 @@ value_type<Container> sum(const Container& container)
     using std::end;
     return sum(begin(container), end(container));
 }
+
+/** @} */
 
 } // namespace aaa

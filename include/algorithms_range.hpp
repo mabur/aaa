@@ -6,6 +6,12 @@
 
 namespace aaa {
 
+/**
+@defgroup algorithms_range Misc Operations on Ranges
+
+@{
+*/
+
 template<typename InputIterator, typename OutputIterator>
 void convert(InputIterator first_in, InputIterator last_in, OutputIterator first_out)
 {
@@ -19,5 +25,7 @@ value_type_i<InputIterator> sum(InputIterator first, InputIterator last)
     const auto zero = value_type_i<InputIterator>();
     return std::accumulate(first, last, zero);
 }
+
+/** @} */
 
 } // namespace aaa
