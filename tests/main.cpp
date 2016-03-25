@@ -9,6 +9,7 @@ void test_std_algorithms();
 void test_algorithms();
 void test_vector_space_operations();
 void test_euclidean_space_operations();
+void test_logical_operations();
 
 int main()
 {
@@ -16,6 +17,7 @@ int main()
 	test_algorithms();
 	test_vector_space_operations();
 	test_euclidean_space_operations();
+    test_logical_operations();
 
 	using namespace std;
 	cout << "Press enter to quit." << endl;
@@ -103,6 +105,30 @@ void test_vector_space_operations()
 	divide(e, c2, c3);
 	divide(c1, e, c3);
 
+#if !_MSC_VER || __clang__
+
+    std::vector<float>   c1f = { 1.f, 2.f, 3.f, 4.f, 5.f };
+    std::array<float, 5> c2f = { 1.f, 2.f, 3.f, 4.f, 5.f };
+    std::valarray<float> c3f = { 1.f, 2.f, 3.f, 4.f, 5.f };
+    int ef = 10.f;
+
+    add(c1, c2f, c3f);
+    add(e, c2f, c3f);
+    add(c2, ef, c3f);
+
+    subtract(c1, c2f, c3f);
+    subtract(e, c2f, c3f);
+    subtract(c2, ef, c3f);
+
+    multiply(c1, c2f, c3f);
+    multiply(e, c2f, c3f);
+    multiply(c1, ef, c3f);
+
+    divide(c1, c2f, c3f);
+    divide(e, c2f, c3f);
+    divide(c1, ef, c3f);
+#endif
+
 	using std::begin;
 	using std::end;
 
@@ -147,4 +173,38 @@ void test_euclidean_space_operations()
 	norm(begin(c1), end(c1));
     squared_distance(begin(c1), end(c1), begin(c2));
 	distance(begin(c1), end(c1), begin(c2));
+}
+
+void test_logical_operations()
+{
+    using namespace aaa;
+
+    std::vector<bool>   c1 = { true, true, false };
+    std::array<bool, 3> c2 = { true, false, true };
+    std::valarray<bool> c3 = { true, false, false };
+
+    logical_and(c1, c2, c3);
+
+    assert(c3[0] == true);
+    assert(c3[1] == false);
+    assert(c3[2] == false);
+
+    logical_or(c1, c2, c3);
+
+    assert(c3[0] == true);
+    assert(c3[1] == true);
+    assert(c3[2] == true);
+
+    logical_not(c1, c2);
+
+    assert(c2[0] == false);
+    assert(c2[1] == false);
+    assert(c2[2] == true);
+
+    using std::begin;
+    using std::end;
+
+    logical_and(begin(c1), end(c1), begin(c2), begin(c3));
+    logical_or(begin(c1), end(c1), begin(c2), begin(c3));
+    logical_not(begin(c1), end(c1), begin(c2));
 }

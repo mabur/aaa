@@ -48,6 +48,11 @@ The library consists of the modules:
     - **min_element**.
     - **max_element**.
     - **minmax_element**.
+- **Logical operations**. This module works on Ranges/Containers with elements
+  of type `bool`. The module defines the algorithms:
+    - **logical_and**. Does elementwise boolean `and` on two ranges/containers.
+    - **logical_or**. Does elementwise boolean `or` on two ranges/containers.
+    - **logical_not**. Does elementwise boolean `not` on a range/container.
 
 Go to the **Modules** pages to learn more about each module.
 
@@ -57,7 +62,8 @@ All the functions of this library assume that the input and output is:
 - Either ranges of iterators, or standard like containers, i.e. they have begin
   and end functions that give iterators.
 - The elements of the ranges/containers should support arithmetic operations:
-  +, -, *, /.
+  +, -, *, /. The functions in the module *Logical Operations* is the only
+  exception to this. It assumes that the elements have type `bool`.
 
 # Building
 
@@ -119,9 +125,9 @@ std::vector<float> project(const std::vector<float>& a, const std::vector<float>
     // product of the vectors. We normalize with the squared_norm of the vector
     // that we are projecting on.
     const auto scaling = dot(a, b) / squared_norm(b);
-    // The projection of a on b is like b:
+    // The projection of a on b is like b,
+    // but multiplied elementwise with the scaling factor.
     auto projection = b;
-    // but multipled elementwise with the scaling factor.
     multiply(scaling, b, projection);
     return projection;
 }
@@ -142,3 +148,6 @@ std::vector<float> project(const std::vector<float>& a, const std::vector<float>
 
 #include "euclidean_space_range.hpp"
 #include "euclidean_space_container.hpp"
+
+#include "logical_range.hpp"
+#include "logical_container.hpp"
