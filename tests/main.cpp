@@ -9,6 +9,7 @@ void test_std_algorithms();
 void test_algorithms();
 void test_vector_space_operations();
 void test_euclidean_space_operations();
+void test_logical_operations();
 
 int main()
 {
@@ -16,6 +17,7 @@ int main()
 	test_algorithms();
 	test_vector_space_operations();
 	test_euclidean_space_operations();
+    test_logical_operations();
 
 	using namespace std;
 	cout << "Press enter to quit." << endl;
@@ -171,4 +173,24 @@ void test_euclidean_space_operations()
 	norm(begin(c1), end(c1));
     squared_distance(begin(c1), end(c1), begin(c2));
 	distance(begin(c1), end(c1), begin(c2));
+}
+
+void test_logical_operations()
+{
+    using namespace aaa;
+
+    std::vector<bool>   c1 = { true, false, false, true, false };
+    std::array<bool, 5> c2 = { true, false, false, true, false };
+    std::valarray<bool> c3 = { true, false, false, true, false };
+
+    logical_and(c1, c2, c3);
+    logical_or(c1, c2, c3);
+    logical_not(c1, c2);
+
+    using std::begin;
+    using std::end;
+
+    logical_and(begin(c1), end(c1), begin(c2), begin(c3));
+    logical_or(begin(c1), end(c1), begin(c2), begin(c3));
+    logical_not(begin(c1), end(c1), begin(c2));
 }

@@ -142,3 +142,6 @@ std::vector<float> project(const std::vector<float>& a, const std::vector<float>
 
 #include "euclidean_space_range.hpp"
 #include "euclidean_space_container.hpp"
+
+#include "logical_range.hpp"
+#include "logical_container.hpp"
