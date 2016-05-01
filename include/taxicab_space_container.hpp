@@ -7,6 +7,7 @@
 namespace aaa {
 
 /**
+@defgroup taxicab_space_container Taxicab Space operations on Containers
 
 In Taxicab geometry we have:
 - the Taxicab norm which is also known as the Manhattan norm or L1 norm.
