@@ -149,6 +149,24 @@ void test_vector_space_operations()
 	divide(begin(c1), end(c1), begin(c2), begin(c3));
 	divide(e, begin(c1), end(c1), begin(c3));
 	divide(begin(c1), end(c1), e, begin(c3));
+
+    c1 = negate(c1);
+
+    c1 = add(c1, c1);
+    c1 = add(c1, e);
+    c1 = add(e, c1);
+
+    c1 = subtract(c1, c1);
+    c1 = subtract(c1, e);
+    c1 = subtract(e, c1);
+
+    c1 = multiply(c1, c1);
+    c1 = multiply(c1, e);
+    c1 = multiply(e, c1);
+
+    c1 = divide(c1, c1);
+    c1 = divide(c1, e);
+    c1 = divide(e, c1);
 }
 
 void test_euclidean_space_operations()
@@ -207,4 +225,8 @@ void test_logical_operations()
     logical_and(begin(c1), end(c1), begin(c2), begin(c3));
     logical_or(begin(c1), end(c1), begin(c2), begin(c3));
     logical_not(begin(c1), end(c1), begin(c2));
+
+    c1 = logical_and(c1, c1);
+    c2 = logical_or(c2, c2);
+    c3 = logical_not(c3);
 }
