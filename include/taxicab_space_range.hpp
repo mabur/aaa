@@ -1,0 +1,72 @@
+#pragma once
+
+#include <numeric>
+
+#include "traits.hpp"
+
+namespace aaa {
+
+/**
+@defgroup taxicab_space_range Taxicab Space operations on Ranges
+
+In Taxicab geometry we have:
+- the Taxicab norm which is also known as the Manhattan norm or L1 norm.
+- the Taxicab distance which is also known as the Manhattan distance or L1 distance.
+
+We represent mathematical vectors as ranges of iterators.
+
+@{
+*/
+
+template<typename InputIterator>
+value_type_i<InputIterator> norm_l1(InputIterator first, InputIterator last)
+{
+    using value_type = const value_type_i<InputIterator>;
+
+    const auto zero    = value_type();
+    const auto add_abs = [](const value_type& left, const value_type& right)
+    {
+        return left + std::abs(right);
+    };
+    return std::accumulate(first, last, zero, add_abs);
+}
+
+template<typename InputIterator>
+value_type_i<InputIterator> squared_norm_l1(InputIterator first, InputIterator last)
+{
+    const auto n = norm_l1(first, last);
+    return n * n;
+}
+
+template<typename InputIterator1, typename InputIterator2>
+value_type_i<InputIterator1>
+distance_l1(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
+{
+    using value_type_left = const value_type_i<InputIterator1>;
+    using value_type_right = const value_type_i<InputIterator2>;
+    using value_type = value_type_left;
+    static_assert(std::is_same<value_type_left, value_type_right>::value, "Different value types");
+
+    const auto zero = value_type();
+    auto op1 = [](const value_type& left, const value_type& right)
+    {
+        return left + right;
+    };
+    auto op2 = [](const value_type& left, const value_type& right)
+    {
+        return std::abs(left - right);
+    };
+    return std::inner_product(first_left, last_left, first_right, zero, op1, op2);
+}
+
+template<typename InputIterator1, typename InputIterator2>
+value_type_i<InputIterator1>
+squared_distance_l1(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
+{
+    const auto d = distance_l1(first_left, last_left, first_right);
+    return d * d;
+}
+
+/** @} */
+
+} // namespace aaa

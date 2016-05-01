@@ -9,6 +9,7 @@ void test_std_algorithms();
 void test_algorithms();
 void test_vector_space_operations();
 void test_euclidean_space_operations();
+void test_taxicab_space_operations();
 void test_logical_operations();
 
 int main()
@@ -17,6 +18,7 @@ int main()
 	test_algorithms();
 	test_vector_space_operations();
 	test_euclidean_space_operations();
+    test_taxicab_space_operations();
     test_logical_operations();
 
 	using namespace std;
@@ -225,6 +227,32 @@ void test_euclidean_space_operations()
 	norm(begin(c1), end(c1));
     squared_distance(begin(c1), end(c1), begin(c2));
 	distance(begin(c1), end(c1), begin(c2));
+}
+
+void test_taxicab_space_operations()
+{
+    using namespace aaa;
+
+    std::vector<int>   c1 = { 1, 2, 3, 4, 5 };
+    std::array<int, 5> c2 = { -1, 3, 3, -4, 0 };
+    std::valarray<int> c3 = { 1, 2, 3, 4, 5 };
+
+    auto a = squared_norm_l1(c1);
+    assert(a == 15 * 15);
+    auto b = norm_l1(c1);
+    assert(b == 15);
+    auto c = squared_distance_l1(c1, c2);
+    assert(c == 16 * 16);
+    auto d = distance_l1(c1, c2);
+    assert(d == 2 + 1 + 0 + 8 + 5);
+
+    using std::begin;
+    using std::end;
+
+    squared_norm_l1(begin(c1), end(c1));
+    norm_l1(begin(c1), end(c1));
+    squared_distance_l1(begin(c1), end(c1), begin(c2));
+    distance_l1(begin(c1), end(c1), begin(c2));
 }
 
 void test_logical_operations()

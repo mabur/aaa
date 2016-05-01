@@ -7,7 +7,7 @@
 namespace aaa {
 
 /**
-@defgroup euclidean_space_ranges Euclidean Space perations on Ranges
+@defgroup euclidean_space_range Euclidean Space operations on Ranges
 
 An Euclidean vector space defines the following:
 - the length or Euclidean norm of a vector.
