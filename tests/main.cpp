@@ -151,22 +151,56 @@ void test_vector_space_operations()
 	divide(begin(c1), end(c1), e, begin(c3));
 
     c1 = negate(c1);
+    c2 = negate(c2);
+    c3 = negate(c3);
 
     c1 = add(c1, c1);
     c1 = add(c1, e);
     c1 = add(e, c1);
 
+    c2 = add(c2, c2);
+    c2 = add(c2, e);
+    c2 = add(e, c2);
+
+    c3 = add(c3, c3);
+    c3 = add(c3, e);
+    c3 = add(e, c3);
+
     c1 = subtract(c1, c1);
     c1 = subtract(c1, e);
     c1 = subtract(e, c1);
+
+    c2 = subtract(c2, c2);
+    c2 = subtract(c2, e);
+    c2 = subtract(e, c2);
+
+    c3 = subtract(c3, c3);
+    c3 = subtract(c3, e);
+    c3 = subtract(e, c3);
 
     c1 = multiply(c1, c1);
     c1 = multiply(c1, e);
     c1 = multiply(e, c1);
 
+    c2 = multiply(c2, c2);
+    c2 = multiply(c2, e);
+    c2 = multiply(e, c2);
+
+    c3 = multiply(c3, c3);
+    c3 = multiply(c3, e);
+    c3 = multiply(e, c3);
+
     c1 = divide(c1, c1);
     c1 = divide(c1, e);
     c1 = divide(e, c1);
+
+    c2 = divide(c2, c2);
+    c2 = divide(c2, e);
+    c2 = divide(e, c2);
+
+    c3 = divide(c3, c3);
+    c3 = divide(c3, e);
+    c3 = divide(e, c3);
 }
 
 void test_euclidean_space_operations()
