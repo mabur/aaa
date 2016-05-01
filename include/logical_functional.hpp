@@ -4,6 +4,12 @@
 
 namespace aaa {
 
+/**
+@defgroup logical_functional Logical Operations returning Containers
+
+@{
+*/
+
 template<typename Container>
 Container logical_and(const Container& left, const Container& right)
 {
@@ -27,5 +33,7 @@ Container logical_not(const Container& in)
     logical_or(in, out);
     return out;
 }
+
+/** @} */
 
 } // namespace aaa

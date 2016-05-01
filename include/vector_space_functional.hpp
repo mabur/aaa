@@ -7,6 +7,37 @@
 
 namespace aaa {
 
+/**
+@defgroup vector_space_functional Vector Space Operations returning Containers
+
+This module defines the functions:
+- `add`
+- `subtract`
+- `negate`
+- `multiply`
+- `divide`
+
+They do elementwise arithmetic operations on containers. This module supports
+expressions on the general form `output = binary_operation(input_left, input_right)`
+where:
+- The `binary_operation` is one of `add`, `subtract`, `multiply`, `divide`.
+- The `output` is a container.
+- At least one of `input_left` and `input_right` is a container.
+The other could be a scalar.
+
+We call these **vector space operations** since a mathematical vector space has the
+following elementwise operations defined:
+- addition of two vectors.
+- subtraction of two vectors.
+- negation of a vector.
+- multiplication of a vector and a scalar.
+- division of a vector and a scalar.
+
+We represent mathematical vectors as containers.
+
+@{
+*/
+
 template<typename Container>
 Container negate(const Container& in)
 {
@@ -122,5 +153,7 @@ Container divide(const value_type<Container>& left, const Container& right)
     divide(left, right, out);
     return out;
 }
+
+/** @} */
 
 } // namespace aaa
