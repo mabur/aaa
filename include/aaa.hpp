@@ -36,6 +36,12 @@ The library consists of the modules:
     - **distance**. Computes the Euclidean distance of two ranges/containers.
     - **squared_distance**. Computes the squared Euclidean distance of two
       ranges/containers.
+- **Taxicab space operations**. This module defines the algorithms:
+    - **norm_l1**. Computes the Taxicab/Manhattan/L1 norm of a range/container.
+    - **squared_norm_l1**. Computes the squared Taxicab/Manhattan/L1 norm of a range/container.
+    - **distance_l1**. Computes the Taxicab/Manhattan/L1 distance of two ranges/containers.
+    - **squared_distance_l1**. Computes the squared Taxicab/Manhattan/L1 distance of two
+      ranges/containers.
 - **Misc algorithms**. This module defines the aglorithms:
     - **sum**. Computes the sum of the elements of a range/container.
     - **convert**. Does elementwise `static_cast` on the elements from one
@@ -145,9 +151,14 @@ std::vector<float> project(const std::vector<float>& a, const std::vector<float>
 
 #include "vector_space_range.hpp"
 #include "vector_space_container.hpp"
+#include "vector_space_functional.hpp"
 
 #include "euclidean_space_range.hpp"
 #include "euclidean_space_container.hpp"
 
+#include "taxicab_space_range.hpp"
+#include "taxicab_space_container.hpp"
+
 #include "logical_range.hpp"
 #include "logical_container.hpp"
+#include "logical_functional.hpp"
