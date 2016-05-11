@@ -30,7 +30,7 @@ template<typename Container>
 Container logical_not(const Container& in)
 {
     auto out = in;
-    logical_or(in, out);
+    logical_not(in, out);
     return out;
 }
 
