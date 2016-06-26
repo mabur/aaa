@@ -10,6 +10,7 @@ void test_algorithms();
 void test_vector_space_operations();
 void test_euclidean_space_operations();
 void test_taxicab_space_operations();
+void test_chebyshev_space_operations();
 void test_logical_operations();
 
 int main()
@@ -19,6 +20,7 @@ int main()
 	test_vector_space_operations();
 	test_euclidean_space_operations();
     test_taxicab_space_operations();
+    test_chebyshev_space_operations();
     test_logical_operations();
 
 	using namespace std;
@@ -253,6 +255,32 @@ void test_taxicab_space_operations()
     norm_l1(begin(c1), end(c1));
     squared_distance_l1(begin(c1), end(c1), begin(c2));
     distance_l1(begin(c1), end(c1), begin(c2));
+}
+
+void test_chebyshev_space_operations()
+{
+    using namespace aaa;
+
+    std::vector<int>   c1 = { 1, 2, 3, 4, 5 };
+    std::array<int, 5> c2 = { -1, 3, 3, -4, 0 };
+    std::valarray<int> c3 = { 1, 2, 3, 4, 5 };
+
+    auto a = squared_norm_max(c1);
+    assert(a == 5 * 5);
+    auto b = norm_max(c1);
+    assert(b == 5);
+    auto c = squared_distance_max(c1, c2);
+    assert(c == 8 * 8);
+    auto d = distance_max(c1, c2);
+    assert(d == 8);
+
+    using std::begin;
+    using std::end;
+
+    squared_norm_max(begin(c1), end(c1));
+    norm_max(begin(c1), end(c1));
+    squared_distance_max(begin(c1), end(c1), begin(c2));
+    distance_max(begin(c1), end(c1), begin(c2));
 }
 
 void test_logical_operations()
