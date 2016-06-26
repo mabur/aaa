@@ -10,61 +10,88 @@
 # Overview
 
 This library consists of a set of templated functions for doing basic arithmetic
-operations on ranges and containers. It assumes that the elements of the
-ranges/containers support the arithmetic operators: +, -, *, /.
+operations on containers and ranges of iterators. The elements of the
+ranges/containers can be any built in aritmetic type, e.g.
+`float`, `double`, `int`, or any other type that supports the arithmetic
+operations: +, -, *, /. We refer to a range/container of arithmetic elements as
+a mathematical vector. This library defines vector operations for arbitrary
+finite vector spaces. This library does not define any specific data structure
+for the vectors, but operates on general vectors/ranges/containers.
 
-From a mathematical point of view it works on vector spaces in arbitrary dimensions.
-It does not define any specific data structure for the vectors.
-Instead it provides functions that implement vector space operations
-for arbitrary ranges/containers.
+The library consists of different modules:
+- **General operations for vector spaces**.
+  This includes various versions of the functions: `add`, `subtract`, `negate`, `multiply`, `divide`.
+- **Norms and metrics for vector spaces**.
+  This includes various versions of the functions: `norm`, `distance`, `squared_norm`, `squared_distance`.
+  The norms and distances are defined for the following vectors spaces:
+  `eclidean` (L2), `tacixab` (L1), `chebyshev` (L-infinity).
+- **Misc algorithms**. `sum`, `convert`.
+- **Logical operations**. `logical_and`, `logical_or`, `logical_not`.
+- **STD algorithms**. `fill`, `copy`, `min_element`, `max_element`, `minmax_element`.
 
-The library consists of the modules:
-- **Vector space operations**. This module defines the algorithms:
-    - **add**. Does elementwise addition of either two ranges/containers,
-      or a scalar and a range/container.
-    - **subtract**. Does elementwise subtraction of either two ranges/containers,
-      or a scalar and a range/container.
-    - **negate**. Does elementwise negation of a range/container.
-    - **multiply**. Does elementwise multiplication of either two ranges/containers,
-      or a scalar and a range/container.
-    - **divide**. Does elementwise division of either two ranges/containers,
-      or a scalar and a range/container.
-- **Euclidean space operations**. This module defines the algorithms:
-    - **norm**. Computes the Euclidean norm of a range/container.
-    - **squared_norm**. Computes the squared Euclidean norm of a range/container.
-    - **dot**. Computes the Euclidean inner product of two ranges/containers.
-    - **distance**. Computes the Euclidean distance of two ranges/containers.
-    - **squared_distance**. Computes the squared Euclidean distance of two
-      ranges/containers.
-- **Taxicab space operations**. This module defines the algorithms:
-    - **norm_l1**. Computes the Taxicab/Manhattan/L1 norm of a range/container.
-    - **squared_norm_l1**. Computes the squared Taxicab/Manhattan/L1 norm of a range/container.
-    - **distance_l1**. Computes the Taxicab/Manhattan/L1 distance of two ranges/containers.
-    - **squared_distance_l1**. Computes the squared Taxicab/Manhattan/L1 distance of two
-      ranges/containers.
-- **Chebyshev space operations**. This module defines the algorithms:
-    - **norm_max**. Computes the Chebyshev/Infinity/Max norm of a range/container.
-    - **squared_norm_max**. Computes the squared Chebyshev/Infinity/Max norm of a range/container.
-    - **distance_max**. Computes the Chebyshev/Infinity/Max distance of two ranges/containers.
-    - **squared_distance_max**. Computes the squared Chebyshev/Infinity/Max distance of two
-      ranges/containers.
-- **Misc algorithms**. This module defines the aglorithms:
-    - **sum**. Computes the sum of the elements of a range/container.
-    - **convert**. Does elementwise `static_cast` on the elements from one
-      range/container to another range/container.
-- **STD algorithms**. This module defines container versions of some range
-  algorithms from the standard library header `<algorithm>`. It only does it for
-  the algorithms that are used a lot for arithmetic types:
-    - **copy**.
-    - **fill**.
-    - **min_element**.
-    - **max_element**.
-    - **minmax_element**.
-- **Logical operations**. This module works on Ranges/Containers with elements
-  of type `bool`. The module defines the algorithms:
-    - **logical_and**. Does elementwise boolean `and` on two ranges/containers.
-    - **logical_or**. Does elementwise boolean `or` on two ranges/containers.
-    - **logical_not**. Does elementwise boolean `not` on a range/container.
+## General Operations for Vector Spaces
+
+This module defines elementwise arithmetic operations on vectors.
+The input is two vectors/ranges/containers and the output is one vector/range/container.
+
+- **add**. Does elementwise addition of either two vectors/ranges/containers,
+    or a scalar and a vector/range/container.
+- **subtract**. Does elementwise subtraction of either two vector/ranges/containers,
+    or a scalar and a vector/range/container.
+- **negate**. Does elementwise negation of a single vector/range/container.
+- **multiply**. Does elementwise multiplication of either two vector/ranges/containers,
+    or a scalar and a vector/range/container.
+- **divide**. Does elementwise division of either two vectors/ranges/containers,
+    or a scalar and a vector/range/container.
+
+## Norms and Metrics for Vector Spaces
+
+This module defines norms/lengths and metrics/distances for vectors.
+These functions take one or two vectors/ranges/containers and returns a
+single scalar:
+ - **norm**. Computes the norm/magnitude/length of a vecor/range/container.
+ - **distance**. Computes the distance of two vectors/ranges/containers.
+ - **squared_norm**. Computes the squared norm of a vector/range/container.
+ - **squared_distance**. Computes the squared distance of two
+ vectors/ranges/containers.
+ - **dot**. Computes the the dot-product of two vecors/ranges/containers.
+
+ We consider three different kinds of vector spaces: `euclidean` (L2),
+ `taxicab` (L1), `chebyshev` (L-infinity). Each kind of vector spaces has its
+ own namespace, with its own versions of the functions above in it. 
+ However, the `dot` product is only defined for `euclidean` vector spaces.
+ All the functions in this module assume that the default construction of a
+ scalar gives zero, which is true for the built-in arithmetic types.
+
+## Misc algorithms
+
+This module defines the aglorithms:
+- **sum**. Computes the sum of the elements of a range/container.
+  It assume that the default construction of a scalar gives zero,
+  which is true for the built-in arithmetic types.
+- **convert**. Does elementwise `static_cast` on the elements from one
+    range/container to another range/container.
+
+##Logical operations
+
+This module works on ranges/containers with elements of type `bool`, 
+or any other type that supports the the boolean operations &&, ||, !.
+The input is one or two ranges/containers and the output is a single
+range/container.
+- **logical_and**. Does elementwise boolean `and` on two ranges/containers.
+- **logical_or**. Does elementwise boolean `or` on two ranges/containers.
+- **logical_not**. Does elementwise boolean `not` on a single range/container.
+
+##STD algorithms
+
+This module defines container versions of some range
+algorithms from the standard library header `<algorithm>`. It only does it for
+the algorithms that are used a lot for arithmetic types:
+- **copy**.
+- **fill**.
+- **min_element**.
+- **max_element**.
+- **minmax_element**.
 
 Go to the **Modules** pages to learn more about each module.
 
@@ -75,7 +102,11 @@ All the functions of this library assume that the input and output is:
   and end functions that give iterators.
 - The elements of the ranges/containers should support arithmetic operations:
   +, -, *, /. The functions in the module *Logical Operations* is the only
-  exception to this. It assumes that the elements have type `bool`.
+  exception to this. It assumes that the elements support the boolean operations
+  &&, ||, !.
+- The functions in the norms and metrics module assume that the default
+  construction of a scalar gives zero, which is true for the built-in arithmetic
+  types. The function `sum` also assumes this.
 
 # Building
 
@@ -132,7 +163,7 @@ void blend(const Image& in1, const Image& in2, Image& out)
 // Returns the projection of a on b.
 std::vector<float> project(const std::vector<float>& a, const std::vector<float>& b)
 {
-    using namespace aaa;
+    using namespace aaa::euclidean;
     // First we compute the scaling factor of the projection by taking the dot
     // product of the vectors. We normalize with the squared_norm of the vector
     // that we are projecting on.
