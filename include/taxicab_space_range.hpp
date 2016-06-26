@@ -6,6 +6,7 @@
 #include "traits.hpp"
 
 namespace aaa {
+namespace taxicab {
 
 /**
 @defgroup taxicab_space_range Taxicab Space operations on Ranges
@@ -20,7 +21,7 @@ We represent mathematical vectors as ranges of iterators.
 */
 
 template<typename InputIterator>
-value_type_i<InputIterator> norm_l1(InputIterator first, InputIterator last)
+value_type_i<InputIterator> norm(InputIterator first, InputIterator last)
 {
     using value_type = const value_type_i<InputIterator>;
 
@@ -33,15 +34,15 @@ value_type_i<InputIterator> norm_l1(InputIterator first, InputIterator last)
 }
 
 template<typename InputIterator>
-value_type_i<InputIterator> squared_norm_l1(InputIterator first, InputIterator last)
+value_type_i<InputIterator> squared_norm(InputIterator first, InputIterator last)
 {
-    const auto n = norm_l1(first, last);
+    const auto n = norm(first, last);
     return n * n;
 }
 
 template<typename InputIterator1, typename InputIterator2>
 value_type_i<InputIterator1>
-distance_l1(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
+distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
 {
     using value_type_left = const value_type_i<InputIterator1>;
     using value_type_right = const value_type_i<InputIterator2>;
@@ -62,12 +63,13 @@ distance_l1(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 
 
 template<typename InputIterator1, typename InputIterator2>
 value_type_i<InputIterator1>
-squared_distance_l1(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
+squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
 {
-    const auto d = distance_l1(first_left, last_left, first_right);
+    const auto d = distance(first_left, last_left, first_right);
     return d * d;
 }
 
 /** @} */
 
+} // namespace taxicab
 } // namespace aaa

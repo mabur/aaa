@@ -239,22 +239,22 @@ void test_taxicab_space_operations()
     std::array<int, 5> c2 = { -1, 3, 3, -4, 0 };
     std::valarray<int> c3 = { 1, 2, 3, 4, 5 };
 
-    auto a = squared_norm_l1(c1);
+    auto a = taxicab::squared_norm(c1);
     assert(a == 15 * 15);
-    auto b = norm_l1(c1);
+    auto b = taxicab::norm(c1);
     assert(b == 15);
-    auto c = squared_distance_l1(c1, c2);
+    auto c = taxicab::squared_distance(c1, c2);
     assert(c == 16 * 16);
-    auto d = distance_l1(c1, c2);
+    auto d = taxicab::distance(c1, c2);
     assert(d == 2 + 1 + 0 + 8 + 5);
 
     using std::begin;
     using std::end;
 
-    squared_norm_l1(begin(c1), end(c1));
-    norm_l1(begin(c1), end(c1));
-    squared_distance_l1(begin(c1), end(c1), begin(c2));
-    distance_l1(begin(c1), end(c1), begin(c2));
+    taxicab::squared_norm(begin(c1), end(c1));
+    taxicab::norm(begin(c1), end(c1));
+    taxicab::squared_distance(begin(c1), end(c1), begin(c2));
+    taxicab::distance(begin(c1), end(c1), begin(c2));
 }
 
 void test_chebyshev_space_operations()
