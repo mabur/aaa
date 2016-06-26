@@ -215,20 +215,20 @@ void test_euclidean_space_operations()
 	std::array<int, 5> c2 = { 1, 2, 3, 4, 5 };
 	std::valarray<int> c3 = { 1, 2, 3, 4, 5 };
 
-	dot(c1, c2);
-	squared_norm(c1);
-	norm(c1);
-    squared_distance(c1, c2);
-	distance(c1, c2);
+	euclidean::dot(c1, c2);
+    euclidean::squared_norm(c1);
+    euclidean::norm(c1);
+    euclidean::squared_distance(c1, c2);
+    euclidean::distance(c1, c2);
 
 	using std::begin;
 	using std::end;
 
-	dot(begin(c1), end(c1), begin(c2));
-	squared_norm(begin(c1), end(c1));
-	norm(begin(c1), end(c1));
-    squared_distance(begin(c1), end(c1), begin(c2));
-	distance(begin(c1), end(c1), begin(c2));
+    euclidean::dot(begin(c1), end(c1), begin(c2));
+    euclidean::squared_norm(begin(c1), end(c1));
+    euclidean::norm(begin(c1), end(c1));
+    euclidean::squared_distance(begin(c1), end(c1), begin(c2));
+    euclidean::distance(begin(c1), end(c1), begin(c2));
 }
 
 void test_taxicab_space_operations()

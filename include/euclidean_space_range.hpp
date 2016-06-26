@@ -5,6 +5,7 @@
 #include "traits.hpp"
 
 namespace aaa {
+namespace euclidean {
 
 /**
 @defgroup euclidean_space_range Euclidean Space operations on Ranges
@@ -74,4 +75,5 @@ distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 fir
 
 /** @} */
 
+} // namespace euclidean
 } // namespace aaa

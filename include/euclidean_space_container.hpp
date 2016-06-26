@@ -5,6 +5,7 @@
 #include "euclidean_space_range.hpp"
 
 namespace aaa {
+namespace euclidean {
 
 /**
 @defgroup euclidean_space_container Euclidean Space Operations on Containers
@@ -85,4 +86,5 @@ sqrt_value_type<Container1> distance(const Container1& left, const Container2& r
 
 /** @} */
 
+} // namespace euclidean
 } // namespace aaa
