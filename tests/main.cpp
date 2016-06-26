@@ -265,22 +265,22 @@ void test_chebyshev_space_operations()
     std::array<int, 5> c2 = { -1, 3, 3, -4, 0 };
     std::valarray<int> c3 = { 1, 2, 3, 4, 5 };
 
-    auto a = squared_norm_max(c1);
+    auto a = chebyshev::squared_norm(c1);
     assert(a == 5 * 5);
-    auto b = norm_max(c1);
+    auto b = chebyshev::norm(c1);
     assert(b == 5);
-    auto c = squared_distance_max(c1, c2);
+    auto c = chebyshev::squared_distance(c1, c2);
     assert(c == 8 * 8);
-    auto d = distance_max(c1, c2);
+    auto d = chebyshev::distance(c1, c2);
     assert(d == 8);
 
     using std::begin;
     using std::end;
 
-    squared_norm_max(begin(c1), end(c1));
-    norm_max(begin(c1), end(c1));
-    squared_distance_max(begin(c1), end(c1), begin(c2));
-    distance_max(begin(c1), end(c1), begin(c2));
+    chebyshev::squared_norm(begin(c1), end(c1));
+    chebyshev::norm(begin(c1), end(c1));
+    chebyshev::squared_distance(begin(c1), end(c1), begin(c2));
+    chebyshev::distance(begin(c1), end(c1), begin(c2));
 }
 
 void test_logical_operations()
