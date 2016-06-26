@@ -209,78 +209,78 @@ void test_vector_space_operations()
 
 void test_euclidean_space_operations()
 {
-    using namespace aaa;
-
 	std::vector<int>   c1 = { 1, 2, 3, 4, 5 };
 	std::array<int, 5> c2 = { 1, 2, 3, 4, 5 };
 	std::valarray<int> c3 = { 1, 2, 3, 4, 5 };
 
-	euclidean::dot(c1, c2);
-    euclidean::squared_norm(c1);
-    euclidean::norm(c1);
-    euclidean::squared_distance(c1, c2);
-    euclidean::distance(c1, c2);
+    using namespace aaa::euclidean;
+
+	dot(c1, c2);
+    squared_norm(c1);
+    norm(c1);
+    squared_distance(c1, c2);
+    distance(c1, c2);
 
 	using std::begin;
 	using std::end;
 
-    euclidean::dot(begin(c1), end(c1), begin(c2));
-    euclidean::squared_norm(begin(c1), end(c1));
-    euclidean::norm(begin(c1), end(c1));
-    euclidean::squared_distance(begin(c1), end(c1), begin(c2));
-    euclidean::distance(begin(c1), end(c1), begin(c2));
+    dot(begin(c1), end(c1), begin(c2));
+    squared_norm(begin(c1), end(c1));
+    norm(begin(c1), end(c1));
+    squared_distance(begin(c1), end(c1), begin(c2));
+    distance(begin(c1), end(c1), begin(c2));
 }
 
 void test_taxicab_space_operations()
 {
-    using namespace aaa;
-
     std::vector<int>   c1 = { 1, 2, 3, 4, 5 };
     std::array<int, 5> c2 = { -1, 3, 3, -4, 0 };
     std::valarray<int> c3 = { 1, 2, 3, 4, 5 };
 
-    auto a = taxicab::squared_norm(c1);
+    using namespace aaa::taxicab;
+
+    auto a = squared_norm(c1);
     assert(a == 15 * 15);
-    auto b = taxicab::norm(c1);
+    auto b = norm(c1);
     assert(b == 15);
-    auto c = taxicab::squared_distance(c1, c2);
+    auto c = squared_distance(c1, c2);
     assert(c == 16 * 16);
-    auto d = taxicab::distance(c1, c2);
+    auto d = distance(c1, c2);
     assert(d == 2 + 1 + 0 + 8 + 5);
 
     using std::begin;
     using std::end;
 
-    taxicab::squared_norm(begin(c1), end(c1));
-    taxicab::norm(begin(c1), end(c1));
-    taxicab::squared_distance(begin(c1), end(c1), begin(c2));
-    taxicab::distance(begin(c1), end(c1), begin(c2));
+    squared_norm(begin(c1), end(c1));
+    norm(begin(c1), end(c1));
+    squared_distance(begin(c1), end(c1), begin(c2));
+    distance(begin(c1), end(c1), begin(c2));
 }
 
 void test_chebyshev_space_operations()
 {
-    using namespace aaa;
-
     std::vector<int>   c1 = { 1, 2, 3, 4, 5 };
     std::array<int, 5> c2 = { -1, 3, 3, -4, 0 };
     std::valarray<int> c3 = { 1, 2, 3, 4, 5 };
 
-    auto a = chebyshev::squared_norm(c1);
+    using namespace aaa::chebyshev;
+
+    auto a = squared_norm(c1);
     assert(a == 5 * 5);
-    auto b = chebyshev::norm(c1);
+    auto b = norm(c1);
     assert(b == 5);
-    auto c = chebyshev::squared_distance(c1, c2);
+    auto c = squared_distance(c1, c2);
     assert(c == 8 * 8);
-    auto d = chebyshev::distance(c1, c2);
+    auto d = distance(c1, c2);
     assert(d == 8);
 
     using std::begin;
     using std::end;
 
-    chebyshev::squared_norm(begin(c1), end(c1));
-    chebyshev::norm(begin(c1), end(c1));
-    chebyshev::squared_distance(begin(c1), end(c1), begin(c2));
-    chebyshev::distance(begin(c1), end(c1), begin(c2));
+    squared_norm(begin(c1), end(c1));
+    norm(begin(c1), end(c1));
+    squared_distance(begin(c1), end(c1), begin(c2));
+    distance(begin(c1), end(c1), begin(c2));
 }
 
 void test_logical_operations()
