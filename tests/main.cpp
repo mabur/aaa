@@ -9,7 +9,8 @@ void test_std_algorithms();
 void test_algorithms();
 void test_vector_space_operations();
 void test_euclidean_space_operations();
-void test_taxicab_space_operations();
+void test_manhattan_space_operations();
+void test_maximum_space_operations();
 void test_logical_operations();
 
 int main()
@@ -18,7 +19,8 @@ int main()
 	test_algorithms();
 	test_vector_space_operations();
 	test_euclidean_space_operations();
-    test_taxicab_space_operations();
+    test_manhattan_space_operations();
+    test_maximum_space_operations();
     test_logical_operations();
 
 	using namespace std;
@@ -207,52 +209,78 @@ void test_vector_space_operations()
 
 void test_euclidean_space_operations()
 {
-    using namespace aaa;
-
 	std::vector<int>   c1 = { 1, 2, 3, 4, 5 };
 	std::array<int, 5> c2 = { 1, 2, 3, 4, 5 };
 	std::valarray<int> c3 = { 1, 2, 3, 4, 5 };
 
+    using namespace aaa::euclidean;
+
 	dot(c1, c2);
-	squared_norm(c1);
-	norm(c1);
+    squared_norm(c1);
+    norm(c1);
     squared_distance(c1, c2);
-	distance(c1, c2);
+    distance(c1, c2);
 
 	using std::begin;
 	using std::end;
 
-	dot(begin(c1), end(c1), begin(c2));
-	squared_norm(begin(c1), end(c1));
-	norm(begin(c1), end(c1));
+    dot(begin(c1), end(c1), begin(c2));
+    squared_norm(begin(c1), end(c1));
+    norm(begin(c1), end(c1));
     squared_distance(begin(c1), end(c1), begin(c2));
-	distance(begin(c1), end(c1), begin(c2));
+    distance(begin(c1), end(c1), begin(c2));
 }
 
-void test_taxicab_space_operations()
+void test_manhattan_space_operations()
 {
-    using namespace aaa;
-
     std::vector<int>   c1 = { 1, 2, 3, 4, 5 };
     std::array<int, 5> c2 = { -1, 3, 3, -4, 0 };
     std::valarray<int> c3 = { 1, 2, 3, 4, 5 };
 
-    auto a = squared_norm_l1(c1);
+    using namespace aaa::manhattan;
+
+    auto a = squared_norm(c1);
     assert(a == 15 * 15);
-    auto b = norm_l1(c1);
+    auto b = norm(c1);
     assert(b == 15);
-    auto c = squared_distance_l1(c1, c2);
+    auto c = squared_distance(c1, c2);
     assert(c == 16 * 16);
-    auto d = distance_l1(c1, c2);
+    auto d = distance(c1, c2);
     assert(d == 2 + 1 + 0 + 8 + 5);
 
     using std::begin;
     using std::end;
 
-    squared_norm_l1(begin(c1), end(c1));
-    norm_l1(begin(c1), end(c1));
-    squared_distance_l1(begin(c1), end(c1), begin(c2));
-    distance_l1(begin(c1), end(c1), begin(c2));
+    squared_norm(begin(c1), end(c1));
+    norm(begin(c1), end(c1));
+    squared_distance(begin(c1), end(c1), begin(c2));
+    distance(begin(c1), end(c1), begin(c2));
+}
+
+void test_maximum_space_operations()
+{
+    std::vector<int>   c1 = { 1, 2, 3, 4, 5 };
+    std::array<int, 5> c2 = { -1, 3, 3, -4, 0 };
+    std::valarray<int> c3 = { 1, 2, 3, 4, 5 };
+
+    using namespace aaa::maximum;
+
+    auto a = squared_norm(c1);
+    assert(a == 5 * 5);
+    auto b = norm(c1);
+    assert(b == 5);
+    auto c = squared_distance(c1, c2);
+    assert(c == 8 * 8);
+    auto d = distance(c1, c2);
+    assert(d == 8);
+
+    using std::begin;
+    using std::end;
+
+    squared_norm(begin(c1), end(c1));
+    norm(begin(c1), end(c1));
+    squared_distance(begin(c1), end(c1), begin(c2));
+    distance(begin(c1), end(c1), begin(c2));
 }
 
 void test_logical_operations()
@@ -291,4 +319,27 @@ void test_logical_operations()
     c1 = logical_and(c1, c1);
     c2 = logical_or(c2, c2);
     c3 = logical_not(c3);
+}
+
+using Image = std::vector<double>;
+
+Image blend(const Image& in1, const Image& in2)
+{
+    using namespace aaa;
+    auto a = add(in1, in2); // Add the images together elementwise.
+    return divide(a, 2); // Divide the result elementwise with 2 to get the mean image.
+}
+
+// Returns the projection of a on b.
+std::vector<float> project(const std::vector<float>& a, const std::vector<float>& b)
+{
+    using namespace aaa;
+    using namespace aaa::euclidean;
+    // First we compute the scaling factor of the projection by taking the dot
+    // product of the vectors. We normalize with the squared_norm of the vector
+    // that we are projecting on.
+    const auto scaling = dot(a, b) / squared_norm(b);
+    // The projection of a on b is like b,
+    // but multiplied elementwise with the scaling factor.
+    return multiply(scaling, b);
 }

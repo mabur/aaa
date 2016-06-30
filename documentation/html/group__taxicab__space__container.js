@@ -1,7 +1,7 @@
 var group__taxicab__space__container =
 [
-    [ "distance_l1", "group__taxicab__space__container.html#gaca4aa4a294480002a3199f5f087a62a0", null ],
-    [ "norm_l1", "group__taxicab__space__container.html#ga284edb60981daaa2f5aa7be2181ec566", null ],
-    [ "squared_distance_l1", "group__taxicab__space__container.html#ga1ee0dbc4ad32300c3d1b181d3a3ae9b5", null ],
-    [ "squared_norm_l1", "group__taxicab__space__container.html#gafacd1588bae174299985f27ddd2d6032", null ]
+    [ "distance", "group__taxicab__space__container.html#ga36f18bca14848d26c8292a2ceb5055cb", null ],
+    [ "norm", "group__taxicab__space__container.html#ga7cee0777b3d75b1ad2bd30f99970ef84", null ],
+    [ "squared_distance", "group__taxicab__space__container.html#gad5cdf7fbf0bffe98261f82aa5203a122", null ],
+    [ "squared_norm", "group__taxicab__space__container.html#ga17711b26da8578faa730e5b53437b6a6", null ]
 ];

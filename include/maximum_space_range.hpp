@@ -1,17 +1,19 @@
 #pragma once
 
+#include <cmath>
 #include <numeric>
 
 #include "traits.hpp"
 
 namespace aaa {
+namespace maximum {
 
 /**
-@defgroup taxicab_space_range Taxicab Space operations on Ranges
+@defgroup maximum_space_range maximum Space operations on Ranges
 
-In Taxicab geometry we have:
-- the Taxicab norm which is also known as the Manhattan norm or L1 norm.
-- the Taxicab distance which is also known as the Manhattan distance or L1 distance.
+In maximum geometry we have:
+- the maximum norm which is also known as the maximum norm or infinity norm.
+- the maximum distance.
 
 We represent mathematical vectors as ranges of iterators.
 
@@ -19,28 +21,28 @@ We represent mathematical vectors as ranges of iterators.
 */
 
 template<typename InputIterator>
-value_type_i<InputIterator> norm_l1(InputIterator first, InputIterator last)
+value_type_i<InputIterator> norm(InputIterator first, InputIterator last)
 {
     using value_type = const value_type_i<InputIterator>;
 
     const auto zero    = value_type();
-    const auto add_abs = [](const value_type& left, const value_type& right)
+    const auto max_abs = [](const value_type& left, const value_type& right)
     {
-        return left + std::abs(right);
+        return std::max(left, std::abs(right));
     };
-    return std::accumulate(first, last, zero, add_abs);
+    return std::accumulate(first, last, zero, max_abs);
 }
 
 template<typename InputIterator>
-value_type_i<InputIterator> squared_norm_l1(InputIterator first, InputIterator last)
+value_type_i<InputIterator> squared_norm(InputIterator first, InputIterator last)
 {
-    const auto n = norm_l1(first, last);
+    const auto n = norm(first, last);
     return n * n;
 }
 
 template<typename InputIterator1, typename InputIterator2>
 value_type_i<InputIterator1>
-distance_l1(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
+distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
 {
     using value_type_left = const value_type_i<InputIterator1>;
     using value_type_right = const value_type_i<InputIterator2>;
@@ -50,7 +52,7 @@ distance_l1(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 
     const auto zero = value_type();
     auto op1 = [](const value_type& left, const value_type& right)
     {
-        return left + right;
+        return std::max(left, right);
     };
     auto op2 = [](const value_type& left, const value_type& right)
     {
@@ -61,12 +63,13 @@ distance_l1(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 
 
 template<typename InputIterator1, typename InputIterator2>
 value_type_i<InputIterator1>
-squared_distance_l1(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
+squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
 {
-    const auto d = distance_l1(first_left, last_left, first_right);
+    const auto d = distance(first_left, last_left, first_right);
     return d * d;
 }
 
 /** @} */
 
+} // namespace maximum
 } // namespace aaa
