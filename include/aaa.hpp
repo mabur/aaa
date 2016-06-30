@@ -24,7 +24,7 @@ The library consists of different modules:
 - **Norms and metrics for vector spaces**.
   This includes various versions of the functions: `norm`, `distance`, `squared_norm`, `squared_distance`.
   The norms and distances are defined for the following vectors spaces:
-  `eclidean` (L2), `tacixab` (L1), `maximum` (L-infinity).
+  `eclidean` (L2), `manhattan` (L1), `maximum` (L-infinity).
 - **Misc algorithms**. `sum`, `convert`.
 - **Logical operations**. `logical_and`, `logical_or`, `logical_not`.
 - **STD algorithms**. `fill`, `copy`, `min_element`, `max_element`, `minmax_element`.
@@ -153,16 +153,17 @@ The two approaches have different advantages and disadvantages:
 The algorithms can be used on arbitrary containers like this:
 ```
 // Blend two images.
-void blend(const Image& in1, const Image& in2, Image& out)
+Image blend(const Image& in1, const Image& in2)
 {
     using namespace aaa;
-    add(in1, in2, out); // Add the images together elementwise.
-    divide(out, 2, out);// Divide the result elementwise with 2 to get the mean image.
+    auto a = add(in1, in2); // Add the images together elementwise.
+    return divide(a, 2); // Divide the result elementwise with 2 to get the mean image.
 }
 
 // Returns the projection of a on b.
 std::vector<float> project(const std::vector<float>& a, const std::vector<float>& b)
 {
+    using namespace aaa;
     using namespace aaa::euclidean;
     // First we compute the scaling factor of the projection by taking the dot
     // product of the vectors. We normalize with the squared_norm of the vector
@@ -170,9 +171,7 @@ std::vector<float> project(const std::vector<float>& a, const std::vector<float>
     const auto scaling = dot(a, b) / squared_norm(b);
     // The projection of a on b is like b,
     // but multiplied elementwise with the scaling factor.
-    auto projection = b;
-    multiply(scaling, b, projection);
-    return projection;
+    return multiply(scaling, b);
 }
 ```
 */

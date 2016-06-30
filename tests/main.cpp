@@ -320,3 +320,26 @@ void test_logical_operations()
     c2 = logical_or(c2, c2);
     c3 = logical_not(c3);
 }
+
+using Image = std::vector<double>;
+
+Image blend(const Image& in1, const Image& in2)
+{
+    using namespace aaa;
+    auto a = add(in1, in2); // Add the images together elementwise.
+    return divide(a, 2); // Divide the result elementwise with 2 to get the mean image.
+}
+
+// Returns the projection of a on b.
+std::vector<float> project(const std::vector<float>& a, const std::vector<float>& b)
+{
+    using namespace aaa;
+    using namespace aaa::euclidean;
+    // First we compute the scaling factor of the projection by taking the dot
+    // product of the vectors. We normalize with the squared_norm of the vector
+    // that we are projecting on.
+    const auto scaling = dot(a, b) / squared_norm(b);
+    // The projection of a on b is like b,
+    // but multiplied elementwise with the scaling factor.
+    return multiply(scaling, b);
+}
