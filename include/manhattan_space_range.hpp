@@ -6,14 +6,14 @@
 #include "traits.hpp"
 
 namespace aaa {
-namespace taxicab {
+namespace manhattan {
 
 /**
-@defgroup taxicab_space_range Taxicab Space operations on Ranges
+@defgroup manhattan_space_range manhattan Space operations on Ranges
 
-In Taxicab geometry we have:
-- the Taxicab norm which is also known as the Manhattan norm or L1 norm.
-- the Taxicab distance which is also known as the Manhattan distance or L1 distance.
+In manhattan geometry we have:
+- the manhattan norm which is also known as the Manhattan norm or L1 norm.
+- the manhattan distance which is also known as the Manhattan distance or L1 distance.
 
 We represent mathematical vectors as ranges of iterators.
 
@@ -71,5 +71,5 @@ squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputItera
 
 /** @} */
 
-} // namespace taxicab
+} // namespace manhattan
 } // namespace aaa

@@ -9,7 +9,7 @@ void test_std_algorithms();
 void test_algorithms();
 void test_vector_space_operations();
 void test_euclidean_space_operations();
-void test_taxicab_space_operations();
+void test_manhattan_space_operations();
 void test_maximum_space_operations();
 void test_logical_operations();
 
@@ -19,7 +19,7 @@ int main()
 	test_algorithms();
 	test_vector_space_operations();
 	test_euclidean_space_operations();
-    test_taxicab_space_operations();
+    test_manhattan_space_operations();
     test_maximum_space_operations();
     test_logical_operations();
 
@@ -231,13 +231,13 @@ void test_euclidean_space_operations()
     distance(begin(c1), end(c1), begin(c2));
 }
 
-void test_taxicab_space_operations()
+void test_manhattan_space_operations()
 {
     std::vector<int>   c1 = { 1, 2, 3, 4, 5 };
     std::array<int, 5> c2 = { -1, 3, 3, -4, 0 };
     std::valarray<int> c3 = { 1, 2, 3, 4, 5 };
 
-    using namespace aaa::taxicab;
+    using namespace aaa::manhattan;
 
     auto a = squared_norm(c1);
     assert(a == 15 * 15);

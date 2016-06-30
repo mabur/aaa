@@ -57,7 +57,7 @@ single scalar:
  - **dot**. Computes the the dot-product of two vecors/ranges/containers.
 
  We consider three different kinds of vector spaces: `euclidean` (L2),
- `taxicab` (L1), `maximum` (L-infinity). Each kind of vector spaces has its
+ `manhattan` (L1), `maximum` (L-infinity). Each kind of vector spaces has its
  own namespace, with its own versions of the functions above in it. 
  However, the `dot` product is only defined for `euclidean` vector spaces.
  All the functions in this module assume that the default construction of a
@@ -193,8 +193,8 @@ std::vector<float> project(const std::vector<float>& a, const std::vector<float>
 #include "euclidean_space_range.hpp"
 #include "euclidean_space_container.hpp"
 
-#include "taxicab_space_range.hpp"
-#include "taxicab_space_container.hpp"
+#include "manhattan_space_range.hpp"
+#include "manhattan_space_container.hpp"
 
 #include "maximum_space_range.hpp"
 #include "maximum_space_container.hpp"
