@@ -24,7 +24,7 @@ The library consists of different modules:
 - **Norms and metrics for vector spaces**.
   This includes various versions of the functions: `norm`, `distance`, `squared_norm`, `squared_distance`.
   The norms and distances are defined for the following vectors spaces:
-  `eclidean` (L2), `tacixab` (L1), `chebyshev` (L-infinity).
+  `eclidean` (L2), `tacixab` (L1), `maximum` (L-infinity).
 - **Misc algorithms**. `sum`, `convert`.
 - **Logical operations**. `logical_and`, `logical_or`, `logical_not`.
 - **STD algorithms**. `fill`, `copy`, `min_element`, `max_element`, `minmax_element`.
@@ -57,7 +57,7 @@ single scalar:
  - **dot**. Computes the the dot-product of two vecors/ranges/containers.
 
  We consider three different kinds of vector spaces: `euclidean` (L2),
- `taxicab` (L1), `chebyshev` (L-infinity). Each kind of vector spaces has its
+ `taxicab` (L1), `maximum` (L-infinity). Each kind of vector spaces has its
  own namespace, with its own versions of the functions above in it. 
  However, the `dot` product is only defined for `euclidean` vector spaces.
  All the functions in this module assume that the default construction of a

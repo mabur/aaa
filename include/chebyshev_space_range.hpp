@@ -6,14 +6,14 @@
 #include "traits.hpp"
 
 namespace aaa {
-namespace chebyshev {
+namespace maximum {
 
 /**
-@defgroup chebyshev_space_range Chebyshev Space operations on Ranges
+@defgroup maximum_space_range maximum Space operations on Ranges
 
-In Chebyshev geometry we have:
-- the Chebyshev norm which is also known as the maximum norm or infinity norm.
-- the Chebyshev distance.
+In maximum geometry we have:
+- the maximum norm which is also known as the maximum norm or infinity norm.
+- the maximum distance.
 
 We represent mathematical vectors as ranges of iterators.
 
@@ -71,5 +71,5 @@ squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputItera
 
 /** @} */
 
-} // namespace chebyshev
+} // namespace maximum
 } // namespace aaa

@@ -5,21 +5,21 @@
 #include "chebyshev_space_range.hpp"
 
 namespace aaa {
-namespace chebyshev {
+namespace maximum {
 
 /**
-@defgroup chebyshev_space_container Chebyshev Space operations on Containers
+@defgroup maximum_space_container maximum Space operations on Containers
 
-In Chebyshev geometry we have:
-- the Chebyshev norm which is also known as the maximum norm or infinity norm.
-- the Chebyshev distance.
+In maximum geometry we have:
+- the maximum norm which is also known as the maximum norm or infinity norm.
+- the maximum distance.
 
 We represent mathematical vectors as containers.
 
 @{
 */
 
-/** The squared Chebyshev norm of a vector.
+/** The squared maximum norm of a vector.
 The vector is represented by an arbitrary container.
 */
 template<typename Container>
@@ -30,7 +30,7 @@ value_type<Container> squared_norm(const Container& a)
     return squared_norm(begin(a), end(a));
 }
 
-/** The Chebyshev norm of a vector.
+/** The maximum norm of a vector.
 The vector is represented by an arbitrary container.
 */
 template<typename Container>
@@ -41,7 +41,7 @@ value_type<Container> norm(const Container& a)
     return norm(begin(a), end(a));
 }
 
-/** The squared Chebyshev distance of two vectors.
+/** The squared maximum distance of two vectors.
 Each vector is represented by a container.
 The two containers should have the same size and value type.
 */
@@ -54,7 +54,7 @@ value_type<Container1> squared_distance(const Container1& left, const Container2
     return squared_distance(begin(left), end(left), begin(right));
 }
 
-/** The Chebyshev distance of two vectors.
+/** The maximum distance of two vectors.
 Each vector is represented by a container.
 The two containers should have the same size and value type.
 */
@@ -69,5 +69,5 @@ value_type<Container1> distance(const Container1& left, const Container2& right)
 
 /** @} */
 
-} // namespace chebyshev
+} // namespace maximum
 } // namespace aaa
