@@ -71,57 +71,57 @@ $(document).ready(function(){initNavTree('index.html','');});
 <li>Examples</li>
 </ul>
 <h1>Overview</h1>
-<p>This library consists of a set of templated functions for doing basic arithmetic operations on ranges and containers. It assumes that the elements of the ranges/containers support the arithmetic operators: +, -, *, /.</p>
-<p>From a mathematical point of view it works on vector spaces in arbitrary dimensions. It does not define any specific data structure for the vectors. Instead it provides functions that implement vector space operations for arbitrary ranges/containers.</p>
-<p>The library consists of the modules:</p><ul>
-<li><b>Vector space operations</b>. This module defines the algorithms:<ul>
-<li><b>add</b>. Does elementwise addition of either two ranges/containers, or a scalar and a range/container.</li>
-<li><b>subtract</b>. Does elementwise subtraction of either two ranges/containers, or a scalar and a range/container.</li>
-<li><b>negate</b>. Does elementwise negation of a range/container.</li>
-<li><b>multiply</b>. Does elementwise multiplication of either two ranges/containers, or a scalar and a range/container.</li>
-<li><b>divide</b>. Does elementwise division of either two ranges/containers, or a scalar and a range/container.</li>
+<p>This library consists of a set of templated functions for doing basic arithmetic operations on containers and ranges of iterators. The elements of the ranges/containers can be any built in aritmetic type, e.g. <code>float</code>, <code>double</code>, <code>int</code>, or any other type that supports the arithmetic operations: +, -, *, /. We refer to a range/container of arithmetic elements as a mathematical vector. This library defines vector operations for arbitrary finite vector spaces. This library does not define any specific data structure for the vectors, but operates on general vectors/ranges/containers.</p>
+<p>The library consists of different modules:</p><ul>
+<li><b>General operations for vector spaces</b>. This includes various versions of the functions: <code>add</code>, <code>subtract</code>, <code>negate</code>, <code>multiply</code>, <code>divide</code>.</li>
+<li><b>Norms and metrics for vector spaces</b>. This includes various versions of the functions: <code>norm</code>, <code>distance</code>, <code>squared_norm</code>, <code>squared_distance</code>. The norms and distances are defined for the following vectors spaces: <code>eclidean</code> (L2), <code>manhattan</code> (L1), <code>maximum</code> (L-infinity).</li>
+<li><b>Misc algorithms</b>. <code>sum</code>, <code>convert</code>.</li>
+<li><b>Logical operations</b>. <code>logical_and</code>, <code>logical_or</code>, <code>logical_not</code>.</li>
+<li><b>STD algorithms</b>. <code>fill</code>, <code>copy</code>, <code>min_element</code>, <code>max_element</code>, <code>minmax_element</code>.</li>
 </ul>
-</li>
-<li><b>Euclidean space operations</b>. This module defines the algorithms:<ul>
-<li><b>norm</b>. Computes the Euclidean norm of a range/container.</li>
-<li><b>squared_norm</b>. Computes the squared Euclidean norm of a range/container.</li>
-<li><b>dot</b>. Computes the Euclidean inner product of two ranges/containers.</li>
-<li><b>distance</b>. Computes the Euclidean distance of two ranges/containers.</li>
-<li><b>squared_distance</b>. Computes the squared Euclidean distance of two ranges/containers.</li>
+<h2>General Operations for Vector Spaces</h2>
+<p>This module defines elementwise arithmetic operations on vectors. The input is two vectors/ranges/containers and the output is one vector/range/container.</p>
+<ul>
+<li><b>add</b>. Does elementwise addition of either two vectors/ranges/containers, or a scalar and a vector/range/container.</li>
+<li><b>subtract</b>. Does elementwise subtraction of either two vector/ranges/containers, or a scalar and a vector/range/container.</li>
+<li><b>negate</b>. Does elementwise negation of a single vector/range/container.</li>
+<li><b>multiply</b>. Does elementwise multiplication of either two vector/ranges/containers, or a scalar and a vector/range/container.</li>
+<li><b>divide</b>. Does elementwise division of either two vectors/ranges/containers, or a scalar and a vector/range/container.</li>
 </ul>
-</li>
-<li><b>Taxicab space operations</b>. This module defines the algorithms:<ul>
-<li><b>norm_l1</b>. Computes the Taxicab/Manhattan/L1 norm of a range/container.</li>
-<li><b>squared_norm_l1</b>. Computes the squared Taxicab/Manhattan/L1 norm of a range/container.</li>
-<li><b>distance_l1</b>. Computes the Taxicab/Manhattan/L1 distance of two ranges/containers.</li>
-<li><b>squared_distance_l1</b>. Computes the squared Taxicab/Manhattan/L1 distance of two ranges/containers.</li>
+<h2>Norms and Metrics for Vector Spaces</h2>
+<p>This module defines norms/lengths and metrics/distances for vectors. These functions take one or two vectors/ranges/containers and returns a single scalar:</p><ul>
+<li><b>norm</b>. Computes the norm/magnitude/length of a vecor/range/container.</li>
+<li><b>distance</b>. Computes the distance of two vectors/ranges/containers.</li>
+<li><b>squared_norm</b>. Computes the squared norm of a vector/range/container.</li>
+<li><b>squared_distance</b>. Computes the squared distance of two vectors/ranges/containers.</li>
+<li><b>dot</b>. Computes the the dot-product of two vecors/ranges/containers.</li>
 </ul>
-</li>
-<li><b>Misc algorithms</b>. This module defines the aglorithms:<ul>
-<li><b>sum</b>. Computes the sum of the elements of a range/container.</li>
+<p>We consider three different kinds of vector spaces: <code>euclidean</code> (L2), <code>manhattan</code> (L1), <code>maximum</code> (L-infinity). Each kind of vector spaces has its own namespace, with its own versions of the functions above in it. However, the <code>dot</code> product is only defined for <code>euclidean</code> vector spaces. All the functions in this module assume that the default construction of a scalar gives zero, which is true for the built-in arithmetic types.</p>
+<h2>Misc algorithms</h2>
+<p>This module defines the aglorithms:</p><ul>
+<li><b>sum</b>. Computes the sum of the elements of a range/container. It assume that the default construction of a scalar gives zero, which is true for the built-in arithmetic types.</li>
 <li><b>convert</b>. Does elementwise <code>static_cast</code> on the elements from one range/container to another range/container.</li>
 </ul>
-</li>
-<li><b>STD algorithms</b>. This module defines container versions of some range algorithms from the standard library header <code>&lt;algorithm&gt;</code>. It only does it for the algorithms that are used a lot for arithmetic types:<ul>
+<h2>Logical operations</h2>
+<p>This module works on ranges/containers with elements of type <code>bool</code>, or any other type that supports the the boolean operations &amp;&amp;, ||, !. The input is one or two ranges/containers and the output is a single range/container.</p><ul>
+<li><b>logical_and</b>. Does elementwise boolean <code>and</code> on two ranges/containers.</li>
+<li><b>logical_or</b>. Does elementwise boolean <code>or</code> on two ranges/containers.</li>
+<li><b>logical_not</b>. Does elementwise boolean <code>not</code> on a single range/container.</li>
+</ul>
+<h2>STD algorithms</h2>
+<p>This module defines container versions of some range algorithms from the standard library header <code>&lt;algorithm&gt;</code>. It only does it for the algorithms that are used a lot for arithmetic types:</p><ul>
 <li><b>copy</b>.</li>
 <li><b>fill</b>.</li>
 <li><b>min_element</b>.</li>
 <li><b>max_element</b>.</li>
 <li><b>minmax_element</b>.</li>
 </ul>
-</li>
-<li><b>Logical operations</b>. This module works on Ranges/Containers with elements of type <code>bool</code>. The module defines the algorithms:<ul>
-<li><b>logical_and</b>. Does elementwise boolean <code>and</code> on two ranges/containers.</li>
-<li><b>logical_or</b>. Does elementwise boolean <code>or</code> on two ranges/containers.</li>
-<li><b>logical_not</b>. Does elementwise boolean <code>not</code> on a range/container.</li>
-</ul>
-</li>
-</ul>
 <p>Go to the <b>Modules</b> pages to learn more about each module.</p>
 <h1>Requirements</h1>
 <p>All the functions of this library assume that the input and output is:</p><ul>
 <li>Either ranges of iterators, or standard like containers, i.e. they have begin and end functions that give iterators.</li>
-<li>The elements of the ranges/containers should support arithmetic operations: +, -, *, /. The functions in the module <em>Logical Operations</em> is the only exception to this. It assumes that the elements have type <code>bool</code>.</li>
+<li>The elements of the ranges/containers should support arithmetic operations: +, -, *, /. The functions in the module <em>Logical Operations</em> is the only exception to this. It assumes that the elements support the boolean operations &amp;&amp;, ||, !.</li>
+<li>The functions in the norms and metrics module assume that the default construction of a scalar gives zero, which is true for the built-in arithmetic types. The function <code>sum</code> also assumes this.</li>
 </ul>
 <h1>Building</h1>
 <p>The library is header only, which makes it easy to use and build. Download it and add it to the include directory of your project and <code>#include &lt;<a class="el" href="aaa_8hpp_source.html">aaa.hpp</a>&gt;</code>.</p>
@@ -137,7 +137,7 @@ $(document).ready(function(){initNavTree('index.html','');});
 <li>The advantage of the second approach is that it allows <em>generic programming</em>. Code that uses such libraries is more general since it is less coupled to a specific data structure. This is good for readability and reuse of the code.</li>
 </ol>
 <h1>Examples</h1>
-<p>The algorithms can be used on arbitrary containers like this: </p><div class="fragment"><div class="line"><span class="comment">// Blend two images.</span></div><div class="line"><span class="keywordtype">void</span> blend(<span class="keyword">const</span> Image&amp; in1, <span class="keyword">const</span> Image&amp; in2, Image&amp; out)</div><div class="line">{</div><div class="line">    <span class="keyword">using namespace </span><a class="code" href="namespaceaaa.html">aaa</a>;</div><div class="line">    add(in1, in2, out); <span class="comment">// Add the images together elementwise.</span></div><div class="line">    divide(out, 2, out);<span class="comment">// Divide the result elementwise with 2 to get the mean image.</span></div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// Returns the projection of a on b.</span></div><div class="line">std::vector&lt;float&gt; project(<span class="keyword">const</span> std::vector&lt;float&gt;&amp; a, <span class="keyword">const</span> std::vector&lt;float&gt;&amp; b)</div><div class="line">{</div><div class="line">    <span class="keyword">using namespace </span><a class="code" href="namespaceaaa.html">aaa</a>;</div><div class="line">    <span class="comment">// First we compute the scaling factor of the projection by taking the dot</span></div><div class="line">    <span class="comment">// product of the vectors. We normalize with the squared_norm of the vector</span></div><div class="line">    <span class="comment">// that we are projecting on.</span></div><div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> scaling = <a class="code" href="group__euclidean__space__container.html#ga71a5eac60a99bb7a62228edc1a201e15">dot</a>(a, b) / <a class="code" href="group__euclidean__space__container.html#gac8124a03c9979612a0acdfd5423ffeb0">squared_norm</a>(b);</div><div class="line">    <span class="comment">// The projection of a on b is like b,</span></div><div class="line">    <span class="comment">// but multiplied elementwise with the scaling factor.</span></div><div class="line">    <span class="keyword">auto</span> projection = b;</div><div class="line">    multiply(scaling, b, projection);</div><div class="line">    <span class="keywordflow">return</span> projection;</div><div class="line">}</div></div><!-- fragment --> </div></div><!-- contents -->
+<p>The algorithms can be used on arbitrary containers like this: </p><div class="fragment"><div class="line"><span class="comment">// Blend two images.</span></div><div class="line">Image blend(<span class="keyword">const</span> Image&amp; in1, <span class="keyword">const</span> Image&amp; in2)</div><div class="line">{</div><div class="line">    <span class="keyword">using namespace </span><a class="code" href="namespaceaaa.html">aaa</a>;</div><div class="line">    <span class="keyword">auto</span> a = add(in1, in2); <span class="comment">// Add the images together elementwise.</span></div><div class="line">    <span class="keywordflow">return</span> divide(a, 2); <span class="comment">// Divide the result elementwise with 2 to get the mean image.</span></div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// Returns the projection of a on b.</span></div><div class="line">std::vector&lt;float&gt; project(<span class="keyword">const</span> std::vector&lt;float&gt;&amp; a, <span class="keyword">const</span> std::vector&lt;float&gt;&amp; b)</div><div class="line">{</div><div class="line">    <span class="keyword">using namespace </span><a class="code" href="namespaceaaa.html">aaa</a>;</div><div class="line">    <span class="keyword">using namespace </span><a class="code" href="namespaceaaa_1_1euclidean.html">aaa::euclidean</a>;</div><div class="line">    <span class="comment">// First we compute the scaling factor of the projection by taking the dot</span></div><div class="line">    <span class="comment">// product of the vectors. We normalize with the squared_norm of the vector</span></div><div class="line">    <span class="comment">// that we are projecting on.</span></div><div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> scaling = <a class="code" href="group__euclidean__space__container.html#gaf3f60807039d15891c913009a255c853">dot</a>(a, b) / <a class="code" href="group__euclidean__space__container.html#ga10bf0ef3447399e1528ded3059e23eca">squared_norm</a>(b);</div><div class="line">    <span class="comment">// The projection of a on b is like b,</span></div><div class="line">    <span class="comment">// but multiplied elementwise with the scaling factor.</span></div><div class="line">    <span class="keywordflow">return</span> multiply(scaling, b);</div><div class="line">}</div></div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
