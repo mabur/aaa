@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-#include "chebyshev_space_range.hpp"
+#include "maximum_space_range.hpp"
 
 namespace aaa {
 namespace maximum {

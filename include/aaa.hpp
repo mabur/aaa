@@ -196,8 +196,8 @@ std::vector<float> project(const std::vector<float>& a, const std::vector<float>
 #include "taxicab_space_range.hpp"
 #include "taxicab_space_container.hpp"
 
-#include "chebyshev_space_range.hpp"
-#include "chebyshev_space_container.hpp"
+#include "maximum_space_range.hpp"
+#include "maximum_space_container.hpp"
 
 #include "logical_range.hpp"
 #include "logical_container.hpp"
