@@ -28,7 +28,7 @@ The library consists of different modules:
   These functions take one or two vectors and returns a single scalar.
   It consists of the functions:
   `dot`, `norm`, `distance`, `squared_norm`, `squared_distance`.
-  They are defined for the following vectors spaces:
+  They are defined for the following vector spaces:
   @ref euclidean_space, @ref manhattan_space, @ref maximum_space.
 - @ref misc_algorithms. This contains the functions:
   `sum`, `convert`.
