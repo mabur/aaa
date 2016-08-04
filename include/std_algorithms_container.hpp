@@ -8,10 +8,17 @@
 namespace aaa {
 
 /**
-@defgroup std_algorithms_container STD Algorithms on Containers
+@addtogroup std_algorithms_container
+
+This module defines container versions of some range
+algorithms from the standard library header
+[algorithm](http://www.cplusplus.com/reference/algorithm/).
+It only does it for the algorithms that are used a lot for arithmetic types.
 
 @{
 */
+
+// TODO: add all_of, any_of, none_of.
 
 template<typename Container1, typename Container2>
 void copy(const Container1& in, Container2& out)

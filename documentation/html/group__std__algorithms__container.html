@@ -16,6 +16,12 @@
   $(document).ready(initResizable);
   $(window).load(resizeHeight);
 </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -125,6 +131,7 @@ template&lt;typename Container , typename Compare &gt; </td></tr>
 <tr class="separator:ga45e98d9a0970351e6567983e6bc435fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>This module defines container versions of some range algorithms from the standard library header <a href="http://www.cplusplus.com/reference/algorithm/">algorithm</a>. It only does it for the algorithms that are used a lot for arithmetic types. </p>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
