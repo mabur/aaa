@@ -8,6 +8,10 @@
 void test_std_algorithms();
 void test_algorithms();
 void test_vector_space_operations();
+void test_add();
+void test_subtract();
+void test_multiply();
+void test_divide();
 void test_euclidean_space_operations();
 void test_manhattan_space_operations();
 void test_maximum_space_operations();
@@ -18,6 +22,10 @@ int main()
     test_std_algorithms();
 	test_algorithms();
 	test_vector_space_operations();
+	test_add();
+	test_subtract();
+	test_multiply();
+	test_divide();
 	test_euclidean_space_operations();
     test_manhattan_space_operations();
     test_maximum_space_operations();
@@ -193,6 +201,8 @@ void test_vector_space_operations()
     c3 = multiply(c3, e);
     c3 = multiply(e, c3);
 
+	e = 1;
+
     c1 = divide(c1, c1);
     c1 = divide(c1, e);
     c1 = divide(e, c1);
@@ -298,6 +308,42 @@ void test_vector_space_operations()
 
     // In this example we use iterators for the input and output.
     negate(begin(in5) + 1, begin(in5) + 6, begin(out));
+}
+
+void test_add()
+{
+	std::vector<int> a = { 1, 2 };
+	std::vector<int> b = { 3, 4 };
+	std::vector<int> c = { 4, 6 };
+	const auto d = aaa::add(a, b);
+	assert(c == d);
+}
+
+void test_subtract()
+{
+	std::vector<int> a = { 1, 2 };
+	std::vector<int> b = { 3, 4 };
+	std::vector<int> c = { -2, -2 };
+	const auto d = aaa::subtract(a, b);
+	assert(c == d);
+}
+
+void test_multiply()
+{
+	std::vector<int> a = { 1, 2 };
+	std::vector<int> b = { 3, 4 };
+	std::vector<int> c = { 3, 8 };
+	const auto d = aaa::multiply(a, b);
+	assert(c == d);
+}
+
+void test_divide()
+{
+	std::vector<int> a = { 8, 9 };
+	std::vector<int> b = { 2, 3 };
+	std::vector<int> c = { 4, 3 };
+	const auto d = aaa::divide(a, b);
+	assert(c == d);
 }
 
 void test_euclidean_space_operations()

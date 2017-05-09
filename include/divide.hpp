@@ -76,7 +76,7 @@ void divide(InputIterator first_left, InputIterator last_left, const Element& ri
 
 template<typename Container1, typename Container2, typename Container3,
     check_ratio<value_type<Container1>, value_type<Container2>, value_type<Container3>> = nullptr>
-    void divide(const Container1& left, const Container2& right, Container3& out)
+void divide(const Container1& left, const Container2& right, Container3& out)
 {
     assert(left.size() == out.size());
     assert(right.size() == out.size());
@@ -87,7 +87,7 @@ template<typename Container1, typename Container2, typename Container3,
 
 template<typename Element, typename Container1, typename Container2,
     check_ratio<Element, value_type<Container1>, value_type<Container2>> = nullptr>
-    void divide(const Element& left, const Container1& right, Container2& out)
+void divide(const Element& left, const Container1& right, Container2& out)
 {
     assert(right.size() == out.size());
     using std::begin;
@@ -97,7 +97,7 @@ template<typename Element, typename Container1, typename Container2,
 
 template<typename Container1, typename Element, typename Container2,
     check_ratio<value_type<Container1>, Element, value_type<Container2>> = nullptr>
-    void divide(const Container1& left, const Element& right, Container2& out)
+void divide(const Container1& left, const Element& right, Container2& out)
 {
     assert(left.size() == out.size());
     using std::begin;
