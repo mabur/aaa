@@ -82,7 +82,7 @@ template<typename Container1, typename Container2, typename Container3,
     assert(right.size() == out.size());
     using std::begin;
     using std::end;
-    multiply(begin(left), end(left), begin(right), begin(out));
+	divide(begin(left), end(left), begin(right), begin(out));
 }
 
 template<typename Element, typename Container1, typename Container2,
@@ -92,7 +92,7 @@ template<typename Element, typename Container1, typename Container2,
     assert(right.size() == out.size());
     using std::begin;
     using std::end;
-    multiply(left, begin(right), end(right), begin(out));
+	divide(left, begin(right), end(right), begin(out));
 }
 
 template<typename Container1, typename Element, typename Container2,
@@ -102,7 +102,7 @@ template<typename Container1, typename Element, typename Container2,
     assert(left.size() == out.size());
     using std::begin;
     using std::end;
-    multiply(begin(left), end(left), right, begin(out));
+	divide(begin(left), end(left), right, begin(out));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
