@@ -28,6 +28,17 @@ gives zero, which is true for the built-in arithmetic types.
 @{
 */
 
+template<typename InputIterator1, typename InputIterator2, typename T>
+value_type_i<InputIterator1>
+dot(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init)
+{
+    using value_type1 = const value_type_i<InputIterator1>;
+    using value_type2 = const value_type_i<InputIterator2>;
+    static_assert(std::is_same<value_type1, value_type2>::value, "Different value types");
+
+    return std::inner_product(first_left, last_left, first_right, init);
+}
+
 template<typename InputIterator1, typename InputIterator2>
 value_type_i<InputIterator1>
 dot(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
@@ -37,7 +48,16 @@ dot(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_ri
     static_assert(std::is_same<value_type1, value_type2>::value, "Different value types");
 
     const auto zero = value_type1();
-    return std::inner_product(first_left, last_left, first_right, zero);
+    return dot(first_left, last_left, first_right, zero);
+}
+
+template<typename Container1, typename Container2, typename T>
+value_type<Container1> dot(const Container1& a, Container2& b, T init)
+{
+    assert(a.size() == b.size());
+    using std::begin;
+    using std::end;
+    return dot(begin(a), end(a), begin(b), init);
 }
 
 /** The dot product of two vectors.
@@ -53,10 +73,24 @@ value_type<Container1> dot(const Container1& a, Container2& b)
     return dot(begin(a), end(a), begin(b));
 }
 
+template<typename InputIterator, typename T>
+value_type_i<InputIterator> squared_norm(InputIterator first, InputIterator last, T init)
+{
+    return dot(first, last, first, init);
+}
+
 template<typename InputIterator>
 value_type_i<InputIterator> squared_norm(InputIterator first, InputIterator last)
 {
     return dot(first, last, first);
+}
+
+template<typename Container, typename T>
+value_type<Container> squared_norm(const Container& a, T init)
+{
+    using std::begin;
+    using std::end;
+    return squared_norm(begin(a), end(a), init);
 }
 
 /** The squared Euclidean norm of a vector.
@@ -70,10 +104,24 @@ value_type<Container> squared_norm(const Container& a)
     return squared_norm(begin(a), end(a));
 }
 
+template<typename InputIterator, typename T>
+sqrt_value_type_i<InputIterator> norm(InputIterator first, InputIterator last, T init)
+{
+    return sqrt(squared_norm(first, last, init));
+}
+
 template<typename InputIterator>
 sqrt_value_type_i<InputIterator> norm(InputIterator first, InputIterator last)
 {
     return sqrt(squared_norm(first, last));
+}
+
+template<typename Container, typename T>
+sqrt_value_type<Container> norm(const Container& a, T init)
+{
+    using std::begin;
+    using std::end;
+    return norm(begin(a), end(a), init);
 }
 
 /** The Euclidean norm of a vector.
@@ -88,6 +136,25 @@ sqrt_value_type<Container> norm(const Container& a)
     return norm(begin(a), end(a));
 }
 
+template<typename InputIterator1, typename InputIterator2, typename T>
+value_type_i<InputIterator1>
+squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init)
+{
+    using value_type_left = const value_type_i<InputIterator1>;
+    using value_type_right = const value_type_i<InputIterator2>;
+    using value_type = value_type_left;
+    static_assert(std::is_same<value_type_left, value_type_right>::value, "Different value types");
+
+    auto op1 = [](const value_type& left, const value_type& right)
+    {
+        return left + right;
+    };
+    auto op2 = [](const value_type& left, const value_type& right)
+    {
+        return (left - right) * (left - right);
+    };
+    return std::inner_product(first_left, last_left, first_right, init, op1, op2);
+}
 
 template<typename InputIterator1, typename InputIterator2>
 value_type_i<InputIterator1>
@@ -97,17 +164,17 @@ squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputItera
     using value_type_right = const value_type_i<InputIterator2>;
     using value_type = value_type_left;
     static_assert(std::is_same<value_type_left, value_type_right>::value, "Different value types");
-
     const auto zero = value_type();
-    auto op1 = [](const value_type& left, const value_type& right)
-    {
-        return left + right;
-    };
-    auto op2 = [](const value_type& left, const value_type& right)
-    {
-        return (left - right) * (left - right);
-    };
-    return std::inner_product(first_left, last_left, first_right, zero, op1, op2);
+    return squared_distance(first_left, last_left, first_right, zero);
+}
+
+template<typename Container1, typename Container2, typename T>
+value_type<Container1> squared_distance(const Container1& left, const Container2& right, T init)
+{
+    assert(left.size() == right.size());
+    using std::begin;
+    using std::end;
+    return squared_distance(begin(left), end(left), begin(right), init);
 }
 
 /** The squared Euclidean distance of two vectors.
@@ -123,11 +190,27 @@ value_type<Container1> squared_distance(const Container1& left, const Container2
     return squared_distance(begin(left), end(left), begin(right));
 }
 
+template<typename InputIterator1, typename InputIterator2, typename T>
+sqrt_value_type_i<InputIterator1>
+distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init)
+{
+    return sqrt(squared_distance(first_left, last_left, first_right, init));
+}
+
 template<typename InputIterator1, typename InputIterator2>
 sqrt_value_type_i<InputIterator1>
 distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
 {
     return sqrt(squared_distance(first_left, last_left, first_right));
+}
+
+template<typename Container1, typename Container2, typename T>
+sqrt_value_type<Container1> distance(const Container1& left, const Container2& right, T init)
+{
+    assert(left.size() == right.size());
+    using std::begin;
+    using std::end;
+    return distance(begin(left), end(left), begin(right), init);
 }
 
 /** The Euclidean distance of two vectors.

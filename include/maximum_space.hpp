@@ -27,17 +27,32 @@ gives zero, which is true for the built-in arithmetic types.
 @{
 */
 
-template<typename InputIterator>
-value_type_i<InputIterator> norm(InputIterator first, InputIterator last)
+template<typename InputIterator, typename T>
+value_type_i<InputIterator> norm(InputIterator first, InputIterator last, T init)
 {
     using value_type = const value_type_i<InputIterator>;
 
-    const auto zero    = value_type();
     const auto max_abs = [](const value_type& left, const value_type& right)
     {
         return std::max(left, std::abs(right));
     };
-    return std::accumulate(first, last, zero, max_abs);
+    return std::accumulate(first, last, init, max_abs);
+}
+
+template<typename InputIterator>
+value_type_i<InputIterator> norm(InputIterator first, InputIterator last)
+{
+    using value_type = const value_type_i<InputIterator>;
+    const auto zero = value_type();
+    return norm(first, last, zero);
+}
+
+template<typename Container, typename T>
+value_type<Container> norm(const Container& a, T init)
+{
+    using std::begin;
+    using std::end;
+    return norm(begin(a), end(a), init);
 }
 
 /** The maximum norm of a vector.
@@ -51,11 +66,26 @@ value_type<Container> norm(const Container& a)
     return norm(begin(a), end(a));
 }
 
+template<typename InputIterator, typename T>
+value_type_i<InputIterator> squared_norm(InputIterator first, InputIterator last, T init)
+{
+    const auto n = norm(first, last, init);
+    return n * n;
+}
+
 template<typename InputIterator>
 value_type_i<InputIterator> squared_norm(InputIterator first, InputIterator last)
 {
     const auto n = norm(first, last);
     return n * n;
+}
+
+template<typename Container, typename T>
+value_type<Container> squared_norm(const Container& a, T init)
+{
+    using std::begin;
+    using std::end;
+    return squared_norm(begin(a), end(a), init);
 }
 
 /** The squared maximum norm of a vector.
@@ -69,16 +99,15 @@ value_type<Container> squared_norm(const Container& a)
     return squared_norm(begin(a), end(a));
 }
 
-template<typename InputIterator1, typename InputIterator2>
+template<typename InputIterator1, typename InputIterator2, typename T>
 value_type_i<InputIterator1>
-distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
+distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init)
 {
     using value_type_left = const value_type_i<InputIterator1>;
     using value_type_right = const value_type_i<InputIterator2>;
     using value_type = value_type_left;
     static_assert(std::is_same<value_type_left, value_type_right>::value, "Different value types");
 
-    const auto zero = value_type();
     auto op1 = [](const value_type& left, const value_type& right)
     {
         return std::max(left, right);
@@ -87,7 +116,28 @@ distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 fir
     {
         return std::abs(left - right);
     };
-    return std::inner_product(first_left, last_left, first_right, zero, op1, op2);
+    return std::inner_product(first_left, last_left, first_right, init, op1, op2);
+}
+
+template<typename InputIterator1, typename InputIterator2>
+value_type_i<InputIterator1>
+distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
+{
+    using value_type_left = const value_type_i<InputIterator1>;
+    using value_type_right = const value_type_i<InputIterator2>;
+    using value_type = value_type_left;
+    static_assert(std::is_same<value_type_left, value_type_right>::value, "Different value types");
+    const auto zero = value_type();
+    return distance(first_left, last_left, first_right, zero);
+}
+
+template<typename Container1, typename Container2, typename T>
+value_type<Container1> distance(const Container1& left, const Container2& right, T init)
+{
+    assert(left.size() == right.size());
+    using std::begin;
+    using std::end;
+    return distance(begin(left), end(left), begin(right), init);
 }
 
 /** The maximum distance of two vectors.
@@ -103,12 +153,29 @@ value_type<Container1> distance(const Container1& left, const Container2& right)
     return distance(begin(left), end(left), begin(right));
 }
 
+template<typename InputIterator1, typename InputIterator2, typename T>
+value_type_i<InputIterator1>
+squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init)
+{
+    const auto d = distance(first_left, last_left, first_right, init);
+    return d * d;
+}
+
 template<typename InputIterator1, typename InputIterator2>
 value_type_i<InputIterator1>
 squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
 {
     const auto d = distance(first_left, last_left, first_right);
     return d * d;
+}
+
+template<typename Container1, typename Container2, typename T>
+value_type<Container1> squared_distance(const Container1& left, const Container2& right, T init)
+{
+    assert(left.size() == right.size());
+    using std::begin;
+    using std::end;
+    return squared_distance(begin(left), end(left), begin(right), init);
 }
 
 /** The squared maximum distance of two vectors.

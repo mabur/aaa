@@ -39,11 +39,35 @@ Computes the sum of the elements of a range.
 It assume that the default construction of a scalar gives zero,
 which is true for the built-in arithmetic types.
 */
+template<typename InputIterator, typename T>
+value_type_i<InputIterator> sum(InputIterator first, InputIterator last, T init)
+{
+    return std::accumulate(first, last, init);
+}
+
+/**
+Computes the sum of the elements of a range.
+It assume that the default construction of a scalar gives zero,
+which is true for the built-in arithmetic types.
+*/
 template<typename InputIterator>
 value_type_i<InputIterator> sum(InputIterator first, InputIterator last)
 {
     const auto zero = value_type_i<InputIterator>();
-    return std::accumulate(first, last, zero);
+    return sum(first, last, zero);
+}
+
+/**
+Computes the sum of the elements of a container.
+It assume that the default construction of a scalar gives zero,
+which is true for the built-in arithmetic types.
+*/
+template<typename Container, typename T>
+value_type<Container> sum(const Container& container, T init)
+{
+    using std::begin;
+    using std::end;
+    return sum(begin(container), end(container), init);
 }
 
 /**
