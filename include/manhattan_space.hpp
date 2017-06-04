@@ -28,8 +28,8 @@ gives zero, which is true for the built-in arithmetic types.
 @{
 */
 
-template<typename InputIterator, typename T>
-T norm(InputIterator first, InputIterator last, T init)
+template<typename InputIterator, typename T = value_type_i<InputIterator>>
+T norm(InputIterator first, InputIterator last, T init = T{})
 {
     using value_type = const value_type_i<InputIterator>;
     const auto add_abs = [](const value_type& left, const value_type& right)
@@ -39,68 +39,37 @@ T norm(InputIterator first, InputIterator last, T init)
     return std::accumulate(first, last, init, add_abs);
 }
 
-template<typename InputIterator>
-value_type_i<InputIterator> norm(InputIterator first, InputIterator last)
-{
-    using value_type = const value_type_i<InputIterator>;
-    const auto zero = value_type();
-    return norm(first, last, zero);
-}
-
-template<typename Container, typename T>
-T norm(const Container& a, T init)
+/** The manhattan norm of a vector.
+The vector is represented by an arbitrary container.
+*/
+template<typename Container, typename T = value_type<Container>>
+T norm(const Container& a, T init = T{})
 {
     using std::begin;
     using std::end;
     return norm(begin(a), end(a), init);
 }
 
-/** The manhattan norm of a vector.
-The vector is represented by an arbitrary container.
-*/
-template<typename Container>
-value_type<Container> norm(const Container& a)
-{
-    using std::begin;
-    using std::end;
-    return norm(begin(a), end(a));
-}
-
-template<typename InputIterator, typename T>
-T squared_norm(InputIterator first, InputIterator last, T init)
+template<typename InputIterator, typename T = value_type_i<InputIterator>>
+T squared_norm(InputIterator first, InputIterator last, T init = T{})
 {
     const auto n = norm(first, last, init);
     return n * n;
 }
 
-template<typename InputIterator>
-value_type_i<InputIterator> squared_norm(InputIterator first, InputIterator last)
-{
-    const auto n = norm(first, last);
-    return n * n;
-}
-
-template<typename Container, typename T>
-T squared_norm(const Container& a, T init)
+/** The squared manhattan norm of a vector.
+The vector is represented by an arbitrary container.
+*/
+template<typename Container, typename T = value_type<Container>>
+T squared_norm(const Container& a, T init = T{})
 {
     using std::begin;
     using std::end;
     return squared_norm(begin(a), end(a), init);
 }
 
-/** The squared manhattan norm of a vector.
-The vector is represented by an arbitrary container.
-*/
-template<typename Container>
-value_type<Container> squared_norm(const Container& a)
-{
-    using std::begin;
-    using std::end;
-    return squared_norm(begin(a), end(a));
-}
-
-template<typename InputIterator1, typename InputIterator2, typename T>
-T distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init)
+template<typename InputIterator1, typename InputIterator2, typename T = value_type_i<InputIterator1>>
+T distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init = T{})
 {
     using value_type_left = const value_type_i<InputIterator1>;
     using value_type_right = const value_type_i<InputIterator2>;
@@ -117,21 +86,12 @@ T distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 f
     return std::inner_product(first_left, last_left, first_right, init, op1, op2);
 }
 
-template<typename InputIterator1, typename InputIterator2>
-value_type_i<InputIterator1>
-distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
-{
-    using value_type_left = const value_type_i<InputIterator1>;
-    using value_type_right = const value_type_i<InputIterator2>;
-    using value_type = value_type_left;
-    static_assert(std::is_same<value_type_left, value_type_right>::value, "Different value types");
-
-    const auto zero = value_type();
-    return distance(first_left, last_left, first_right, zero);
-}
-
-template<typename Container1, typename Container2, typename T>
-T distance(const Container1& left, const Container2& right, T init)
+/** The manhattan distance of two vectors.
+Each vector is represented by a container.
+The two containers should have the same size and value type.
+*/
+template<typename Container1, typename Container2, typename T = value_type<Container1>>
+T distance(const Container1& left, const Container2& right, T init = T{})
 {
     assert(left.size() == right.size());
     using std::begin;
@@ -139,54 +99,24 @@ T distance(const Container1& left, const Container2& right, T init)
     return distance(begin(left), end(left), begin(right), init);
 }
 
-/** The manhattan distance of two vectors.
-Each vector is represented by a container.
-The two containers should have the same size and value type.
-*/
-template<typename Container1, typename Container2>
-value_type<Container1> distance(const Container1& left, const Container2& right)
-{
-    assert(left.size() == right.size());
-    using std::begin;
-    using std::end;
-    return distance(begin(left), end(left), begin(right));
-}
-
-template<typename InputIterator1, typename InputIterator2, typename T>
-T squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init)
+template<typename InputIterator1, typename InputIterator2, typename T = value_type_i<InputIterator1>>
+T squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init = T{})
 {
     const auto d = distance(first_left, last_left, first_right, init);
     return d * d;
-}
-
-template<typename InputIterator1, typename InputIterator2>
-value_type_i<InputIterator1>
-squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
-{
-    const auto d = distance(first_left, last_left, first_right);
-    return d * d;
-}
-
-template<typename Container1, typename Container2, typename T>
-T squared_distance(const Container1& left, const Container2& right, T init)
-{
-    assert(left.size() == right.size());
-    using std::begin;
-    using std::end;
-    return squared_distance(begin(left), end(left), begin(right), init);
 }
 
 /** The squared manhattan distance of two vectors.
 Each vector is represented by a container.
 The two containers should have the same size and value type.
 */
-template<typename Container1, typename Container2>
-value_type<Container1> squared_distance(const Container1& left, const Container2& right)
+template<typename Container1, typename Container2, typename T = value_type<Container1>>
+T squared_distance(const Container1& left, const Container2& right, T init = T{})
 {
     assert(left.size() == right.size());
     using std::begin;
     using std::end;
-    return squared_distance(begin(left), end(left), begin(right));
+    return squared_distance(begin(left), end(left), begin(right), init);
 }
 
 /** @} */
