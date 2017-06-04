@@ -79,12 +79,12 @@ Functions</h2></td></tr>
 <tr class="memitem:gacc96cdf0f4488fe9c51144ef79edb852"><td class="memTemplParams" colspan="2">template&lt;typename Container1 , typename Container2 &gt; </td></tr>
 <tr class="memitem:gacc96cdf0f4488fe9c51144ef79edb852"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__misc__algorithms.html#gacc96cdf0f4488fe9c51144ef79edb852">aaa::convert</a> (const Container1 &amp;in, Container2 &amp;out)</td></tr>
 <tr class="separator:gacc96cdf0f4488fe9c51144ef79edb852"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga422db94ada4ccf6ff305646c16b9ab5b"><td class="memTemplParams" colspan="2">template&lt;typename InputIterator &gt; </td></tr>
-<tr class="memitem:ga422db94ada4ccf6ff305646c16b9ab5b"><td class="memTemplItemLeft" align="right" valign="top">value_type_i&lt; InputIterator &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__misc__algorithms.html#ga422db94ada4ccf6ff305646c16b9ab5b">aaa::sum</a> (InputIterator first, InputIterator last)</td></tr>
-<tr class="separator:ga422db94ada4ccf6ff305646c16b9ab5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga499f41cc78dc9c10c5f92afd31bd5d13"><td class="memTemplParams" colspan="2">template&lt;typename Container &gt; </td></tr>
-<tr class="memitem:ga499f41cc78dc9c10c5f92afd31bd5d13"><td class="memTemplItemLeft" align="right" valign="top">value_type&lt; Container &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__misc__algorithms.html#ga499f41cc78dc9c10c5f92afd31bd5d13">aaa::sum</a> (const Container &amp;container)</td></tr>
-<tr class="separator:ga499f41cc78dc9c10c5f92afd31bd5d13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadae8f5c18598d5470b00e94006305e10"><td class="memTemplParams" colspan="2">template&lt;typename InputIterator , typename T  = value_type_i&lt;InputIterator&gt;&gt; </td></tr>
+<tr class="memitem:gadae8f5c18598d5470b00e94006305e10"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__misc__algorithms.html#gadae8f5c18598d5470b00e94006305e10">aaa::sum</a> (InputIterator first, InputIterator last, T init=T{})</td></tr>
+<tr class="separator:gadae8f5c18598d5470b00e94006305e10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga37f3aafa381735d7d2d4940d5cc2fbbd"><td class="memTemplParams" colspan="2">template&lt;typename Container , typename T  = value_type&lt;Container&gt;&gt; </td></tr>
+<tr class="memitem:ga37f3aafa381735d7d2d4940d5cc2fbbd"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__misc__algorithms.html#ga37f3aafa381735d7d2d4940d5cc2fbbd">aaa::sum</a> (const Container &amp;container, T init=T{})</td></tr>
+<tr class="separator:ga37f3aafa381735d7d2d4940d5cc2fbbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Function Documentation</h2>
@@ -152,14 +152,14 @@ template&lt;typename Container1 , typename Container2 &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ga422db94ada4ccf6ff305646c16b9ab5b"></a>
+<a class="anchor" id="gadae8f5c18598d5470b00e94006305e10"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename InputIterator &gt; </div>
+template&lt;typename InputIterator , typename T  = value_type_i&lt;InputIterator&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">value_type_i&lt;InputIterator&gt; aaa::sum </td>
+          <td class="memname">T aaa::sum </td>
           <td>(</td>
           <td class="paramtype">InputIterator&#160;</td>
           <td class="paramname"><em>first</em>, </td>
@@ -168,7 +168,13 @@ template&lt;typename InputIterator &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">InputIterator&#160;</td>
-          <td class="paramname"><em>last</em>&#160;</td>
+          <td class="paramname"><em>last</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>init</em> = <code>T{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -177,26 +183,36 @@ template&lt;typename InputIterator &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Computes the sum of the elements of a range. It assume that the default construction of a scalar gives zero, which is true for the built-in arithmetic types. </p>
+<p>Computes the sum of the elements of a range. </p>
 
 </div>
 </div>
-<a class="anchor" id="ga499f41cc78dc9c10c5f92afd31bd5d13"></a>
+<a class="anchor" id="ga37f3aafa381735d7d2d4940d5cc2fbbd"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Container &gt; </div>
+template&lt;typename Container , typename T  = value_type&lt;Container&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">value_type&lt;Container&gt; aaa::sum </td>
+          <td class="memname">T aaa::sum </td>
           <td>(</td>
           <td class="paramtype">const Container &amp;&#160;</td>
-          <td class="paramname"><em>container</em></td><td>)</td>
+          <td class="paramname"><em>container</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>init</em> = <code>T{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Computes the sum of the elements of a container. It assume that the default construction of a scalar gives zero, which is true for the built-in arithmetic types. </p>
+<p>Computes the sum of the elements of a container. </p>
 
 </div>
 </div>

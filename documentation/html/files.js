@@ -12,6 +12,7 @@ var files =
     [ "misc_algorithms.hpp", "misc__algorithms_8hpp_source.html", null ],
     [ "multiply.hpp", "multiply_8hpp_source.html", null ],
     [ "negate.hpp", "negate_8hpp_source.html", null ],
+    [ "statistics.hpp", "statistics_8hpp_source.html", null ],
     [ "std_algorithms_container.hpp", "std__algorithms__container_8hpp_source.html", null ],
     [ "subtract.hpp", "subtract_8hpp_source.html", null ],
     [ "traits.hpp", "traits_8hpp_source.html", null ]

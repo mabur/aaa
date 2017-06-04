@@ -1,7 +1,11 @@
 var group__maximum__space =
 [
-    [ "distance", "group__maximum__space.html#ga664badc9dda3dd23b8e0dda5b97e8e7f", null ],
-    [ "norm", "group__maximum__space.html#ga39af43753092367b668447f3bb44f66f", null ],
-    [ "squared_distance", "group__maximum__space.html#ga7217207b5fd29a41f25ab276e5de25fb", null ],
-    [ "squared_norm", "group__maximum__space.html#ga72a82cbf7813ff04368fe074ad25b6ee", null ]
+    [ "distance", "group__maximum__space.html#gad31aa78e021e6f0fea67db9960ffd780", null ],
+    [ "distance", "group__maximum__space.html#ga96ffd867ebdaed2f7d8d3cb68d55808c", null ],
+    [ "norm", "group__maximum__space.html#ga71856911211962fb04ff547d40248260", null ],
+    [ "norm", "group__maximum__space.html#ga66169d8065f008124c54caae45b748b4", null ],
+    [ "squared_distance", "group__maximum__space.html#ga7435b11b2f287744bb3fb1e0e30e15f6", null ],
+    [ "squared_distance", "group__maximum__space.html#ga2af3229c491eeea370294cffead55ef7", null ],
+    [ "squared_norm", "group__maximum__space.html#gab8f60ef516cab6f7355c9b87373f276b", null ],
+    [ "squared_norm", "group__maximum__space.html#ga76df6342df7e7a1709ef130e845f41bb", null ]
 ];
