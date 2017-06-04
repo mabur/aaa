@@ -8,6 +8,7 @@
 void test_std_algorithms();
 void test_algorithms();
 void test_sum();
+void test_sum_double();
 void test_vector_space_operations();
 void test_add();
 void test_subtract();
@@ -23,6 +24,7 @@ int main()
     test_std_algorithms();
 	test_algorithms();
     test_sum();
+    test_sum_double();
 	test_vector_space_operations();
 	test_add();
 	test_subtract();
@@ -105,6 +107,36 @@ void test_sum()
     assert(sum(begin(c1), end(c1)) == 15);
     assert(sum(begin(c1), end(c1), -2) == 13);
     assert(sum(begin(c1), end(c1), 0.0) == 15.0);
+}
+
+void test_sum_double()
+{
+    const auto N = size_t{ 10000 };
+
+    auto data_float = std::vector<float>(N);
+    auto data_double = std::vector<double>(N);
+
+    auto manual_sum_float = float{ 0 };
+    auto manual_sum_double = double{ 0 };
+
+    for (size_t i = 0; i < N; ++i)
+    {
+        const auto value = float{ i * 0.1f };
+        
+        data_float[i] = value;
+        data_double[i] = value;
+
+        manual_sum_float += value;
+        manual_sum_double += value;
+    }
+    
+    assert(manual_sum_float == aaa::sum(data_float));
+    assert(manual_sum_float == aaa::sum(data_float, 0.f));
+    assert(manual_sum_float == aaa::sum(data_double, 0.f));
+
+    assert(manual_sum_double == aaa::sum(data_double));
+    assert(manual_sum_double == aaa::sum(data_double, 0.0));
+    assert(manual_sum_double == aaa::sum(data_float, 0.0));
 }
 
 void test_vector_space_operations()
