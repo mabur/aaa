@@ -7,7 +7,12 @@
 
 void test_std_algorithms();
 void test_algorithms();
+void test_sum();
 void test_vector_space_operations();
+void test_add();
+void test_subtract();
+void test_multiply();
+void test_divide();
 void test_euclidean_space_operations();
 void test_manhattan_space_operations();
 void test_maximum_space_operations();
@@ -17,7 +22,12 @@ int main()
 {
     test_std_algorithms();
 	test_algorithms();
+    test_sum();
 	test_vector_space_operations();
+	test_add();
+	test_subtract();
+	test_multiply();
+	test_divide();
 	test_euclidean_space_operations();
     test_manhattan_space_operations();
     test_maximum_space_operations();
@@ -79,6 +89,22 @@ void test_algorithms()
 	convert(begin(c1), end(c1), begin(c2));
 	convert(begin(c3), end(c3), begin(c1));
 	sum(begin(c1), end(c1));
+}
+
+void test_sum()
+{
+    using namespace aaa;
+    using namespace std;
+
+    std::vector<int> c1 = { 1, 2, 3, 4, 5 };
+
+    assert(sum(c1) == 15);
+    assert(sum(c1, -2) == 13);
+    assert(sum(c1, 0.0) == 15.0);
+
+    assert(sum(begin(c1), end(c1)) == 15);
+    assert(sum(begin(c1), end(c1), -2) == 13);
+    assert(sum(begin(c1), end(c1), 0.0) == 15.0);
 }
 
 void test_vector_space_operations()
@@ -193,6 +219,8 @@ void test_vector_space_operations()
     c3 = multiply(c3, e);
     c3 = multiply(e, c3);
 
+	e = 1;
+
     c1 = divide(c1, c1);
     c1 = divide(c1, e);
     c1 = divide(e, c1);
@@ -300,19 +328,59 @@ void test_vector_space_operations()
     negate(begin(in5) + 1, begin(in5) + 6, begin(out));
 }
 
+void test_add()
+{
+	std::vector<int> a = { 1, 2 };
+	std::vector<int> b = { 3, 4 };
+	std::vector<int> c = { 4, 6 };
+	const auto d = aaa::add(a, b);
+	assert(c == d);
+}
+
+void test_subtract()
+{
+	std::vector<int> a = { 1, 2 };
+	std::vector<int> b = { 3, 4 };
+	std::vector<int> c = { -2, -2 };
+	const auto d = aaa::subtract(a, b);
+	assert(c == d);
+}
+
+void test_multiply()
+{
+	std::vector<int> a = { 1, 2 };
+	std::vector<int> b = { 3, 4 };
+	std::vector<int> c = { 3, 8 };
+	const auto d = aaa::multiply(a, b);
+	assert(c == d);
+}
+
+void test_divide()
+{
+	std::vector<int> a = { 8, 9 };
+	std::vector<int> b = { 2, 3 };
+	std::vector<int> c = { 4, 3 };
+	const auto d = aaa::divide(a, b);
+	assert(c == d);
+}
+
 void test_euclidean_space_operations()
 {
-	std::vector<int>   c1 = { 1, 2, 3, 4, 5 };
-	std::array<int, 5> c2 = { 1, 2, 3, 4, 5 };
-	std::valarray<int> c3 = { 1, 2, 3, 4, 5 };
+	std::vector<int>   c1 = { 1, 2};
+	std::array<int, 2> c2 = { 3, 4};
 
     using namespace aaa::euclidean;
 
-	dot(c1, c2);
-    squared_norm(c1);
-    norm(c1);
-    squared_distance(c1, c2);
+	assert(dot(c1, c2) == 11);
+    assert(dot(c1, c2, 1.0) == 12.0);
+    assert(squared_norm(c1) == 5);
+    assert(squared_norm(c1, 1.0) == 6.0);
+    assert(norm(c2) == 5.0);
+    assert(norm(c2, 0.0) == 5.0);
+    assert(squared_distance(c1, c2) == 8);
+    assert(squared_distance(c1, c2, 1.0) == 9.0);
     distance(c1, c2);
+    assert(distance(c1, c2, 1.0) == 3.0);
 
 	using std::begin;
 	using std::end;
@@ -332,14 +400,14 @@ void test_manhattan_space_operations()
 
     using namespace aaa::manhattan;
 
-    auto a = squared_norm(c1);
-    assert(a == 15 * 15);
-    auto b = norm(c1);
-    assert(b == 15);
-    auto c = squared_distance(c1, c2);
-    assert(c == 16 * 16);
-    auto d = distance(c1, c2);
-    assert(d == 2 + 1 + 0 + 8 + 5);
+    assert(squared_norm(c1) == 15 * 15);
+    assert(squared_norm(c1, 1.0) == 16.0 * 16.0);
+    assert(norm(c1) == 15);
+    assert(norm(c1, 1.0) == 16.0);
+    assert(squared_distance(c1, c2) == 16 * 16);
+    assert(squared_distance(c1, c2, 1.0) == 17.0 * 17.0);
+    assert(distance(c1, c2) == 2 + 1 + 0 + 8 + 5);
+    assert(distance(c1, c2, 1.0) == 2 + 1 + 0 + 8 + 5 + 1.0);
 
     using std::begin;
     using std::end;
@@ -358,14 +426,18 @@ void test_maximum_space_operations()
 
     using namespace aaa::maximum;
 
-    auto a = squared_norm(c1);
-    assert(a == 5 * 5);
-    auto b = norm(c1);
-    assert(b == 5);
-    auto c = squared_distance(c1, c2);
-    assert(c == 8 * 8);
-    auto d = distance(c1, c2);
-    assert(d == 8);
+    assert(squared_norm(c1) == 5 * 5);
+    assert(squared_norm(c1, 1.0) == 5.0 * 5.0);
+    assert(squared_norm(c1, 50.0) == 50.0 * 50.0);
+    assert(norm(c1) == 5);
+    assert(norm(c1, 1.0) == 5.0);
+    assert(norm(c1, 6.0) == 6.0);
+    assert(squared_distance(c1, c2) == 8 * 8);
+    assert(squared_distance(c1, c2, 1.0) == 8.0 * 8.0);
+    assert(squared_distance(c1, c2, 10.0) == 10.0 * 10.0);
+    assert(distance(c1, c2) == 8);
+    assert(distance(c1, c2, 1.0) == 8.0);
+    assert(distance(c1, c2, 10.0) == 10.0);
 
     using std::begin;
     using std::end;

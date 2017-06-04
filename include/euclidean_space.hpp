@@ -22,126 +22,126 @@ Euclidean space is also known as L-2 space. It defines the the following functio
 We represent mathematical vectors as either containers, or ranges of iterators.
 The functions in this module take one or two vectors as input and output a
 single scalar. This is sometimes refered to as a reduction or fold operation.
-The functions in this module assume that the default construction of a scalar
-gives zero, which is true for the built-in arithmetic types.
 
 @{
 */
 
-template<typename InputIterator1, typename InputIterator2>
-value_type_i<InputIterator1>
-dot(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
+/** The dot product of two vectors.
+Each vector is represented by a range of iterators.
+*/
+template<typename InputIterator1, typename InputIterator2, typename T = value_type_i<InputIterator1>>
+T dot(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init = T{})
 {
-    using value_type1 = const value_type_i<InputIterator1>;
-    using value_type2 = const value_type_i<InputIterator2>;
-    static_assert(std::is_same<value_type1, value_type2>::value, "Different value types");
-
-    const auto zero = value_type1();
-    return std::inner_product(first_left, last_left, first_right, zero);
+    return std::inner_product(first_left, last_left, first_right, init);
 }
 
 /** The dot product of two vectors.
 Each vector is represented by a container.
-The two containers should have the same size and value type.
+The two containers should have the same size.
 */
-template<typename Container1, typename Container2>
-value_type<Container1> dot(const Container1& a, Container2& b)
+template<typename Container1, typename Container2, typename T = value_type<Container1>>
+T dot(const Container1& a, Container2& b, T init = T{})
 {
     assert(a.size() == b.size());
     using std::begin;
     using std::end;
-    return dot(begin(a), end(a), begin(b));
-}
-
-template<typename InputIterator>
-value_type_i<InputIterator> squared_norm(InputIterator first, InputIterator last)
-{
-    return dot(first, last, first);
+    return dot(begin(a), end(a), begin(b), init);
 }
 
 /** The squared Euclidean norm of a vector.
-The vector is represented by an arbitrary container.
+The vector is represented by a range of iterators.
 */
-template<typename Container>
-value_type<Container> squared_norm(const Container& a)
+template<typename InputIterator, typename T = value_type_i<InputIterator>>
+T squared_norm(InputIterator first, InputIterator last, T init = T{})
+{
+    return dot(first, last, first, init);
+}
+
+/** The squared Euclidean norm of a vector.
+The vector is represented by a container.
+*/
+template<typename Container, typename T = value_type<Container>>
+T squared_norm(const Container& a, T init = T{})
 {
     using std::begin;
     using std::end;
-    return squared_norm(begin(a), end(a));
-}
-
-template<typename InputIterator>
-sqrt_value_type_i<InputIterator> norm(InputIterator first, InputIterator last)
-{
-    return sqrt(squared_norm(first, last));
+    return squared_norm(begin(a), end(a), init);
 }
 
 /** The Euclidean norm of a vector.
-The vector is represented by an arbitrary container.
-Returns a floating point type, i.e. it follows the same convention as `std::sqrt`.
+The vector is represented by a range of iterators.
+Returns a value of floating point type following the same convention as `std::sqrt`.
 */
-template<typename Container>
-sqrt_value_type<Container> norm(const Container& a)
+template<typename InputIterator, typename T = value_type_i<InputIterator>>
+sqrt_type_t<T> norm(InputIterator first, InputIterator last, T init = T{})
+{
+    return sqrt(squared_norm(first, last, init));
+}
+
+/** The Euclidean norm of a vector.
+The vector is represented by a container.
+Returns a value of floating point type following the same convention as `std::sqrt`.
+*/
+template<typename Container, typename T = value_type<Container>>
+sqrt_type_t<T> norm(const Container& a, T init = T{})
 {
     using std::begin;
     using std::end;
-    return norm(begin(a), end(a));
+    return norm(begin(a), end(a), init);
 }
 
-
-template<typename InputIterator1, typename InputIterator2>
-value_type_i<InputIterator1>
-squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
+/** The squared Euclidean distance of two vectors.
+Each vector is represented by a range of iterators.
+*/
+template<typename InputIterator1, typename InputIterator2, typename T = value_type_i<InputIterator1>>
+T squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init = T{})
 {
-    using value_type_left = const value_type_i<InputIterator1>;
-    using value_type_right = const value_type_i<InputIterator2>;
-    using value_type = value_type_left;
-    static_assert(std::is_same<value_type_left, value_type_right>::value, "Different value types");
-
-    const auto zero = value_type();
-    auto op1 = [](const value_type& left, const value_type& right)
+    auto op1 = [](const T left, const T right) -> T
     {
         return left + right;
     };
-    auto op2 = [](const value_type& left, const value_type& right)
+    auto op2 = [](const auto left, const auto right) -> T
     {
         return (left - right) * (left - right);
     };
-    return std::inner_product(first_left, last_left, first_right, zero, op1, op2);
+    return std::inner_product(first_left, last_left, first_right, init, op1, op2);
 }
 
 /** The squared Euclidean distance of two vectors.
 Each vector is represented by a container.
-The two containers should have the same size and value type.
+The two containers should have the same size.
 */
-template<typename Container1, typename Container2>
-value_type<Container1> squared_distance(const Container1& left, const Container2& right)
+template<typename Container1, typename Container2, typename T = value_type<Container1>>
+T squared_distance(const Container1& left, const Container2& right, T init = T{})
 {
     assert(left.size() == right.size());
     using std::begin;
     using std::end;
-    return squared_distance(begin(left), end(left), begin(right));
+    return squared_distance(begin(left), end(left), begin(right), init);
 }
 
-template<typename InputIterator1, typename InputIterator2>
-sqrt_value_type_i<InputIterator1>
-distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right)
+/** The Euclidean distance of two vectors.
+Each vector is represented by a range of iterators.
+Returns a value of a floating point type following the same convention as `std::sqrt`.
+*/
+template<typename InputIterator1, typename InputIterator2, typename T = value_type_i<InputIterator1>>
+sqrt_type_t<T> distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init = T{})
 {
-    return sqrt(squared_distance(first_left, last_left, first_right));
+    return sqrt(squared_distance(first_left, last_left, first_right, init));
 }
 
 /** The Euclidean distance of two vectors.
 Each vector is represented by a container.
-The two containers should have the same size and value type.
-Returns a floating point type, i.e. it follows the same convention as `std::sqrt`.
+The two containers should have the same size.
+Returns a value of a floating point type following the same convention as `std::sqrt`.
 */
-template<typename Container1, typename Container2>
-sqrt_value_type<Container1> distance(const Container1& left, const Container2& right)
+template<typename Container1, typename Container2, typename T = value_type<Container1>>
+sqrt_type_t<T> distance(const Container1& left, const Container2& right, T init = T{})
 {
     assert(left.size() == right.size());
     using std::begin;
     using std::end;
-    return distance(begin(left), end(left), begin(right));
+    return distance(begin(left), end(left), begin(right), init);
 }
 
 /** @} */
