@@ -29,10 +29,9 @@ gives zero, which is true for the built-in arithmetic types.
 */
 
 template<typename InputIterator, typename T>
-value_type_i<InputIterator> norm(InputIterator first, InputIterator last, T init)
+T norm(InputIterator first, InputIterator last, T init)
 {
     using value_type = const value_type_i<InputIterator>;
-
     const auto add_abs = [](const value_type& left, const value_type& right)
     {
         return left + std::abs(right);
@@ -49,7 +48,7 @@ value_type_i<InputIterator> norm(InputIterator first, InputIterator last)
 }
 
 template<typename Container, typename T>
-value_type<Container> norm(const Container& a, T init)
+T norm(const Container& a, T init)
 {
     using std::begin;
     using std::end;
@@ -68,7 +67,7 @@ value_type<Container> norm(const Container& a)
 }
 
 template<typename InputIterator, typename T>
-value_type_i<InputIterator> squared_norm(InputIterator first, InputIterator last, T init)
+T squared_norm(InputIterator first, InputIterator last, T init)
 {
     const auto n = norm(first, last, init);
     return n * n;
@@ -82,7 +81,7 @@ value_type_i<InputIterator> squared_norm(InputIterator first, InputIterator last
 }
 
 template<typename Container, typename T>
-value_type<Container> squared_norm(const Container& a, T init)
+T squared_norm(const Container& a, T init)
 {
     using std::begin;
     using std::end;
@@ -101,14 +100,12 @@ value_type<Container> squared_norm(const Container& a)
 }
 
 template<typename InputIterator1, typename InputIterator2, typename T>
-value_type_i<InputIterator1>
-distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init)
+T distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init)
 {
     using value_type_left = const value_type_i<InputIterator1>;
     using value_type_right = const value_type_i<InputIterator2>;
     using value_type = value_type_left;
     static_assert(std::is_same<value_type_left, value_type_right>::value, "Different value types");
-
     auto op1 = [](const value_type& left, const value_type& right)
     {
         return left + right;
@@ -134,7 +131,7 @@ distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 fir
 }
 
 template<typename Container1, typename Container2, typename T>
-value_type<Container1> distance(const Container1& left, const Container2& right, T init)
+T distance(const Container1& left, const Container2& right, T init)
 {
     assert(left.size() == right.size());
     using std::begin;
@@ -156,8 +153,7 @@ value_type<Container1> distance(const Container1& left, const Container2& right)
 }
 
 template<typename InputIterator1, typename InputIterator2, typename T>
-value_type_i<InputIterator1>
-squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init)
+T squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init)
 {
     const auto d = distance(first_left, last_left, first_right, init);
     return d * d;
@@ -172,7 +168,7 @@ squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputItera
 }
 
 template<typename Container1, typename Container2, typename T>
-value_type<Container1> squared_distance(const Container1& left, const Container2& right, T init)
+T squared_distance(const Container1& left, const Container2& right, T init)
 {
     assert(left.size() == right.size());
     using std::begin;

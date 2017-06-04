@@ -29,8 +29,7 @@ gives zero, which is true for the built-in arithmetic types.
 */
 
 template<typename InputIterator1, typename InputIterator2, typename T>
-value_type_i<InputIterator1>
-dot(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init)
+T dot(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init)
 {
     using value_type1 = const value_type_i<InputIterator1>;
     using value_type2 = const value_type_i<InputIterator2>;
@@ -52,7 +51,7 @@ dot(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_ri
 }
 
 template<typename Container1, typename Container2, typename T>
-value_type<Container1> dot(const Container1& a, Container2& b, T init)
+T dot(const Container1& a, Container2& b, T init)
 {
     assert(a.size() == b.size());
     using std::begin;
@@ -74,7 +73,7 @@ value_type<Container1> dot(const Container1& a, Container2& b)
 }
 
 template<typename InputIterator, typename T>
-value_type_i<InputIterator> squared_norm(InputIterator first, InputIterator last, T init)
+T squared_norm(InputIterator first, InputIterator last, T init)
 {
     return dot(first, last, first, init);
 }
@@ -86,7 +85,7 @@ value_type_i<InputIterator> squared_norm(InputIterator first, InputIterator last
 }
 
 template<typename Container, typename T>
-value_type<Container> squared_norm(const Container& a, T init)
+T squared_norm(const Container& a, T init)
 {
     using std::begin;
     using std::end;
@@ -105,7 +104,7 @@ value_type<Container> squared_norm(const Container& a)
 }
 
 template<typename InputIterator, typename T>
-sqrt_value_type_i<InputIterator> norm(InputIterator first, InputIterator last, T init)
+T norm(InputIterator first, InputIterator last, T init)
 {
     return sqrt(squared_norm(first, last, init));
 }
@@ -117,7 +116,7 @@ sqrt_value_type_i<InputIterator> norm(InputIterator first, InputIterator last)
 }
 
 template<typename Container, typename T>
-sqrt_value_type<Container> norm(const Container& a, T init)
+T norm(const Container& a, T init)
 {
     using std::begin;
     using std::end;
@@ -137,14 +136,12 @@ sqrt_value_type<Container> norm(const Container& a)
 }
 
 template<typename InputIterator1, typename InputIterator2, typename T>
-value_type_i<InputIterator1>
-squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init)
+T squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init)
 {
     using value_type_left = const value_type_i<InputIterator1>;
     using value_type_right = const value_type_i<InputIterator2>;
     using value_type = value_type_left;
     static_assert(std::is_same<value_type_left, value_type_right>::value, "Different value types");
-
     auto op1 = [](const value_type& left, const value_type& right)
     {
         return left + right;
@@ -169,7 +166,7 @@ squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputItera
 }
 
 template<typename Container1, typename Container2, typename T>
-value_type<Container1> squared_distance(const Container1& left, const Container2& right, T init)
+T squared_distance(const Container1& left, const Container2& right, T init)
 {
     assert(left.size() == right.size());
     using std::begin;
@@ -191,7 +188,7 @@ value_type<Container1> squared_distance(const Container1& left, const Container2
 }
 
 template<typename InputIterator1, typename InputIterator2, typename T>
-sqrt_value_type_i<InputIterator1>
+sqrt_type_t<T>
 distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init)
 {
     return sqrt(squared_distance(first_left, last_left, first_right, init));
@@ -205,7 +202,7 @@ distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 fir
 }
 
 template<typename Container1, typename Container2, typename T>
-sqrt_value_type<Container1> distance(const Container1& left, const Container2& right, T init)
+sqrt_type_t<T> distance(const Container1& left, const Container2& right, T init)
 {
     assert(left.size() == right.size());
     using std::begin;
