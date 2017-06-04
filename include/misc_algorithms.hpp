@@ -18,7 +18,10 @@ Does elementwise `static_cast` on the elements from one range to another range.
 template<typename InputIterator, typename OutputIterator>
 void convert(InputIterator first_in, InputIterator last_in, OutputIterator first_out)
 {
-    auto f = [](value_type_i<InputIterator> x) { return value_type_i<OutputIterator>(x); };
+    auto f = [](value_type_i<InputIterator> x)
+    {
+        return value_type_i<OutputIterator>(x);
+    };
     std::transform(first_in, last_in, first_out, f);
 }
 
@@ -36,8 +39,6 @@ void convert(const Container1& in, Container2& out)
 
 /**
 Computes the sum of the elements of a range.
-It assume that the default construction of a scalar gives zero,
-which is true for the built-in arithmetic types.
 */
 template<typename InputIterator, typename T = value_type_i<InputIterator>>
 T sum(InputIterator first, InputIterator last, T init = T{})
@@ -47,8 +48,6 @@ T sum(InputIterator first, InputIterator last, T init = T{})
 
 /**
 Computes the sum of the elements of a container.
-It assume that the default construction of a scalar gives zero,
-which is true for the built-in arithmetic types.
 */
 template<typename Container, typename T = value_type<Container>>
 T sum(const Container& container, T init = T{})

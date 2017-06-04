@@ -22,17 +22,17 @@ Manhattan space defines the following functions:
 We represent mathematical vectors as either containers, or ranges of iterators.
 The functions in this module take one or two vectors as input and output a
 single scalar. This is sometimes refered to as a reduction or fold operation.
-The functions in this module assume that the default construction of a scalar
-gives zero, which is true for the built-in arithmetic types.
 
 @{
 */
 
+/** The manhattan norm of a vector.
+The vector is represented a range of iterators.
+*/
 template<typename InputIterator, typename T = value_type_i<InputIterator>>
 T norm(InputIterator first, InputIterator last, T init = T{})
 {
-    using value_type = const value_type_i<InputIterator>;
-    const auto add_abs = [](const value_type& left, const value_type& right)
+    const auto add_abs = [](const auto left, const auto right) -> T
     {
         return left + std::abs(right);
     };
@@ -40,7 +40,7 @@ T norm(InputIterator first, InputIterator last, T init = T{})
 }
 
 /** The manhattan norm of a vector.
-The vector is represented by an arbitrary container.
+The vector is represented by a container.
 */
 template<typename Container, typename T = value_type<Container>>
 T norm(const Container& a, T init = T{})
@@ -50,6 +50,9 @@ T norm(const Container& a, T init = T{})
     return norm(begin(a), end(a), init);
 }
 
+/** The squared manhattan norm of a vector.
+The vector is represented by a range of iterators.
+*/
 template<typename InputIterator, typename T = value_type_i<InputIterator>>
 T squared_norm(InputIterator first, InputIterator last, T init = T{})
 {
@@ -58,7 +61,7 @@ T squared_norm(InputIterator first, InputIterator last, T init = T{})
 }
 
 /** The squared manhattan norm of a vector.
-The vector is represented by an arbitrary container.
+The vector is represented by a container.
 */
 template<typename Container, typename T = value_type<Container>>
 T squared_norm(const Container& a, T init = T{})
@@ -68,18 +71,18 @@ T squared_norm(const Container& a, T init = T{})
     return squared_norm(begin(a), end(a), init);
 }
 
+/** The manhattan distance of two vectors.
+Each vector is represented by a range of iterators.
+The two containers should have the same size.
+*/
 template<typename InputIterator1, typename InputIterator2, typename T = value_type_i<InputIterator1>>
 T distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init = T{})
 {
-    using value_type_left = const value_type_i<InputIterator1>;
-    using value_type_right = const value_type_i<InputIterator2>;
-    using value_type = value_type_left;
-    static_assert(std::is_same<value_type_left, value_type_right>::value, "Different value types");
-    auto op1 = [](const value_type& left, const value_type& right)
+    auto op1 = [](const T left, const T right) -> T
     {
         return left + right;
     };
-    auto op2 = [](const value_type& left, const value_type& right)
+    auto op2 = [](const auto left, const auto right) -> T
     {
         return std::abs(left - right);
     };
@@ -88,7 +91,7 @@ T distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 f
 
 /** The manhattan distance of two vectors.
 Each vector is represented by a container.
-The two containers should have the same size and value type.
+The two containers should have the same size.
 */
 template<typename Container1, typename Container2, typename T = value_type<Container1>>
 T distance(const Container1& left, const Container2& right, T init = T{})
@@ -99,6 +102,9 @@ T distance(const Container1& left, const Container2& right, T init = T{})
     return distance(begin(left), end(left), begin(right), init);
 }
 
+/** The squared manhattan distance of two vectors.
+Each vector is represented by a range of iterators.
+*/
 template<typename InputIterator1, typename InputIterator2, typename T = value_type_i<InputIterator1>>
 T squared_distance(InputIterator1 first_left, InputIterator1 last_left, InputIterator2 first_right, T init = T{})
 {
