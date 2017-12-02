@@ -171,7 +171,7 @@ void test_vector_space_operations()
     std::vector<float>   c1f = { 1.f, 2.f, 3.f, 4.f, 5.f };
     std::array<float, 5> c2f = { 1.f, 2.f, 3.f, 4.f, 5.f };
     std::valarray<float> c3f = { 1.f, 2.f, 3.f, 4.f, 5.f };
-    int ef = 10.f;
+    const auto ef = 10.f;
 
     add(c1, c2f, c3f);
     add(e, c2f, c3f);
