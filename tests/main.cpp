@@ -21,23 +21,33 @@ void test_logical_operations();
 
 int main()
 {
+    using namespace std;
+    cout << "test_std_algorithms" << endl;
     test_std_algorithms();
+    cout << "test_algorithms" << endl;
 	test_algorithms();
+    cout << "test_sum" << endl;
     test_sum();
+    cout << "test_sum_double" << endl;
     test_sum_double();
+    cout << "test_vector_space_operations" << endl;
 	test_vector_space_operations();
+    cout << "test_add" << endl;
 	test_add();
+    cout << "test_subtract" << endl;
 	test_subtract();
+    cout << "test_multiply" << endl;
 	test_multiply();
+    cout << "test_divide" << endl;
 	test_divide();
+    cout << "test_euclidean_space_operations" << endl;
 	test_euclidean_space_operations();
+    cout << "test_manhattan_space_operations" << endl;
     test_manhattan_space_operations();
+    cout << "test_maximum_space_operations" << endl;
     test_maximum_space_operations();
+    cout << "test_logical_operations" << endl;
     test_logical_operations();
-
-    std::cout << "Press enter to quit." << std::endl;
-    std::cin.get();
-
 	return 0;
 }
 
