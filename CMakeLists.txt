@@ -1,10 +1,7 @@
-# Top-Level CMakeList.txt
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.2)
 enable_language(CXX)
-add_definitions(-std=c++11)
-
+add_definitions(-std=c++14)
 include_directories(include)
 file(GLOB aaa_header_files "include/*.hpp")
-
-PROJECT(aaa)
+project(aaa)
 add_executable(test_aaa tests/main.cpp ${aaa_header_files})
