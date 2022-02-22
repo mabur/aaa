@@ -6,6 +6,7 @@
 #include "aaa.hpp"
 
 void test_std_algorithms();
+void test_ordered();
 void test_algorithms();
 void test_sum();
 void test_sum_double();
@@ -24,6 +25,8 @@ int main()
     using namespace std;
     cout << "test_std_algorithms" << endl;
     test_std_algorithms();
+    cout << "test_ordered" << endl;
+    test_ordered();
     cout << "test_algorithms" << endl;
 	test_algorithms();
     cout << "test_sum" << endl;
@@ -81,6 +84,71 @@ void test_std_algorithms()
     *minmax2.first = 3;
     //*minmax1.second = 3;
     *minmax2.second = 3;
+}
+
+void test_ordered()
+{
+    using namespace aaa;
+
+    std::vector<int> c1 = {};
+    auto mid1 = mid_element(c1.begin(), c1.end());
+    assert(mid1 == c1.begin());
+    assert(mid1 == c1.end());
+
+    c1 = {};
+    mid1 = mid_element(c1);
+    assert(mid1 == c1.begin());
+    assert(mid1 == c1.end());
+
+    std::vector<int> c2 = {1};
+    auto mid2 = mid_element(c2.begin(), c2.end());
+    assert(mid2 == c2.begin());
+    assert(*mid2 == 1);
+
+    c2 = {1};
+    mid2 = mid_element(c2);
+    assert(mid2 == c2.begin());
+    assert(*mid2 == 1);
+
+    std::vector<int> c3 = {1, 2};
+    auto mid3 = mid_element(c3.begin(), c3.end());
+    assert(mid3 == c3.begin() + 1);
+    assert(*mid3 == 2);
+
+    c3 = {1, 2};
+    mid3 = mid_element(c3);
+    assert(mid3 == c3.begin() + 1);
+    assert(*mid3 == 2);
+
+    std::vector<int> c4 = {2, 1};
+    auto mid4 = mid_element(c4.begin(), c4.end());
+    assert(mid4 == c4.begin() + 1);
+    assert(*mid4 == 2);
+
+    c4 = {2, 1};
+    mid4 = mid_element(c4);
+    assert(mid4 == c4.begin() + 1);
+    assert(*mid4 == 2);
+
+    std::vector<int> c5 = {1, 2, 0};
+    auto mid5 = mid_element(c5.begin(), c5.end());
+    assert(mid5 == c5.begin() + 1);
+    assert(*mid5 == 1);
+
+    c5 = {1, 2, 0};
+    mid5 = mid_element(c5);
+    assert(mid5 == c5.begin() + 1);
+    assert(*mid5 == 1);
+
+    std::vector<int> c6 = {1, 2, 0, 5};
+    auto mid6 = mid_element(c6.begin(), c6.end());
+    assert(mid6 == c6.begin() + 2);
+    assert(*mid6 == 2);
+
+    c6 = {1, 2, 0, 5};
+    mid6 = mid_element(c6);
+    assert(mid6 == c6.begin() + 2);
+    assert(*mid6 == 2);
 }
 
 void test_algorithms()
