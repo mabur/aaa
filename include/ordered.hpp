@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+namespace aaa {
+
 template<typename RandomAccessIterator>
 RandomAccessIterator mid_element(RandomAccessIterator first, RandomAccessIterator last)
 {
@@ -34,4 +36,6 @@ typename Container::iterator mid_element(Container& container, Compare comp)
     using std::begin;
     using std::end;
     return mid_element(begin(container), end(container), comp);
+}
+
 }
