@@ -56,34 +56,22 @@ int main()
 
 void test_std_algorithms()
 {
-    using namespace aaa;
+    using std::vector;
+    using aaa::min_element;
+    using aaa::max_element;
+    using aaa::minmax_element;
 
-    const std::vector<int> c1 = { 1, 2, 3, 4, 5 };
-    std::array<float, 5> c2 = { 1, 2, 3, 4, 5 };
-    std::valarray<double> c3 = { 1, 2, 3, 4, 5 };
-    double x = 3.14;
+    assert(*aaa::min_element(vector<int>{1, 2}) == 1);
+    assert(*aaa::min_element(vector<int>{2, 1}) == 1);
 
-    copy(c1, c2);
-    fill(c3, x);
+    assert(*aaa::max_element(vector<int>{1, 2}) == 2);
+    assert(*aaa::max_element(vector<int>{2, 1}) == 2);
 
-    auto min1 = min_element(c1);
-    auto min2 = min_element(c2);
+    assert(*aaa::minmax_element(vector<int>{1, 2}).first == 1);
+    assert(*aaa::minmax_element(vector<int>{2, 1}).first == 1);
 
-    auto max1 = max_element(c1);
-    auto max2 = max_element(c2);
-
-    auto minmax1 = minmax_element(c1);
-    auto minmax2 = minmax_element(c2);
-
-    //*min1 = 3;
-    *min2 = 3;
-    //*max1 = 3;
-    *max2 = 3;
-
-    //*minmax1.first = 3;
-    *minmax2.first = 3;
-    //*minmax1.second = 3;
-    *minmax2.second = 3;
+    assert(*aaa::minmax_element(vector<int>{1, 2}).second == 2);
+    assert(*aaa::minmax_element(vector<int>{2, 1}).second == 2);
 }
 
 void test_ordered()
@@ -173,18 +161,12 @@ void test_algorithms()
 
 void test_sum()
 {
-    using namespace aaa;
-    using namespace std;
+    using std::vector;
+    using aaa::sum;
 
-    std::vector<int> c1 = { 1, 2, 3, 4, 5 };
-
-    assert(sum(c1) == 15);
-    assert(sum(c1, -2) == 13);
-    assert(sum(c1, 0.0) == 15.0);
-
-    assert(sum(begin(c1), end(c1)) == 15);
-    assert(sum(begin(c1), end(c1), -2) == 13);
-    assert(sum(begin(c1), end(c1), 0.0) == 15.0);
+    assert(sum(vector<int>{1, 2, 3, 4, 5}) == 15);
+    assert(sum(vector<int>{1, 2, 3, 4, 5}, -2) == 13);
+    assert(sum(vector<int>{1, 2, 3, 4, 5}, 0.0) == 15.0);
 }
 
 void test_sum_double()
