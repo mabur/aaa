@@ -85,7 +85,7 @@ void test_ordered()
 {
     using namespace aaa;
 
-    std::vector<int> c1 = {};
+    auto c1 = vi{};
     auto mid1 = mid_element(c1.begin(), c1.end());
     assert_equal(mid1, c1.begin());
     assert_equal(mid1, c1.end());
@@ -95,7 +95,7 @@ void test_ordered()
     assert_equal(mid1, c1.begin());
     assert_equal(mid1, c1.end());
 
-    std::vector<int> c2 = {1};
+    auto c2 = vi{1};
     auto mid2 = mid_element(c2.begin(), c2.end());
     assert_equal(mid2, c2.begin());
     assert_equal(*mid2, 1);
@@ -105,7 +105,7 @@ void test_ordered()
     assert_equal(mid2, c2.begin());
     assert_equal(*mid2, 1);
 
-    std::vector<int> c3 = {1, 2};
+    auto c3 = vi{1, 2};
     auto mid3 = mid_element(c3.begin(), c3.end());
     assert_equal(mid3, c3.begin() + 1);
     assert_equal(*mid3, 2);
@@ -115,7 +115,7 @@ void test_ordered()
     assert_equal(mid3, c3.begin() + 1);
     assert_equal(*mid3, 2);
 
-    std::vector<int> c4 = {2, 1};
+    auto c4 = vi{2, 1};
     auto mid4 = mid_element(c4.begin(), c4.end());
     assert_equal(mid4, c4.begin() + 1);
     assert_equal(*mid4, 2);
@@ -125,7 +125,7 @@ void test_ordered()
     assert_equal(mid4, c4.begin() + 1);
     assert_equal(*mid4, 2);
 
-    std::vector<int> c5 = {1, 2, 0};
+    auto c5 = vi{1, 2, 0};
     auto mid5 = mid_element(c5.begin(), c5.end());
     assert_equal(mid5, c5.begin() + 1);
     assert_equal(*mid5, 1);
@@ -135,7 +135,7 @@ void test_ordered()
     assert_equal(mid5, c5.begin() + 1);
     assert_equal(*mid5, 1);
 
-    std::vector<int> c6 = {1, 2, 0, 5};
+    auto c6 = vi{1, 2, 0, 5};
     auto mid6 = mid_element(c6.begin(), c6.end());
     assert_equal(mid6, c6.begin() + 2);
     assert_equal(*mid6, 2);
