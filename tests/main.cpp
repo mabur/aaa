@@ -22,6 +22,12 @@ void test_logical_operations();
 
 using vi = std::vector<int>;
 
+template<typename T>
+void assert_equal(const T& left, const T& right)
+{
+    assert(left == right);
+}
+
 int main()
 {
     using namespace std;
@@ -58,22 +64,21 @@ int main()
 
 void test_std_algorithms()
 {
-    using std::vector;
     using aaa::min_element;
     using aaa::max_element;
     using aaa::minmax_element;
 
-    assert(*aaa::min_element(vi{1, 2}) == 1);
-    assert(*aaa::min_element(vi{2, 1}) == 1);
+    assert_equal(*min_element(vi{1, 2}), 1);
+    assert_equal(*min_element(vi{2, 1}), 1);
 
-    assert(*aaa::max_element(vi{1, 2}) == 2);
-    assert(*aaa::max_element(vi{2, 1}) == 2);
+    assert_equal(*max_element(vi{1, 2}), 2);
+    assert_equal(*max_element(vi{2, 1}), 2);
 
-    assert(*aaa::minmax_element(vi{1, 2}).first == 1);
-    assert(*aaa::minmax_element(vi{2, 1}).first == 1);
+    assert_equal(*minmax_element(vi{1, 2}).first, 1);
+    assert_equal(*minmax_element(vi{2, 1}).first, 1);
 
-    assert(*aaa::minmax_element(vi{1, 2}).second == 2);
-    assert(*aaa::minmax_element(vi{2, 1}).second == 2);
+    assert_equal(*minmax_element(vi{1, 2}).second, 2);
+    assert_equal(*minmax_element(vi{2, 1}).second, 2);
 }
 
 void test_ordered()
@@ -82,63 +87,63 @@ void test_ordered()
 
     std::vector<int> c1 = {};
     auto mid1 = mid_element(c1.begin(), c1.end());
-    assert(mid1 == c1.begin());
-    assert(mid1 == c1.end());
+    assert_equal(mid1, c1.begin());
+    assert_equal(mid1, c1.end());
 
     c1 = {};
     mid1 = mid_element(c1);
-    assert(mid1 == c1.begin());
-    assert(mid1 == c1.end());
+    assert_equal(mid1, c1.begin());
+    assert_equal(mid1, c1.end());
 
     std::vector<int> c2 = {1};
     auto mid2 = mid_element(c2.begin(), c2.end());
-    assert(mid2 == c2.begin());
-    assert(*mid2 == 1);
+    assert_equal(mid2, c2.begin());
+    assert_equal(*mid2, 1);
 
     c2 = {1};
     mid2 = mid_element(c2);
-    assert(mid2 == c2.begin());
-    assert(*mid2 == 1);
+    assert_equal(mid2, c2.begin());
+    assert_equal(*mid2, 1);
 
     std::vector<int> c3 = {1, 2};
     auto mid3 = mid_element(c3.begin(), c3.end());
-    assert(mid3 == c3.begin() + 1);
-    assert(*mid3 == 2);
+    assert_equal(mid3, c3.begin() + 1);
+    assert_equal(*mid3, 2);
 
     c3 = {1, 2};
     mid3 = mid_element(c3);
-    assert(mid3 == c3.begin() + 1);
-    assert(*mid3 == 2);
+    assert_equal(mid3, c3.begin() + 1);
+    assert_equal(*mid3, 2);
 
     std::vector<int> c4 = {2, 1};
     auto mid4 = mid_element(c4.begin(), c4.end());
-    assert(mid4 == c4.begin() + 1);
-    assert(*mid4 == 2);
+    assert_equal(mid4, c4.begin() + 1);
+    assert_equal(*mid4, 2);
 
     c4 = {2, 1};
     mid4 = mid_element(c4);
-    assert(mid4 == c4.begin() + 1);
-    assert(*mid4 == 2);
+    assert_equal(mid4, c4.begin() + 1);
+    assert_equal(*mid4, 2);
 
     std::vector<int> c5 = {1, 2, 0};
     auto mid5 = mid_element(c5.begin(), c5.end());
-    assert(mid5 == c5.begin() + 1);
-    assert(*mid5 == 1);
+    assert_equal(mid5, c5.begin() + 1);
+    assert_equal(*mid5, 1);
 
     c5 = {1, 2, 0};
     mid5 = mid_element(c5);
-    assert(mid5 == c5.begin() + 1);
-    assert(*mid5 == 1);
+    assert_equal(mid5, c5.begin() + 1);
+    assert_equal(*mid5, 1);
 
     std::vector<int> c6 = {1, 2, 0, 5};
     auto mid6 = mid_element(c6.begin(), c6.end());
-    assert(mid6 == c6.begin() + 2);
-    assert(*mid6 == 2);
+    assert_equal(mid6, c6.begin() + 2);
+    assert_equal(*mid6, 2);
 
     c6 = {1, 2, 0, 5};
     mid6 = mid_element(c6);
-    assert(mid6 == c6.begin() + 2);
-    assert(*mid6 == 2);
+    assert_equal(mid6, c6.begin() + 2);
+    assert_equal(*mid6, 2);
 }
 
 void test_algorithms()
@@ -163,12 +168,10 @@ void test_algorithms()
 
 void test_sum()
 {
-    using std::vector;
     using aaa::sum;
-
-    assert(sum(vi{1, 2, 3, 4, 5}) == 15);
-    assert(sum(vi{1, 2, 3, 4, 5}, -2) == 13);
-    assert(sum(vi{1, 2, 3, 4, 5}, 0.0) == 15.0);
+    assert_equal(sum(vi{1, 2, 3, 4, 5}), 15);
+    assert_equal(sum(vi{1, 2, 3, 4, 5}, -2), 13);
+    assert_equal(sum(vi{1, 2, 3, 4, 5}, 0.0), 15.0);
 }
 
 void test_sum_double()
@@ -192,13 +195,13 @@ void test_sum_double()
         manual_sum_double += value;
     }
     
-    assert(manual_sum_float == aaa::sum(data_float));
-    assert(manual_sum_float == aaa::sum(data_float, 0.f));
-    assert(manual_sum_float == aaa::sum(data_double, 0.f));
+    assert_equal(manual_sum_float, aaa::sum(data_float));
+    assert_equal(manual_sum_float, aaa::sum(data_float, 0.f));
+    assert_equal(manual_sum_float, aaa::sum(data_double, 0.f));
 
-    assert(manual_sum_double == aaa::sum(data_double));
-    assert(manual_sum_double == aaa::sum(data_double, 0.0));
-    assert(manual_sum_double == aaa::sum(data_float, 0.0));
+    assert_equal(manual_sum_double, aaa::sum(data_double));
+    assert_equal(manual_sum_double, aaa::sum(data_double, 0.0));
+    assert_equal(manual_sum_double, aaa::sum(data_float, 0.0));
 }
 
 void test_vector_space_operations()
@@ -424,38 +427,22 @@ void test_vector_space_operations()
 
 void test_add()
 {
-	std::vector<int> a = { 1, 2 };
-	std::vector<int> b = { 3, 4 };
-	std::vector<int> c = { 4, 6 };
-	const auto d = aaa::add(a, b);
-	assert(c == d);
+	assert_equal(aaa::add(vi{1, 2}, vi{3, 4}), vi{4, 6});
 }
 
 void test_subtract()
 {
-	std::vector<int> a = { 1, 2 };
-	std::vector<int> b = { 3, 4 };
-	std::vector<int> c = { -2, -2 };
-	const auto d = aaa::subtract(a, b);
-	assert(c == d);
+	assert_equal(aaa::subtract(vi{1, 2}, vi{3, 4}), vi{-2, -2});
 }
 
 void test_multiply()
 {
-	std::vector<int> a = { 1, 2 };
-	std::vector<int> b = { 3, 4 };
-	std::vector<int> c = { 3, 8 };
-	const auto d = aaa::multiply(a, b);
-	assert(c == d);
+	assert_equal(aaa::multiply(vi{1, 2}, vi{3, 4}), vi{3, 8});
 }
 
 void test_divide()
 {
-	std::vector<int> a = { 8, 9 };
-	std::vector<int> b = { 2, 3 };
-	std::vector<int> c = { 4, 3 };
-	const auto d = aaa::divide(a, b);
-	assert(c == d);
+	assert_equal(aaa::divide(vi{8, 9}, vi{2, 3}), vi{4, 3});
 }
 
 void test_euclidean_space_operations()
@@ -465,16 +452,16 @@ void test_euclidean_space_operations()
 
     using namespace aaa::euclidean;
 
-	assert(dot(c1, c2) == 11);
-    assert(dot(c1, c2, 1.0) == 12.0);
-    assert(squared_norm(c1) == 5);
-    assert(squared_norm(c1, 1.0) == 6.0);
-    assert(norm(c2) == 5.0);
-    assert(norm(c2, 0.0) == 5.0);
-    assert(squared_distance(c1, c2) == 8);
-    assert(squared_distance(c1, c2, 1.0) == 9.0);
+	assert_equal(dot(c1, c2), 11);
+    assert_equal(dot(c1, c2, 1.0), 12.0);
+    assert_equal(squared_norm(c1), 5);
+    assert_equal(squared_norm(c1, 1.0), 6.0);
+    assert_equal(norm(c2), 5.0);
+    assert_equal(norm(c2, 0.0), 5.0);
+    assert_equal(squared_distance(c1, c2), 8);
+    assert_equal(squared_distance(c1, c2, 1.0), 9.0);
     distance(c1, c2);
-    assert(distance(c1, c2, 1.0) == 3.0);
+    assert_equal(distance(c1, c2, 1.0), 3.0);
 
 	using std::begin;
 	using std::end;
@@ -494,14 +481,14 @@ void test_manhattan_space_operations()
 
     using namespace aaa::manhattan;
 
-    assert(squared_norm(c1) == 15 * 15);
-    assert(squared_norm(c1, 1.0) == 16.0 * 16.0);
-    assert(norm(c1) == 15);
-    assert(norm(c1, 1.0) == 16.0);
-    assert(squared_distance(c1, c2) == 16 * 16);
-    assert(squared_distance(c1, c2, 1.0) == 17.0 * 17.0);
-    assert(distance(c1, c2) == 2 + 1 + 0 + 8 + 5);
-    assert(distance(c1, c2, 1.0) == 2 + 1 + 0 + 8 + 5 + 1.0);
+    assert_equal(squared_norm(c1), 15 * 15);
+    assert_equal(squared_norm(c1, 1.0), 16.0 * 16.0);
+    assert_equal(norm(c1), 15);
+    assert_equal(norm(c1, 1.0), 16.0);
+    assert_equal(squared_distance(c1, c2), 16 * 16);
+    assert_equal(squared_distance(c1, c2, 1.0), 17.0 * 17.0);
+    assert_equal(distance(c1, c2), 2 + 1 + 0 + 8 + 5);
+    assert_equal(distance(c1, c2, 1.0), 2 + 1 + 0 + 8 + 5 + 1.0);
 
     using std::begin;
     using std::end;
@@ -520,18 +507,18 @@ void test_maximum_space_operations()
 
     using namespace aaa::maximum;
 
-    assert(squared_norm(c1) == 5 * 5);
-    assert(squared_norm(c1, 1.0) == 5.0 * 5.0);
-    assert(squared_norm(c1, 50.0) == 50.0 * 50.0);
-    assert(norm(c1) == 5);
-    assert(norm(c1, 1.0) == 5.0);
-    assert(norm(c1, 6.0) == 6.0);
-    assert(squared_distance(c1, c2) == 8 * 8);
-    assert(squared_distance(c1, c2, 1.0) == 8.0 * 8.0);
-    assert(squared_distance(c1, c2, 10.0) == 10.0 * 10.0);
-    assert(distance(c1, c2) == 8);
-    assert(distance(c1, c2, 1.0) == 8.0);
-    assert(distance(c1, c2, 10.0) == 10.0);
+    assert_equal(squared_norm(c1), 5 * 5);
+    assert_equal(squared_norm(c1, 1.0), 5.0 * 5.0);
+    assert_equal(squared_norm(c1, 50.0), 50.0 * 50.0);
+    assert_equal(norm(c1), 5);
+    assert_equal(norm(c1, 1.0), 5.0);
+    assert_equal(norm(c1, 6.0), 6.0);
+    assert_equal(squared_distance(c1, c2), 8 * 8);
+    assert_equal(squared_distance(c1, c2, 1.0), 8.0 * 8.0);
+    assert_equal(squared_distance(c1, c2, 10.0), 10.0 * 10.0);
+    assert_equal(distance(c1, c2), 8);
+    assert_equal(distance(c1, c2, 1.0), 8.0);
+    assert_equal(distance(c1, c2, 10.0), 10.0);
 
     using std::begin;
     using std::end;
@@ -552,21 +539,21 @@ void test_logical_operations()
 
     logical_and(c1, c2, c3);
 
-    assert(c3[0] == true);
-    assert(c3[1] == false);
-    assert(c3[2] == false);
+    assert_equal(c3[0], true);
+    assert_equal(c3[1], false);
+    assert_equal(c3[2], false);
 
     logical_or(c1, c2, c3);
 
-    assert(c3[0] == true);
-    assert(c3[1] == true);
-    assert(c3[2] == true);
+    assert_equal(c3[0], true);
+    assert_equal(c3[1], true);
+    assert_equal(c3[2], true);
 
     logical_not(c1, c2);
 
-    assert(c2[0] == false);
-    assert(c2[1] == false);
-    assert(c2[2] == true);
+    assert_equal(c2[0], false);
+    assert_equal(c2[1], false);
+    assert_equal(c2[2], true);
 
     using std::begin;
     using std::end;
