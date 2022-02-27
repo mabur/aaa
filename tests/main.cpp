@@ -20,6 +20,8 @@ void test_manhattan_space_operations();
 void test_maximum_space_operations();
 void test_logical_operations();
 
+using vi = std::vector<int>;
+
 int main()
 {
     using namespace std;
@@ -61,17 +63,17 @@ void test_std_algorithms()
     using aaa::max_element;
     using aaa::minmax_element;
 
-    assert(*aaa::min_element(vector<int>{1, 2}) == 1);
-    assert(*aaa::min_element(vector<int>{2, 1}) == 1);
+    assert(*aaa::min_element(vi{1, 2}) == 1);
+    assert(*aaa::min_element(vi{2, 1}) == 1);
 
-    assert(*aaa::max_element(vector<int>{1, 2}) == 2);
-    assert(*aaa::max_element(vector<int>{2, 1}) == 2);
+    assert(*aaa::max_element(vi{1, 2}) == 2);
+    assert(*aaa::max_element(vi{2, 1}) == 2);
 
-    assert(*aaa::minmax_element(vector<int>{1, 2}).first == 1);
-    assert(*aaa::minmax_element(vector<int>{2, 1}).first == 1);
+    assert(*aaa::minmax_element(vi{1, 2}).first == 1);
+    assert(*aaa::minmax_element(vi{2, 1}).first == 1);
 
-    assert(*aaa::minmax_element(vector<int>{1, 2}).second == 2);
-    assert(*aaa::minmax_element(vector<int>{2, 1}).second == 2);
+    assert(*aaa::minmax_element(vi{1, 2}).second == 2);
+    assert(*aaa::minmax_element(vi{2, 1}).second == 2);
 }
 
 void test_ordered()
@@ -164,9 +166,9 @@ void test_sum()
     using std::vector;
     using aaa::sum;
 
-    assert(sum(vector<int>{1, 2, 3, 4, 5}) == 15);
-    assert(sum(vector<int>{1, 2, 3, 4, 5}, -2) == 13);
-    assert(sum(vector<int>{1, 2, 3, 4, 5}, 0.0) == 15.0);
+    assert(sum(vi{1, 2, 3, 4, 5}) == 15);
+    assert(sum(vi{1, 2, 3, 4, 5}, -2) == 13);
+    assert(sum(vi{1, 2, 3, 4, 5}, 0.0) == 15.0);
 }
 
 void test_sum_double()
