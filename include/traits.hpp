@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <type_traits>
 
 namespace aaa {
@@ -64,5 +65,11 @@ template<typename A, typename B, typename C>
 using check_ratio = enable_if_same<A, B, C>;
 
 #endif
+
+template<typename F, typename Input>
+using check_key = decltype(std::function<void(Input)>{std::declval<F>()})*;
+
+template<typename F, typename Input>
+using check_compare = decltype(std::function<void(Input, Input)>{std::declval<F>()})*;
 
 } // namespace aaa

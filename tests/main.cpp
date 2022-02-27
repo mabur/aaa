@@ -1,3 +1,4 @@
+#include <functional>
 #include <iostream>
 #include <vector>
 #include <array>
@@ -70,6 +71,9 @@ void test_std_algorithms()
 
     assert_equal(*min_element(vi{1, 2}), 1);
     assert_equal(*min_element(vi{2, 1}), 1);
+
+    assert_equal(*min_element(vi{1, 2}, std::negate<int>{}), 2);
+    assert_equal(*min_element(vi{2, 1}, std::negate<int>{}), 2);
 
     assert_equal(*max_element(vi{1, 2}), 2);
     assert_equal(*max_element(vi{2, 1}), 2);
