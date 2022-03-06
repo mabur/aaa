@@ -23,12 +23,6 @@ template<>           struct sqrt_type<float> { using type = float; };
 template<>           struct sqrt_type<long double> { using type = long double; };
 template<typename T> using sqrt_type_t = typename sqrt_type<T>::type;
 
-template<typename Container>
-using sqrt_value_type = sqrt_type_t<value_type<Container>>;
-
-template<typename Iterator>
-using sqrt_value_type_i = sqrt_type_t<value_type_i<Iterator>>;
-
 
 // This is what we want. However, it requires Expression SFINAE, which is not
 // yet supported in MSVC, unless MSVC uses Clang.
