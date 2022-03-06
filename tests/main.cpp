@@ -29,6 +29,15 @@ void assert_equal(const T& left, const T& right)
     assert(left == right);
 }
 
+void assert_equal(int left, int right)
+{
+    if (left != right) {
+        using namespace std;
+        cout << left << " != " << right << endl;
+        assert(left == right);
+    }
+}
+
 int main()
 {
     using namespace std;
@@ -80,6 +89,10 @@ void test_std_algorithms()
     assert_equal(*max_element(vi{2}), 2);
     assert_equal(*max_element(vi{1, 2}), 2);
     assert_equal(*max_element(vi{2, 1}), 2);
+
+    assert_equal(*max_element(vi{1}, std::negate<int>{}), 1);
+    assert_equal(*max_element(vi{1, 2}, std::negate<int>{}), 1);
+    assert_equal(*max_element(vi{2, 1}, std::negate<int>{}), 1);
 
     assert_equal(*minmax_element(vi{1}).first, 1);
     assert_equal(*minmax_element(vi{1, 2}).first, 1);

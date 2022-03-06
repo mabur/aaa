@@ -4,6 +4,7 @@
 #include <cassert>
 
 #include "traits.hpp"
+#include "max_element.hpp"
 #include "min_element.hpp"
 
 namespace aaa {
@@ -36,39 +37,6 @@ void fill(Container& container, const Value& value)
     using std::begin;
     using std::end;
     std::fill(begin(container), end(container), value);
-}
-
-template<typename Container>
-typename Container::iterator max_element(Container& container)
-{
-    using std::begin;
-    using std::end;
-    return std::max_element(begin(container), end(container));
-}
-
-template<typename Container>
-typename Container::const_iterator max_element(const Container& container)
-{
-    using std::begin;
-    using std::end;
-    return std::max_element(begin(container), end(container));
-}
-
-
-template<typename Container, typename Compare>
-typename Container::iterator max_element(Container& container, Compare comp)
-{
-    using std::begin;
-    using std::end;
-    return std::max_element(begin(container), end(container), comp);
-}
-
-template<typename Container, typename Compare>
-typename Container::const_iterator max_element(const Container& container, Compare comp)
-{
-    using std::begin;
-    using std::end;
-    return std::max_element(begin(container), end(container), comp);
 }
 
 template<typename Container>
