@@ -69,18 +69,23 @@ void test_std_algorithms()
     using aaa::max_element;
     using aaa::minmax_element;
 
+    assert_equal(*min_element(vi{1}), 1);
     assert_equal(*min_element(vi{1, 2}), 1);
     assert_equal(*min_element(vi{2, 1}), 1);
 
+    assert_equal(*min_element(vi{2}, std::negate<int>{}), 2);
     assert_equal(*min_element(vi{1, 2}, std::negate<int>{}), 2);
     assert_equal(*min_element(vi{2, 1}, std::negate<int>{}), 2);
 
+    assert_equal(*max_element(vi{2}), 2);
     assert_equal(*max_element(vi{1, 2}), 2);
     assert_equal(*max_element(vi{2, 1}), 2);
 
+    assert_equal(*minmax_element(vi{1}).first, 1);
     assert_equal(*minmax_element(vi{1, 2}).first, 1);
     assert_equal(*minmax_element(vi{2, 1}).first, 1);
 
+    assert_equal(*minmax_element(vi{2}).second, 2);
     assert_equal(*minmax_element(vi{1, 2}).second, 2);
     assert_equal(*minmax_element(vi{2, 1}).second, 2);
 }
