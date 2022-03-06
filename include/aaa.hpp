@@ -163,7 +163,10 @@ std::vector<float> project(const std::vector<float>& a, const std::vector<float>
 #pragma once
 
 #include "std_algorithms_container.hpp"
-#include "ordered.hpp"
+
+#include "max_element.hpp"
+#include "min_element.hpp"
+#include "mid_element.hpp"
 
 #include "misc_algorithms.hpp"
 
